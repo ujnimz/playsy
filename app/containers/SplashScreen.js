@@ -4,7 +4,7 @@ import auth from '@react-native-firebase/auth';
 
 import AppLoading from '../components/misc/AppLoading';
 import HomeScreen from './HomeScreen';
-import WelcomeStackScreen from '../navigation/WelcomeStackScreen';
+import AuthStack from '../navigation/AuthStack';
 
 function SplashScreen() {
   // Set an initializing state whilst Firebase connects
@@ -25,7 +25,7 @@ function SplashScreen() {
   if (initializing) return <AppLoading />;
 
   if (!user) {
-    return <WelcomeStackScreen />;
+    return <AuthStack />;
   }
   return <HomeScreen />;
 }

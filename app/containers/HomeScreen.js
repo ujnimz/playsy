@@ -1,8 +1,8 @@
 import React from 'react';
 import {StyleSheet, View, Text, Button} from 'react-native';
 
-import SideDrawerScreen from '../navigation/SideDrawerScreen';
-import BottomTabsScreen from '../navigation/BottomTabsScreen';
+// import SideDrawerScreen from '../navigation/SideDrawerScreen';
+// import BottomTabsScreen from '../navigation/BottomTabsScreen';
 
 import auth from '@react-native-firebase/auth';
 
