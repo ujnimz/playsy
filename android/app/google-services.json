@@ -1,0 +1,83 @@
+{
+  "project_info": {
+    "project_number": "371530900387",
+    "firebase_url": "https://smb-app-4999d-default-rtdb.firebaseio.com",
+    "project_id": "smb-app-4999d",
+    "storage_bucket": "smb-app-4999d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:371530900387:android:86c2daa532d5743d94f016",
+        "android_client_info": {
+          "package_name": "com.playsy"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "371530900387-3v7ka7sktq3qcga96ug48rm2bkk134q9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAPr7WYB6LBphT7kdr0XU23Uh-CdfrPadY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "371530900387-3v7ka7sktq3qcga96ug48rm2bkk134q9.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "371530900387-pq7a7fumoh0klc7s7jnkisjv3r0vegib.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.sinhalamusicbox"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:371530900387:android:5db97c734990b53094f016",
+        "android_client_info": {
+          "package_name": "com.playsymusic"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "371530900387-3v7ka7sktq3qcga96ug48rm2bkk134q9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAPr7WYB6LBphT7kdr0XU23Uh-CdfrPadY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "371530900387-3v7ka7sktq3qcga96ug48rm2bkk134q9.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "371530900387-pq7a7fumoh0klc7s7jnkisjv3r0vegib.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.sinhalamusicbox"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
