@@ -1,0 +1,9 @@
+export const SIGNIN_SUCCESS = 'SIGNIN_SUCCESS';
+export const SIGNIN_FAIL = 'SIGNIN_FAIL';
+export const SIGNUP_SUCCESS = 'SIGNIN_FAIL';
+export const SIGNUP_FAIL = 'SIGNIN_FAIL';
+export const SIGNOUT_SUCCESS = 'SIGNOUT_SUCCESS';
+export const SIGNOUT_FAIL = 'SIGNOUT_FAIL';
+export const AUTH_LOADING = 'AUTH_LOADING';
+export const AUTH_SUCCESS = 'AUTH_SUCCESS';
+export const AUTH_FAIL = 'AUTH_FAIL';

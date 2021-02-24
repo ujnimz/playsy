@@ -8,10 +8,10 @@ const FormPasswordInput = ({inputValue, placeholderText, ...rest}) => {
   const {colors} = useTheme();
   const styles = getStyles(colors);
 
-  const [showPassword, setShowPassword] = useState(false);
+  const [hidePassword, setHidePassword] = useState(true);
 
   const onShowPassword = () => {
-    setShowPassword(!showPassword);
+    setHidePassword(!hidePassword);
   };
 
   return (
@@ -22,12 +22,12 @@ const FormPasswordInput = ({inputValue, placeholderText, ...rest}) => {
         value={inputValue}
         placeholder={placeholderText}
         placeholderTextColor={colors.placeHolder}
-        secureTextEntry={showPassword}
+        secureTextEntry={hidePassword}
         autoCapitalize="none"
         {...rest}
       />
       <TouchableOpacity onPress={onShowPassword}>
-        {showPassword ? (
+        {hidePassword ? (
           <Icon name="eye" color={colors.placeHolder} size={20} />
         ) : (
           <Icon name="eye-off" color={colors.placeHolder} size={20} />

@@ -1,33 +1,34 @@
 import React, {useState, useEffect} from 'react';
-
-import auth from '@react-native-firebase/auth';
+import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
+import {authStatus} from '../redux/actions/auth';
 
 import AppLoading from '../components/misc/AppLoading';
-import HomeScreen from './HomeScreen';
-import AuthStack from '../navigation/AuthStack';
+//import HomeScreen from './HomeScreen';
+import AuthStackScreen from '../navigation/AuthStackScreen';
+import AppStackScreen from '../navigation/AppStackScreen';
 
-function SplashScreen() {
-  // Set an initializing state whilst Firebase connects
-  const [initializing, setInitializing] = useState(true);
-  const [user, setUser] = useState();
-
-  // Handle user state changes
-  function onAuthStateChanged(user) {
-    setUser(user);
-    if (initializing) setInitializing(false);
-  }
+function SplashScreen({authState, authStatus}) {
+  const {isLoading, user} = authState;
 
   useEffect(() => {
-    const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
-    return subscriber; // unsubscribe on unmount
-  }, []);
+    authStatus();
+  }, [user]);
 
-  if (initializing) return <AppLoading />;
+  if (isLoading) return <AppLoading />;
 
   if (!user) {
-    return <AuthStack />;
+    return <AuthStackScreen />;
   }
-  return <HomeScreen />;
+  return <AppStackScreen />;
 }
 
-export default SplashScreen;
+SplashScreen.propTypes = {
+  authStatus: PropTypes.func.isRequired,
+};
+
+const mapStateToProps = (state) => ({
+  authState: state.authState,
+});
+
+export default connect(mapStateToProps, {authStatus})(SplashScreen);

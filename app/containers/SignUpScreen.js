@@ -1,5 +1,8 @@
 import React, {useState} from 'react';
 import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
+import {signUp} from '../redux/actions/auth';
+
 import Icon from 'react-native-vector-icons/Ionicons';
 import {
   StyleSheet,
@@ -10,6 +13,7 @@ import {
   Keyboard,
   KeyboardAvoidingView,
   TouchableWithoutFeedback,
+  ActivityIndicator,
 } from 'react-native';
 
 import FormTextInput from '../components/forms/FormTextInput';
@@ -19,7 +23,8 @@ import FormButton from '../components/forms/FormButton';
 import {windowWidth} from '../utilities/Dimentions';
 import {useTheme} from '../utilities/ThemeProvider';
 
-function SignUpScreen({navigation}) {
+function SignUpScreen(props) {
+  const {navigation, signUp, authState} = props;
   const {colors} = useTheme();
 
   const [data, setData] = useState({
@@ -50,8 +55,7 @@ function SignUpScreen({navigation}) {
   };
 
   const onSignUp = () => {
-    console.log('Click on Sign In');
-    //signIn(data.email, data.password);
+    signUp(data);
   };
 
   const styles = getStyles(colors);
@@ -103,10 +107,17 @@ function SignUpScreen({navigation}) {
               backgroundColor={colors.primary}
               color={colors.contrastText}
             />
+            {
+              <ActivityIndicator
+                size="small"
+                color="#0000ff"
+                animating={authState.isLoading}
+              />
+            }
 
             <TouchableOpacity
               onPress={() => navigation.navigate('SignInScreen')}>
-              <Text>Have an account?</Text>
+              <Text style={styles.forgotLink}>Have an account?</Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -144,11 +155,20 @@ const getStyles = (colors) => {
       justifyContent: 'center',
       padding: windowWidth / 15,
     },
+    forgotLink: {
+      color: colors.placeHolder,
+      fontWeight: 'bold',
+    },
   });
 };
 
 SignUpScreen.propTypes = {
   navigation: PropTypes.object.isRequired,
+  signUp: PropTypes.func.isRequired,
 };
 
-export default SignUpScreen;
+const mapStateToProps = (state) => ({
+  authState: state.authState,
+});
+
+export default connect(mapStateToProps, {signUp})(SignUpScreen);

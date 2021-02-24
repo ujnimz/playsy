@@ -1,33 +1,48 @@
 import React from 'react';
-import {StyleSheet, View, Text, Button} from 'react-native';
+import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
 
-// import SideDrawerScreen from '../navigation/SideDrawerScreen';
-// import BottomTabsScreen from '../navigation/BottomTabsScreen';
+import {
+  StyleSheet,
+  View,
+  Text,
+  Button,
+  ActivityIndicator,
+  ScrollView,
+} from 'react-native';
 
-import auth from '@react-native-firebase/auth';
+import {useTheme} from '../utilities/ThemeProvider';
+import {windowHeight} from '../utilities/Dimentions';
 
-const onLogOut = () => {
-  auth()
-    .signOut()
-    .then(() => console.log('User signed out!'));
-};
+import ToolBar from '../components/layouts/ToolBar';
 
 function HomeScreen() {
+  const {colors} = useTheme();
+  const styles = getStyles(colors);
+
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
+      <ToolBar />
       <Text>Test</Text>
-      <Button title="Logout" onPress={onLogOut} />
-    </View>
+    </ScrollView>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
+const getStyles = (colors) => {
+  return StyleSheet.create({
+    container: {
+      flex: 1,
+      backgroundColor: colors.background,
+    },
+  });
+};
+
+HomeScreen.propTypes = {
+  //signOut: PropTypes.func.isRequired,
+};
+
+const mapStateToProps = (state) => ({
+  //authState: state.authState,
 });
 
-export default HomeScreen;
+export default connect(mapStateToProps, {})(HomeScreen);

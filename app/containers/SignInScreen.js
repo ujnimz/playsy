@@ -1,9 +1,10 @@
 import React, {useState} from 'react';
 import PropTypes from 'prop-types';
-import auth from '@react-native-firebase/auth';
+import {connect} from 'react-redux';
+import {signIn} from '../redux/actions/auth';
+
 import Icon from 'react-native-vector-icons/Ionicons';
 import {
-  Alert,
   StyleSheet,
   Text,
   View,
@@ -12,6 +13,7 @@ import {
   Keyboard,
   KeyboardAvoidingView,
   TouchableWithoutFeedback,
+  ActivityIndicator,
 } from 'react-native';
 
 import FormTextInput from '../components/forms/FormTextInput';
@@ -21,8 +23,12 @@ import FormButton from '../components/forms/FormButton';
 import {windowWidth} from '../utilities/Dimentions';
 import {useTheme} from '../utilities/ThemeProvider';
 
-function SignInScreen({navigation}) {
+function SignInScreen(props) {
+  const {navigation, signIn, authState} = props;
   const {colors} = useTheme();
+  const styles = getStyles(colors);
+
+  console.log(authState);
 
   const [data, setData] = useState({
     email: '',
@@ -44,39 +50,8 @@ function SignInScreen({navigation}) {
   };
 
   const onSignIn = () => {
-    if (data.email === '' || data.password === '')
-      return Alert.alert('Invalid!', 'Please check your login details again.');
-    auth()
-      .signInWithEmailAndPassword(data.email, data.password)
-      .then(() => {
-        console.log('User account created & signed in!');
-      })
-      .catch((error) => {
-        console.log(error);
-        if (error.code === 'auth/user-not-found') {
-          Alert.alert(
-            'User not found.',
-            'Please check your login details again.',
-          );
-        }
-
-        if (error.code === 'auth/invalid-email') {
-          Alert.alert(
-            'Email address is invalid!',
-            'Please check your email address again.',
-          );
-        }
-
-        if (error.code === 'auth/wrong-password') {
-          Alert.alert(
-            'Password is incorrect!',
-            'Please check your password again.',
-          );
-        }
-      });
+    signIn(data);
   };
-
-  const styles = getStyles(colors);
 
   return (
     <KeyboardAvoidingView
@@ -117,9 +92,16 @@ function SignInScreen({navigation}) {
               backgroundColor={colors.primary}
               color={colors.contrastText}
             />
+            {
+              <ActivityIndicator
+                size="small"
+                color="#0000ff"
+                animating={authState.isLoading}
+              />
+            }
 
             <TouchableOpacity onPress={() => alert('Password Forgot')}>
-              <Text>Forgot your password?</Text>
+              <Text style={styles.forgotLink}>Forgot your password?</Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -157,11 +139,20 @@ const getStyles = (colors) => {
       justifyContent: 'center',
       padding: windowWidth / 15,
     },
+    forgotLink: {
+      color: colors.placeHolder,
+      fontWeight: 'bold',
+    },
   });
 };
 
 SignInScreen.propTypes = {
   navigation: PropTypes.object.isRequired,
+  signIn: PropTypes.func.isRequired,
 };
 
-export default SignInScreen;
+const mapStateToProps = (state) => ({
+  authState: state.authState,
+});
+
+export default connect(mapStateToProps, {signIn})(SignInScreen);

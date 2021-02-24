@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, View, ActivityIndicator} from 'react-native';
 
 import {useTheme} from '../../utilities/ThemeProvider';
 import ThemeToggle from './ThemeToggle';
@@ -11,8 +11,7 @@ function AppLoading() {
 
   return (
     <View style={styles.container}>
-      <Text>AppLoading...</Text>
-      <ThemeToggle />
+      <ActivityIndicator size="small" color="#0000ff" />
     </View>
   );
 }
