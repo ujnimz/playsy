@@ -1,13 +1,13 @@
 import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 
-function Albums() {
+const ForYou = () => {
   return (
     <View style={styles.container}>
-      <Text>Albums</Text>
+      <Text>For You</Text>
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -18,4 +18,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Albums;
+export default ForYou;

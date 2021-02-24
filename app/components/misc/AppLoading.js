@@ -4,7 +4,7 @@ import {StyleSheet, Text, View, ActivityIndicator} from 'react-native';
 import {useTheme} from '../../utilities/ThemeProvider';
 import ThemeToggle from './ThemeToggle';
 
-function AppLoading() {
+const AppLoading = () => {
   const {colors} = useTheme();
 
   const styles = getStyles(colors);
@@ -14,7 +14,7 @@ function AppLoading() {
       <ActivityIndicator size="small" color="#0000ff" />
     </View>
   );
-}
+};
 
 const getStyles = (colors) => {
   return StyleSheet.create({

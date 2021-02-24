@@ -2,37 +2,31 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 
-import {
-  StyleSheet,
-  View,
-  Text,
-  Button,
-  ActivityIndicator,
-  ScrollView,
-} from 'react-native';
+import {StyleSheet, Text, ScrollView} from 'react-native';
 
 import {useTheme} from '../utilities/ThemeProvider';
-import {windowHeight} from '../utilities/Dimentions';
+import {gapSize} from '../utilities/Dimentions';
 
 import ToolBar from '../components/layouts/ToolBar';
 
-function HomeScreen() {
+const HomeScreen = () => {
   const {colors} = useTheme();
   const styles = getStyles(colors);
 
   return (
     <ScrollView style={styles.container}>
       <ToolBar />
-      <Text>Test</Text>
+      <Text>Home</Text>
     </ScrollView>
   );
-}
+};
 
 const getStyles = (colors) => {
   return StyleSheet.create({
     container: {
       flex: 1,
       backgroundColor: colors.background,
+      padding: gapSize,
     },
   });
 };

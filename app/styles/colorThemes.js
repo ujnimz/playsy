@@ -6,6 +6,7 @@ export const lightColors = {
   text: '#222222',
   contrastText: '#ffffff',
   placeHolder: '#909090',
+  grey: '#909090',
   error: '#D32F2F',
 };
 
@@ -17,5 +18,6 @@ export const darkColors = {
   text: '#ffffff',
   contrastText: '#222222',
   placeHolder: '#909090',
+  grey: '#909090',
   error: '#EF9A9A',
 };

@@ -6,6 +6,7 @@ import SettingsScreen from '../containers/SettingsScreen';
 import BottomTabsScreen from './BottomTabsScreen';
 
 import {useTheme} from '../utilities/ThemeProvider';
+import {iconSize} from '../utilities/Dimentions';
 
 const AppStack = createStackNavigator();
 
@@ -14,7 +15,14 @@ const AppStackScreen = () => {
   const styles = getStyles(colors);
 
   return (
-    <AppStack.Navigator>
+    <AppStack.Navigator
+      screenOptions={{
+        headerTintColor: colors.text,
+        headerStyle: {
+          backgroundColor: colors.background,
+          shadowColor: 'transparent',
+        },
+      }}>
       <AppStack.Screen
         name="BottomTabsScreen"
         component={BottomTabsScreen}
@@ -23,13 +31,13 @@ const AppStackScreen = () => {
       <AppStack.Screen
         name="SettingsScreen"
         component={SettingsScreen}
-        options={({navigation, route}) => ({
+        options={({navigation}) => ({
           headerTitle: 'Settings',
           headerLeft: () => (
             <Icon
               style={styles.icon}
               name="chevron-back"
-              size={28}
+              size={iconSize}
               onPress={() => navigation.goBack()}
             />
           ),

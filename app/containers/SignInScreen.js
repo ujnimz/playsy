@@ -20,10 +20,10 @@ import FormTextInput from '../components/forms/FormTextInput';
 import FormPasswordInput from '../components/forms/FormPasswordInput';
 import FormButton from '../components/forms/FormButton';
 
-import {windowWidth} from '../utilities/Dimentions';
+import {gapSize} from '../utilities/Dimentions';
 import {useTheme} from '../utilities/ThemeProvider';
 
-function SignInScreen(props) {
+const SignInScreen = (props) => {
   const {navigation, signIn, authState} = props;
   const {colors} = useTheme();
   const styles = getStyles(colors);
@@ -108,7 +108,7 @@ function SignInScreen(props) {
       </TouchableWithoutFeedback>
     </KeyboardAvoidingView>
   );
-}
+};
 
 const getStyles = (colors) => {
   return StyleSheet.create({
@@ -118,12 +118,12 @@ const getStyles = (colors) => {
     container: {
       flex: 1,
       backgroundColor: colors.background,
+      padding: gapSize,
     },
     header: {
       flex: 1,
       alignItems: 'flex-start',
       justifyContent: 'space-around',
-      paddingLeft: windowWidth / 15,
     },
     icon: {
       color: colors.text,
@@ -137,7 +137,6 @@ const getStyles = (colors) => {
       flex: 3,
       alignItems: 'center',
       justifyContent: 'center',
-      padding: windowWidth / 15,
     },
     forgotLink: {
       color: colors.placeHolder,

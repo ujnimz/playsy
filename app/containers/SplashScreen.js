@@ -8,7 +8,7 @@ import AppLoading from '../components/misc/AppLoading';
 import AuthStackScreen from '../navigation/AuthStackScreen';
 import AppStackScreen from '../navigation/AppStackScreen';
 
-function SplashScreen({authState, authStatus}) {
+const SplashScreen = ({authState, authStatus}) => {
   const {isLoading, user} = authState;
 
   useEffect(() => {
@@ -21,7 +21,7 @@ function SplashScreen({authState, authStatus}) {
     return <AuthStackScreen />;
   }
   return <AppStackScreen />;
-}
+};
 
 SplashScreen.propTypes = {
   authStatus: PropTypes.func.isRequired,

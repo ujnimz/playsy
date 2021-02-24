@@ -10,11 +10,10 @@ import {
 } from 'react-native';
 
 import {useTheme} from '../utilities/ThemeProvider';
-import ThemeToggle from '../components/misc/ThemeToggle';
 
 const logo = require('../assets/images/logo.png');
 
-function WelcomeScreen({navigation}) {
+const WelcomeScreen = ({navigation}) => {
   const {colors} = useTheme();
 
   const styles = getStyles(colors);
@@ -36,14 +35,13 @@ function WelcomeScreen({navigation}) {
           onPress={() => navigation.navigate('SignInScreen')}>
           <Text style={styles.loginButtonText}>Log in</Text>
         </TouchableOpacity>
-        <ThemeToggle />
       </View>
       <View style={styles.footer}>
         <Text style={styles.footerText}>v.0.01</Text>
       </View>
     </View>
   );
-}
+};
 
 const {height} = Dimensions.get('screen');
 const LOGO_HEIGHT = height * 0.15;

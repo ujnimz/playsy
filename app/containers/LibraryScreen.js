@@ -1,13 +1,13 @@
 import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 
-function LibraryScreen() {
+const LibraryScreen = () => {
   return (
     <View style={styles.container}>
       <Text>Library</Text>
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
