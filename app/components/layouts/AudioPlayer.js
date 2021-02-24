@@ -4,6 +4,8 @@ import {StyleSheet, Text, View} from 'react-native';
 import {useTheme} from '../../utilities/ThemeProvider';
 import {gapSize} from '../../utilities/Dimentions';
 
+import MiniPlayer from './MiniPlayer';
+
 const PlayerScreen = () => {
   const {colors} = useTheme();
 
@@ -11,6 +13,7 @@ const PlayerScreen = () => {
 
   return (
     <View style={styles.container}>
+      <MiniPlayer />
       <Text>Music Player</Text>
     </View>
   );
@@ -20,9 +23,6 @@ const getStyles = (colors) => {
   return StyleSheet.create({
     container: {
       flex: 1,
-      padding: gapSize,
-      alignItems: 'center',
-      justifyContent: 'space-between',
       backgroundColor: colors.primary,
     },
   });

@@ -6,7 +6,11 @@ import BottomSheet from 'reanimated-bottom-sheet';
 
 import AudioPlayer from './AudioPlayer';
 import {useTheme} from '../../utilities/ThemeProvider';
-import {windowHeight, gapSize} from '../../utilities/Dimentions';
+import {
+  windowHeight,
+  gapSize,
+  miniPlayerHeight,
+} from '../../utilities/Dimentions';
 
 const BottomTabs = ({state, descriptors, navigation}) => {
   const focusedOptions = descriptors[state.routes[state.index].key].options;
@@ -36,7 +40,8 @@ const BottomTabs = ({state, descriptors, navigation}) => {
         />
         <BottomSheet
           ref={sheetRef}
-          snapPoints={[windowHeight, 60, 60]}
+          snapPoints={[windowHeight, miniPlayerHeight, miniPlayerHeight]}
+          initialSnap={1}
           renderContent={renderContent}
           callbackNode={fall}
           enabledGestureInteraction={true}
