@@ -6,7 +6,7 @@ import SearchScreen from '../containers/SearchScreen';
 import ForYou from '../containers/ForYou';
 import LibraryScreen from '../containers/LibraryScreen';
 
-import BottomTabs from '../components/layouts/BottomTabs';
+import BottomTabs from '../components/layouts/ui/BottomTabs';
 
 import Icon from 'react-native-vector-icons/Ionicons';
 

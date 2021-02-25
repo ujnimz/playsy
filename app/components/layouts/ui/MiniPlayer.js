@@ -3,12 +3,12 @@ import {StyleSheet, Text, Image, View, Pressable} from 'react-native';
 import TextTicker from 'react-native-text-ticker';
 import Icon from 'react-native-vector-icons/Ionicons';
 
-import {useTheme} from '../../utilities/ThemeProvider';
-import {gapSize, miniPlayerHeight} from '../../utilities/Dimentions';
+import {useTheme} from '../../../utilities/ThemeProvider';
+import {gapSize, miniPlayerHeight} from '../../../utilities/Dimentions';
 
-const artist = require('../../assets/images/artist.jpg');
+const artist = require('../../../assets/images/artist.jpg');
 
-const MiniPlayer = () => {
+const MiniPlayer = ({onOpenBottomSheet}) => {
   const {colors} = useTheme();
 
   const styles = getStyles(colors);
@@ -17,7 +17,7 @@ const MiniPlayer = () => {
     <View style={styles.container}>
       <View style={styles.content}>
         <Image source={artist} style={styles.image} />
-        <View style={styles.textContent}>
+        <Pressable style={styles.textContent} onPress={onOpenBottomSheet}>
           <TextTicker
             style={styles.title}
             duration={4000}
@@ -34,7 +34,7 @@ const MiniPlayer = () => {
             shouldAnimateTreshold={10}>
             Athma Liyanage
           </TextTicker>
-        </View>
+        </Pressable>
       </View>
       <View style={styles.iconView}>
         <Icon name="play" color={colors.text} size={34} />

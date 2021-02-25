@@ -3,8 +3,8 @@ import {StyleSheet, Text, View} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
-import {useTheme} from '../../utilities/ThemeProvider';
-import {iconSize} from '../../utilities/Dimentions';
+import {useTheme} from '../../../utilities/ThemeProvider';
+import {iconSize} from '../../../utilities/Dimentions';
 
 const ToolBar = () => {
   const {colors} = useTheme();

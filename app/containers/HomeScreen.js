@@ -2,12 +2,41 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 
-import {StyleSheet, Text, ScrollView} from 'react-native';
+import {StyleSheet, Text, View, ScrollView, FlatList} from 'react-native';
 
 import {useTheme} from '../utilities/ThemeProvider';
-import {gapSize} from '../utilities/Dimentions';
+import {gapSize, windowWidth} from '../utilities/Dimentions';
 
-import ToolBar from '../components/layouts/ToolBar';
+import ToolBar from '../components/layouts/ui/ToolBar';
+import ThumbRow from '../components/layouts/ui/ThumbRow';
+
+const DATA = [
+  {
+    id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
+    title: 'Me Hitha Thaniyen – Athma Liyanage ft. Thilina Ruhunage',
+    meta: 'Athma Liyanage',
+  },
+  {
+    id: '3ac68afc-c605-48d3-a4f8-fbd91aa97f63',
+    title: 'Me Hitha Thaniyen – Athma Liyanage ft. Thilina Ruhunage',
+    meta: 'Athma Liyanage',
+  },
+  {
+    id: '58694a0f-3da1-471f-bd96-145571e29d72',
+    title: 'Me Hitha Thaniyen – Athma Liyanage ft. Thilina Ruhunage',
+    meta: 'Athma Liyanage',
+  },
+  {
+    id: '58694a0f-3da1-471f-bdds-145571e29d72',
+    title: 'Me Hitha Thaniyen – Athma Liyanage ft. Thilina Ruhunage',
+    meta: 'Athma Liyanage',
+  },
+  {
+    id: '58694a0f-3da1-471f-bdsf6-145571e29d72',
+    title: 'Me Hitha Thaniyen – Athma Liyanage ft. Thilina Ruhunage',
+    meta: 'Athma Liyanage',
+  },
+];
 
 const HomeScreen = () => {
   const {colors} = useTheme();
@@ -16,7 +45,10 @@ const HomeScreen = () => {
   return (
     <ScrollView style={styles.container}>
       <ToolBar />
-      <Text>Home</Text>
+      <ThumbRow data={DATA} />
+      <ThumbRow data={DATA} />
+      <ThumbRow data={DATA} />
+      <ThumbRow data={DATA} />
     </ScrollView>
   );
 };

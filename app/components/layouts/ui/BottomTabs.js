@@ -14,12 +14,12 @@ import BottomSheet from 'reanimated-bottom-sheet';
 import MiniPlayer from './MiniPlayer';
 import FullPlayer from './FullPlayer';
 
-import {useTheme} from '../../utilities/ThemeProvider';
+import {useTheme} from '../../../utilities/ThemeProvider';
 import {
   windowHeight,
   gapSize,
   miniPlayerHeight,
-} from '../../utilities/Dimentions';
+} from '../../../utilities/Dimentions';
 
 const BottomTabs = ({state, descriptors, navigation}) => {
   const focusedOptions = descriptors[state.routes[state.index].key].options;

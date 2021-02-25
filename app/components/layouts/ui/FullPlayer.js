@@ -3,14 +3,14 @@ import {StyleSheet, Text, Image, View, TouchableOpacity} from 'react-native';
 import TextTicker from 'react-native-text-ticker';
 import Icon from 'react-native-vector-icons/Ionicons';
 
-import {useTheme} from '../../utilities/ThemeProvider';
+import {useTheme} from '../../../utilities/ThemeProvider';
 import {
   gapSize,
   miniPlayerHeight,
   windowWidth,
-} from '../../utilities/Dimentions';
+} from '../../../utilities/Dimentions';
 
-const artist = require('../../assets/images/artist.jpg');
+const artist = require('../../../assets/images/artist.jpg');
 
 const FullPlayer = ({onCloseBottomSheet}) => {
   const {colors} = useTheme();
