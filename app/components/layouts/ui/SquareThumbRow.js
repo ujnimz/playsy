@@ -8,7 +8,7 @@ import {gapSize} from '../../../utilities/Dimentions';
 import SquareThumb from './SquareThumb';
 import ThumbTitle from './ThumbTitle';
 
-const ThumbRow = ({data}) => {
+const SquareThumbRow = ({data}) => {
   const {colors} = useTheme();
   const styles = getStyles(colors);
 
@@ -35,4 +35,4 @@ const getStyles = (colors) => {
   });
 };
 
-export default ThumbRow;
+export default SquareThumbRow;

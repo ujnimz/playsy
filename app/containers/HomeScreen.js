@@ -8,7 +8,8 @@ import {useTheme} from '../utilities/ThemeProvider';
 import {gapSize, windowWidth} from '../utilities/Dimentions';
 
 import ToolBar from '../components/layouts/ui/ToolBar';
-import ThumbRow from '../components/layouts/ui/ThumbRow';
+import SquareThumbRow from '../components/layouts/ui/SquareThumbRow';
+import RoundThumbRow from '../components/layouts/ui/RoundThumbRow';
 
 const DATA = [
   {
@@ -45,10 +46,10 @@ const HomeScreen = () => {
   return (
     <ScrollView style={styles.container}>
       <ToolBar />
-      <ThumbRow data={DATA} />
-      <ThumbRow data={DATA} />
-      <ThumbRow data={DATA} />
-      <ThumbRow data={DATA} />
+      <SquareThumbRow data={DATA} />
+      <RoundThumbRow data={DATA} />
+      <SquareThumbRow data={DATA} />
+      <RoundThumbRow data={DATA} />
     </ScrollView>
   );
 };
