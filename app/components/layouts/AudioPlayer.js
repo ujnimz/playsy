@@ -5,8 +5,9 @@ import {useTheme} from '../../utilities/ThemeProvider';
 import {gapSize} from '../../utilities/Dimentions';
 
 import MiniPlayer from './MiniPlayer';
+import FullPlayer from './FullPlayer';
 
-const PlayerScreen = () => {
+const PlayerScreen = ({onCloseBottomSheet}) => {
   const {colors} = useTheme();
 
   const styles = getStyles(colors);
@@ -14,7 +15,7 @@ const PlayerScreen = () => {
   return (
     <View style={styles.container}>
       <MiniPlayer />
-      <Text>Music Player</Text>
+      <FullPlayer onCloseBottomSheet={onCloseBottomSheet} />
     </View>
   );
 };
@@ -23,7 +24,9 @@ const getStyles = (colors) => {
   return StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: colors.primary,
+    },
+    header: {
+      flex: 1,
     },
   });
 };

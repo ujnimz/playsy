@@ -1,11 +1,12 @@
 import React from 'react';
-import {StyleSheet, Text, Image, View} from 'react-native';
+import {StyleSheet, Text, Image, View, Pressable} from 'react-native';
+import TextTicker from 'react-native-text-ticker';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 import {useTheme} from '../../utilities/ThemeProvider';
 import {gapSize, miniPlayerHeight} from '../../utilities/Dimentions';
 
-const logo = require('../../assets/images/artist.jpg');
+const artist = require('../../assets/images/artist.jpg');
 
 const MiniPlayer = () => {
   const {colors} = useTheme();
@@ -15,14 +16,28 @@ const MiniPlayer = () => {
   return (
     <View style={styles.container}>
       <View style={styles.content}>
-        <Image source={logo} style={styles.image} />
+        <Image source={artist} style={styles.image} />
         <View style={styles.textContent}>
-          <Text style={styles.title}>Athma Liyanage</Text>
-          <Text style={styles.meta}>Athma Liyanage</Text>
+          <TextTicker
+            style={styles.title}
+            duration={4000}
+            animationType="bounce"
+            marqueeDelay={2000}
+            shouldAnimateTreshold={10}>
+            Me Hitha Thaniyen – Athma Liyanage ft. Thilina Ruhunage
+          </TextTicker>
+          <TextTicker
+            style={styles.meta}
+            duration={4000}
+            animationType="bounce"
+            marqueeDelay={2000}
+            shouldAnimateTreshold={10}>
+            Athma Liyanage
+          </TextTicker>
         </View>
       </View>
       <View style={styles.iconView}>
-        <Icon name="play" size={34} />
+        <Icon name="play" color={colors.text} size={34} />
       </View>
     </View>
   );
@@ -35,18 +50,17 @@ const getStyles = (colors) => {
       flexDirection: 'row',
       alignContent: 'center',
       justifyContent: 'space-between',
+      backgroundColor: colors.primary,
     },
     titleView: {
       justifyContent: 'flex-start',
     },
-    iconView: {
-      justifyContent: 'center',
-      marginRight: gapSize,
-    },
     content: {
+      flex: 1,
       flexDirection: 'row',
     },
     textContent: {
+      flex: 1,
       padding: gapSize / 3,
     },
     title: {
@@ -61,6 +75,10 @@ const getStyles = (colors) => {
     image: {
       width: miniPlayerHeight,
       height: miniPlayerHeight,
+    },
+    iconView: {
+      justifyContent: 'center',
+      marginRight: gapSize,
     },
   });
 };

@@ -1,10 +1,19 @@
 import React from 'react';
-import {View, Text, TouchableOpacity, Button, StyleSheet} from 'react-native';
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  Button,
+  StyleSheet,
+  Pressable,
+} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import Animated from 'react-native-reanimated';
+import Animated, {Easing} from 'react-native-reanimated';
 import BottomSheet from 'reanimated-bottom-sheet';
 
-import AudioPlayer from './AudioPlayer';
+import MiniPlayer from './MiniPlayer';
+import FullPlayer from './FullPlayer';
+
 import {useTheme} from '../../utilities/ThemeProvider';
 import {
   windowHeight,
@@ -22,29 +31,66 @@ const BottomTabs = ({state, descriptors, navigation}) => {
   const {colors} = useTheme();
   const styles = getStyles(colors);
 
-  const renderContent = () => (
-    <View style={styles.playerScreen}>
-      <AudioPlayer />
-    </View>
-  );
-
   const sheetRef = React.createRef();
   const fall = new Animated.Value(0);
+
+  const onOpenBottomSheet = () => {
+    sheetRef.current.snapTo(0);
+  };
+  const onCloseBottomSheet = () => {
+    sheetRef.current.snapTo(1);
+  };
+
+  //const [fadeAnimation, setFadeAnimation] = useState(new Animated.Value(0))
+  const fadeAnimation = new Animated.Value(1);
+
+  const miniPlayerFadeIn = () => {
+    Animated.timing(fadeAnimation, {
+      toValue: 1,
+      duration: 200,
+      easing: Easing.inOut(Easing.linear),
+    }).start();
+  };
+
+  const miniPlayerFadeOut = () => {
+    Animated.timing(fadeAnimation, {
+      toValue: 0,
+      duration: 200,
+      easing: Easing.inOut(Easing.linear),
+    }).start();
+  };
+
+  const renderContent = () => (
+    <View style={styles.playerScreen}>
+      <Animated.View
+        style={{
+          opacity: fadeAnimation,
+        }}>
+        <MiniPlayer onOpenBottomSheet={onOpenBottomSheet} />
+      </Animated.View>
+
+      <FullPlayer onCloseBottomSheet={onCloseBottomSheet} />
+    </View>
+  );
 
   return (
     <>
       <View>
-        <Button
-          title="Open Bottom Sheet"
-          onPress={() => sheetRef.current.snapTo(0)}
-        />
+        <Button title="Open Bottom Sheet" onPress={onOpenBottomSheet} />
         <BottomSheet
           ref={sheetRef}
-          snapPoints={[windowHeight, miniPlayerHeight, miniPlayerHeight]}
+          snapPoints={[
+            windowHeight - miniPlayerHeight,
+            miniPlayerHeight,
+            miniPlayerHeight,
+          ]}
           initialSnap={1}
           renderContent={renderContent}
           callbackNode={fall}
           enabledGestureInteraction={true}
+          enabledBottomInitialAnimation={true}
+          onOpenStart={miniPlayerFadeOut}
+          onCloseEnd={miniPlayerFadeIn}
         />
       </View>
       <View style={styles.container}>
