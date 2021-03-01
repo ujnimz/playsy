@@ -1,15 +1,15 @@
 import 'react-native-gesture-handler';
 import React from 'react';
-// REDUX
-import {Provider} from 'react-redux';
-import mainStore from './app/redux/mainStore';
 // REACT NAVIGATION
 import {NavigationContainer} from '@react-navigation/native';
 import {AppearanceProvider} from 'react-native-appearance';
+// REDUX
+import {Provider} from 'react-redux';
+import mainStore from '_redux/mainStore';
 // DARK LIGHT THEME
-import {ThemeProvider} from './app/utilities/ThemeProvider';
-import ThemeScreen from './app/utilities/ThemeScreen';
-import SplashScreen from './app/containers/SplashScreen';
+import {ThemeProvider} from '_theme/ThemeProvider';
+import ThemeScreen from '_theme/ThemeScreen';
+import AppRoot from './app/index';
 
 const App = () => {
   return (
@@ -18,7 +18,7 @@ const App = () => {
         <ThemeProvider>
           <NavigationContainer>
             <ThemeScreen>
-              <SplashScreen />
+              <AppRoot />
             </ThemeScreen>
           </NavigationContainer>
         </ThemeProvider>
