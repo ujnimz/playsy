@@ -12,7 +12,6 @@ const artist = require('_assets/images/artist.jpg');
 
 const MiniPlayer = ({onOpenBottomSheet}) => {
   const theme = useTheme();
-
   const styles = getStyles(theme);
 
   return (
