@@ -20,14 +20,11 @@ import FormTextInput from '_atoms/FormTextInput';
 import FormPasswordInput from '_atoms/FormPasswordInput';
 import FormButton from '_atoms/FormButton';
 
-import {gapSize} from '_utilities/Dimentions';
 import {useTheme} from '_theme/ThemeProvider';
 
 const SignInScreen = ({navigation, signIn, authState}) => {
-  const {colors} = useTheme();
-  const styles = getStyles(colors);
-
-  console.log(authState);
+  const theme = useTheme();
+  const styles = getStyles(theme);
 
   const [data, setData] = useState({
     email: '',
@@ -88,8 +85,8 @@ const SignInScreen = ({navigation, signIn, authState}) => {
             <FormButton
               onPress={onSignIn}
               buttonTitle="Log in"
-              backgroundColor={colors.primary}
-              color={colors.contrastText}
+              backgroundColor={theme.colors.primary}
+              color={theme.colors.contrastText}
             />
             {
               <ActivityIndicator
@@ -109,7 +106,7 @@ const SignInScreen = ({navigation, signIn, authState}) => {
   );
 };
 
-const getStyles = (colors) => {
+const getStyles = ({colors, typography, spacing}) => {
   return StyleSheet.create({
     root: {
       flex: 1,
@@ -117,7 +114,7 @@ const getStyles = (colors) => {
     container: {
       flex: 1,
       backgroundColor: colors.background,
-      padding: gapSize,
+      padding: spacing.SCALE_18,
     },
     header: {
       flex: 1,
@@ -128,9 +125,9 @@ const getStyles = (colors) => {
       color: colors.text,
     },
     title: {
+      ...typography.FONT_BOLD,
       color: colors.text,
-      fontSize: 28,
-      fontWeight: 'bold',
+      fontSize: typography.FONT_SIZE_28,
     },
     body: {
       flex: 3,
@@ -138,8 +135,8 @@ const getStyles = (colors) => {
       justifyContent: 'center',
     },
     forgotLink: {
+      ...typography.FONT_MEDIUM,
       color: colors.placeHolder,
-      fontWeight: 'bold',
     },
   });
 };

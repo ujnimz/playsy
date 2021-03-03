@@ -1,19 +1,22 @@
 {
   "compilerOptions": {
     "baseUrl": ".",
+    "module": "commonjs",
+    "target": "es6",
     "paths": {
-      "_assets": ["app/assets/*"],
-      "_components": ["app/components/*"],
-      "_atoms": ["app/components/atoms/*"],
-      "_molecules": ["app/components/molecules/*"],
-      "_organisms": ["app/components/organisms/*"],
-      "_navigations": ["app/navigations/*"],
-      "_screens": ["app/screens/*"],
-      "_services": ["app/services/*"],
-      "_styles": ["app/styles/*"],
-      "_theme": ["app/theme/*"],
-      "_utilities": ["app/utilities/*"],
-      "_redux": ["./app/redux"]
+      "_assets/*": ["app/assets/*"],
+      "_components/*": ["app/components/*"],
+      "_atoms/*": ["app/components/atoms/*"],
+      "_molecules/*": ["app/components/molecules/*"],
+      "_organisms/*": ["app/components/organisms/*"],
+      "_navigations/*": ["app/navigations/*"],
+      "_screens/*": ["app/screens/*"],
+      "_services/*": ["app/services/*"],
+      "_styles/*": ["app/styles/*"],
+      "_theme/*": ["app/theme/*"],
+      "_utilities/*": ["app/utilities/*"],
+      "_redux/*": ["./app/redux/*"]
     }
-  }
+  },
+  "exclude": ["node_modules"]
 }

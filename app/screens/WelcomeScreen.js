@@ -15,7 +15,6 @@ const logo = require('_assets/images/logo.png');
 
 const WelcomeScreen = ({navigation}) => {
   const theme = useTheme();
-
   const styles = getStyles(theme);
 
   return (
