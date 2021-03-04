@@ -18,9 +18,9 @@ const AppStackScreen = () => {
   return (
     <AppStack.Navigator
       screenOptions={{
-        headerTintColor: theme.colors.text,
+        headerTintColor: theme.colors.PRIMARY,
         headerStyle: {
-          backgroundColor: theme.colors.background,
+          backgroundColor: theme.colors.BACKGROUND,
           shadowColor: 'transparent',
         },
       }}>
@@ -38,7 +38,7 @@ const AppStackScreen = () => {
             <Icon
               style={styles.icon}
               name="chevron-back"
-              size={iconSize}
+              size={theme.spacing.SCALE_16 * 2}
               onPress={() => navigation.goBack()}
             />
           ),
@@ -51,7 +51,7 @@ const AppStackScreen = () => {
 const getStyles = ({colors}) => {
   return StyleSheet.create({
     icon: {
-      color: colors.text,
+      color: colors.PRIMARY,
     },
   });
 };

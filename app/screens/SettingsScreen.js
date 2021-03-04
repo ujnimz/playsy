@@ -27,32 +27,64 @@ const SettingsScreen = ({signOut}) => {
         </View>
       </View>
 
-      <FormButton
-        onPress={signOut}
-        buttonTitle="Logout"
-        backgroundColor={theme.colors.primary}
-        color={theme.colors.contrastText}
-      />
+      <View style={styles.settingsRow}>
+        <View>
+          <Text style={styles.settingsRowText}>Account Settings</Text>
+        </View>
+        <View>
+          <ThemeToggle />
+        </View>
+      </View>
+
+      <View style={styles.settingsRow}>
+        <View>
+          <Text style={styles.settingsRowText}>Notifications</Text>
+        </View>
+        <View>
+          <ThemeToggle />
+        </View>
+      </View>
+
+      <View style={styles.settingsRow}>
+        <View>
+          <Text style={styles.settingsRowText}>About</Text>
+        </View>
+        <View>
+          <ThemeToggle />
+        </View>
+      </View>
+
+      <View style={styles.footer}>
+        <FormButton
+          onPress={signOut}
+          buttonTitle="Logout"
+          backgroundColor={theme.colors.PRIMARY}
+          color={theme.colors.TEXTCONTRAST}
+        />
+      </View>
     </View>
   );
 };
 
-const getStyles = ({colors}) => {
+const getStyles = ({colors, spacing}) => {
   return StyleSheet.create({
     container: {
       flex: 1,
-      alignItems: 'center',
+      alignContent: 'center',
       justifyContent: 'flex-start',
-      paddingTop: windowHeight / 50,
-      backgroundColor: colors.background,
+      backgroundColor: colors.BACKGROUND,
     },
     settingsRow: {
       flexDirection: 'row',
       alignItems: 'center',
       justifyContent: 'space-between',
+      padding: spacing.SCALE_8,
+    },
+    footer: {
+      alignItems: 'center',
     },
     settingsRowText: {
-      color: colors.text,
+      color: colors.PRIMARY,
     },
   });
 };

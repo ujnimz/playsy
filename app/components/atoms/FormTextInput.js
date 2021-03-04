@@ -14,25 +14,26 @@ const FormTextInput = ({inputValue, placeholderText, ...rest}) => {
         onChangeText={(text) => onChangeEmail(text)}
         value={inputValue}
         placeholder={placeholderText}
-        placeholderTextColor={theme.colors.placeHolder}
+        placeholderTextColor={theme.colors.GREY}
         {...rest}
       />
     </View>
   );
 };
 
-const getStyles = ({colors, margin, spacing}) => {
+const getStyles = ({colors, margin, spacing, typography}) => {
   return StyleSheet.create({
     formElement: {
       flexDirection: 'row',
-      borderColor: colors.placeHolder,
+      borderColor: colors.GREY,
       borderBottomWidth: 1,
       ...margin.MARGIN_0_12,
     },
     formTextInput: {
       flex: 1,
       height: spacing.SCALE_28,
-      color: colors.text,
+      color: colors.PRIMARY,
+      ...typography.FONT_REGULAR,
     },
   });
 };

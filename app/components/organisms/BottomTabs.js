@@ -35,7 +35,7 @@ const BottomTabs = ({state, descriptors, navigation}) => {
   const miniPlayerFadeIn = () => {
     Animated.timing(fadeAnimation, {
       toValue: 1,
-      duration: 200,
+      duration: 100,
       easing: Easing.inOut(Easing.linear),
     }).start();
   };
@@ -68,9 +68,9 @@ const BottomTabs = ({state, descriptors, navigation}) => {
         <BottomSheet
           ref={sheetRef}
           snapPoints={[
-            windowHeight - miniPlayerHeight,
-            miniPlayerHeight,
-            miniPlayerHeight,
+            windowHeight - theme.spacing.SCALE_18 * 3,
+            theme.spacing.SCALE_18 * 3,
+            theme.spacing.SCALE_18 * 3,
           ]}
           initialSnap={1}
           renderContent={renderContent}
@@ -124,10 +124,14 @@ const BottomTabs = ({state, descriptors, navigation}) => {
               onLongPress={onLongPress}
               style={styles.tabItem}>
               {tabIcon(
-                isFocused ? theme.colors.text : theme.colors.grey,
+                isFocused ? theme.colors.PRIMARY : theme.colors.GREY,
                 isFocused ? '' : '-outline',
               )}
-              <Text style={isFocused ? styles.activeLabel : styles.label}>
+              <Text
+                style={[
+                  styles.label,
+                  {color: isFocused ? theme.colors.PRIMARY : theme.colors.GREY},
+                ]}>
                 {label}
               </Text>
             </TouchableOpacity>
@@ -138,38 +142,33 @@ const BottomTabs = ({state, descriptors, navigation}) => {
   );
 };
 
-const getStyles = ({colors}) => {
+const getStyles = ({colors, spacing}) => {
   return StyleSheet.create({
     container: {
       flexDirection: 'row',
       alignItems: 'stretch',
       justifyContent: 'center',
-      backgroundColor: colors.background,
+      backgroundColor: colors.BACKGROUND,
     },
     tabItem: {
       flex: 1,
       alignItems: 'center',
       justifyContent: 'space-between',
-      paddingTop: gapSize,
+      padding: spacing.SCALE_12 / 2,
     },
     label: {
-      color: colors.grey,
-      fontSize: 12,
-    },
-    activeLabel: {
-      color: colors.text,
       fontSize: 12,
     },
     icon: {
-      color: colors.grey,
+      color: colors.GREY,
       marginBottom: 5,
     },
     activeIcon: {
-      color: colors.text,
+      color: colors.PRIMARY,
     },
     playerScreen: {
-      height: windowHeight,
-      backgroundColor: colors.background,
+      height: windowHeight - spacing.SCALE_18 * 3,
+      backgroundColor: colors.BACKGROUND,
     },
   });
 };

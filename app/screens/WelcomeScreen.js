@@ -45,14 +45,14 @@ const WelcomeScreen = ({navigation}) => {
 const {height} = Dimensions.get('screen');
 const LOGO_HEIGHT = height * 0.15;
 
-const getStyles = ({colors}) => {
+const getStyles = ({colors, spacing}) => {
   return StyleSheet.create({
     container: {
       flex: 1,
       alignItems: 'center',
       justifyContent: 'center',
-      backgroundColor: colors.background,
-      paddingTop: 44,
+      backgroundColor: colors.BACKGROUND,
+      paddingTop: spacing.SCALE_28,
     },
     header: {
       flex: 3,
@@ -61,13 +61,13 @@ const getStyles = ({colors}) => {
     },
     title: {
       fontSize: 26,
-      color: colors.text,
+      color: colors.PRIMARY,
       textTransform: 'uppercase',
       marginBottom: 30,
     },
     signupButton: {
       alignItems: 'center',
-      backgroundColor: colors.primary,
+      backgroundColor: colors.PRIMARY,
       padding: 10,
       width: 200,
       borderRadius: 30,
@@ -75,12 +75,12 @@ const getStyles = ({colors}) => {
     },
     signupButtonText: {
       textTransform: 'uppercase',
-      color: colors.contrastText,
+      color: colors.TEXTCONTRAST,
       fontWeight: 'bold',
     },
     loginButton: {
       alignItems: 'center',
-      backgroundColor: colors.secondary,
+      backgroundColor: colors.SECONDARY,
       padding: 10,
       width: 200,
       borderRadius: 30,
@@ -88,7 +88,7 @@ const getStyles = ({colors}) => {
     },
     loginButtonText: {
       textTransform: 'uppercase',
-      color: colors.contrastText,
+      color: colors.TEXTCONTRAST,
       fontWeight: 'bold',
     },
     content: {
@@ -107,7 +107,7 @@ const getStyles = ({colors}) => {
       paddingBottom: 34,
     },
     footerText: {
-      color: colors.text,
+      color: colors.PRIMARY,
       fontSize: 11,
     },
   });

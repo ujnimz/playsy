@@ -4,7 +4,6 @@ import {useNavigation} from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 import {useTheme} from '_theme/ThemeProvider';
-import {iconSize} from '_utilities/Dimentions';
 
 const ToolBar = () => {
   const theme = useTheme();
@@ -16,7 +15,7 @@ const ToolBar = () => {
       <Icon
         style={styles.icon}
         name="settings-outline"
-        size={iconSize}
+        size={theme.spacing.SCALE_12 * 2}
         onPress={() => navigation.navigate('SettingsScreen')}
       />
     </View>
@@ -31,7 +30,7 @@ const getStyles = ({colors}) => {
       justifyContent: 'flex-end',
     },
     icon: {
-      color: colors.text,
+      color: colors.PRIMARY,
     },
   });
 };

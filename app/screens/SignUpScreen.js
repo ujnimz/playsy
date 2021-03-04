@@ -71,7 +71,7 @@ const SignUpScreen = ({navigation, signUp, authState}) => {
               size={36}
               onPress={() => navigation.goBack()}
             />
-            <Text style={styles.title}>Let&aposs Get Started!</Text>
+            <Text style={styles.title}>Let's Get Started!</Text>
           </View>
 
           <View style={styles.body}>
@@ -102,8 +102,8 @@ const SignUpScreen = ({navigation, signUp, authState}) => {
             <FormButton
               onPress={onSignUp}
               buttonTitle="Sign Up"
-              backgroundColor={theme.colors.primary}
-              color={theme.colors.contrastText}
+              backgroundColor={theme.colors.SECONDARY}
+              color={theme.colors.TEXTCONTRAST}
             />
             {
               <ActivityIndicator
@@ -124,15 +124,15 @@ const SignUpScreen = ({navigation, signUp, authState}) => {
   );
 };
 
-const getStyles = ({colors}) => {
+const getStyles = ({colors, typography, spacing}) => {
   return StyleSheet.create({
     root: {
       flex: 1,
     },
     container: {
       flex: 1,
-      backgroundColor: colors.background,
-      padding: gapSize,
+      backgroundColor: colors.BACKGROUND,
+      padding: spacing.SCALE_18,
     },
     header: {
       flex: 1,
@@ -140,12 +140,12 @@ const getStyles = ({colors}) => {
       justifyContent: 'space-around',
     },
     icon: {
-      color: colors.text,
+      color: colors.PRIMARY,
     },
     title: {
-      color: colors.text,
-      fontSize: 28,
-      fontWeight: 'bold',
+      ...typography.FONT_BOLD,
+      color: colors.PRIMARY,
+      fontSize: typography.FONT_SIZE_28,
     },
     body: {
       flex: 3,
@@ -153,8 +153,8 @@ const getStyles = ({colors}) => {
       justifyContent: 'center',
     },
     forgotLink: {
-      color: colors.placeHolder,
-      fontWeight: 'bold',
+      ...typography.FONT_MEDIUM,
+      color: colors.PLACEHOLDER,
     },
   });
 };

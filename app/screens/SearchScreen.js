@@ -19,10 +19,10 @@ const getStyles = ({colors, typography}) => {
       flex: 1,
       alignItems: 'center',
       justifyContent: 'center',
-      backgroundColor: colors.background,
+      backgroundColor: colors.BACKGROUND,
     },
     text: {
-      color: colors.text,
+      color: colors.PRIMARY,
       fontSize: 18,
       ...typography.FONT_BOLD,
     },

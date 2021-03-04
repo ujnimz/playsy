@@ -18,7 +18,7 @@ const FormButton = ({buttonTitle, backgroundColor, color, ...rest}) => {
   );
 };
 
-const getStyles = ({spacing, margin, padding}) => {
+const getStyles = ({spacing, margin, padding, typography}) => {
   return StyleSheet.create({
     loginButton: {
       alignItems: 'center',
@@ -28,7 +28,7 @@ const getStyles = ({spacing, margin, padding}) => {
       ...padding.PADDING_12,
     },
     loginButtonText: {
-      fontWeight: 'bold',
+      ...typography.FONT_BOLD,
       textTransform: 'uppercase',
     },
   });

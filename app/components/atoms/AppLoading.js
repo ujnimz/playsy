@@ -5,12 +5,11 @@ import {useTheme} from '_theme/ThemeProvider';
 
 const AppLoading = () => {
   const theme = useTheme();
-
   const styles = getStyles(theme);
 
   return (
     <View style={styles.container}>
-      <ActivityIndicator size="small" color={theme.colors.secondary} />
+      <ActivityIndicator size="small" color={theme.colors.SECONDARY} />
     </View>
   );
 };
@@ -21,7 +20,7 @@ const getStyles = ({colors}) => {
       flex: 1,
       alignItems: 'center',
       justifyContent: 'center',
-      backgroundColor: colors.background,
+      backgroundColor: colors.BACKGROUND,
       paddingTop: 44,
     },
   });

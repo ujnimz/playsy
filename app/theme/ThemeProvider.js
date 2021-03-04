@@ -5,8 +5,8 @@ import {useColorScheme} from 'react-native-appearance';
 import {Typography, Spacing, Margin, Padding, Colors, Mixins} from '_styles';
 
 export const ThemeContext = React.createContext({
-  isDark: false,
-  colors: Colors.LIGHT_COLORS,
+  isDark: true,
+  colors: Colors.DARK_COLORS,
   typography: Typography,
   spacing: Spacing,
   margin: Margin,

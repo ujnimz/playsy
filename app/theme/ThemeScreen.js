@@ -11,7 +11,7 @@ const ThemeScreen = ({children}) => {
     flex: 1,
     paddingTop: 44,
     paddingBottom: 30,
-    backgroundColor: colors.background,
+    backgroundColor: colors.BACKGROUND,
   };
 
   return (

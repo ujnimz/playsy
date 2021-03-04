@@ -51,12 +51,13 @@ const HomeScreen = () => {
   );
 };
 
-const getStyles = ({colors}) => {
+const getStyles = ({colors, spacing}) => {
   return StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: colors.background,
-      padding: gapSize,
+      backgroundColor: colors.BACKGROUND,
+      padding: spacing.SCALE_18,
+      overflow: 'visible',
     },
   });
 };

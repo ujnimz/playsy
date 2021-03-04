@@ -5,11 +5,10 @@ import {connect} from 'react-redux';
 import {StyleSheet, Text, Image, View, TouchableOpacity} from 'react-native';
 
 import {useTheme} from '_theme/ThemeProvider';
-import {gapSize, windowWidth} from '_utilities/Dimentions';
 
 const artist = require('_assets/images/artist.jpg');
 
-const RoundCard = () => {
+const Card = ({isRound}) => {
   const theme = useTheme();
   const styles = getStyles(theme);
 
@@ -17,10 +16,20 @@ const RoundCard = () => {
     <>
       <TouchableOpacity style={styles.container}>
         <View>
-          <Image source={artist} style={styles.image} resizeMode="cover" />
+          <Image
+            source={artist}
+            style={[
+              styles.image,
+              {borderRadius: isRound ? (theme.spacing.SCALE_12 * 10) / 2 : 3},
+            ]}
+            resizeMode="cover"
+          />
         </View>
         <View>
-          <Text style={styles.title}>Athma Liyanage</Text>
+          <Text
+            style={[styles.title, {textAlign: isRound ? 'center' : 'left'}]}>
+            Athma Liyanage
+          </Text>
         </View>
       </TouchableOpacity>
     </>
@@ -36,18 +45,23 @@ const getStyles = ({colors, spacing, typography}) => {
       width: spacing.SCALE_12 * 10,
       height: spacing.SCALE_12 * 10,
       marginBottom: spacing.SCALE_8,
+    },
+    round: {
       borderRadius: (spacing.SCALE_12 * 10) / 2,
+    },
+    square: {
+      borderRadius: 3,
     },
     title: {
       ...typography.FONT_MEDIUM,
       fontSize: spacing.SCALE_12,
-      color: colors.text,
+      color: colors.PRIMARY,
       textAlign: 'center',
     },
   });
 };
 
-RoundCard.propTypes = {
+Card.propTypes = {
   //item: PropTypes.object.isRequired,
 };
 
@@ -55,4 +69,4 @@ const mapStateToProps = () => ({
   //authState: state.authState,
 });
 
-export default connect(mapStateToProps, {})(RoundCard);
+export default connect(mapStateToProps, {})(Card);

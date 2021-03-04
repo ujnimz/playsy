@@ -85,8 +85,8 @@ const SignInScreen = ({navigation, signIn, authState}) => {
             <FormButton
               onPress={onSignIn}
               buttonTitle="Log in"
-              backgroundColor={theme.colors.primary}
-              color={theme.colors.contrastText}
+              backgroundColor={theme.colors.SECONDARY}
+              color={theme.colors.TEXTCONTRAST}
             />
             {
               <ActivityIndicator
@@ -113,7 +113,7 @@ const getStyles = ({colors, typography, spacing}) => {
     },
     container: {
       flex: 1,
-      backgroundColor: colors.background,
+      backgroundColor: colors.BACKGROUND,
       padding: spacing.SCALE_18,
     },
     header: {
@@ -122,11 +122,11 @@ const getStyles = ({colors, typography, spacing}) => {
       justifyContent: 'space-around',
     },
     icon: {
-      color: colors.text,
+      color: colors.PRIMARY,
     },
     title: {
       ...typography.FONT_BOLD,
-      color: colors.text,
+      color: colors.PRIMARY,
       fontSize: typography.FONT_SIZE_28,
     },
     body: {
@@ -136,7 +136,7 @@ const getStyles = ({colors, typography, spacing}) => {
     },
     forgotLink: {
       ...typography.FONT_MEDIUM,
-      color: colors.placeHolder,
+      color: colors.PLACEHOLDER,
     },
   });
 };

@@ -4,7 +4,6 @@ import {StyleSheet, Image, View, Pressable} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 import {useTheme} from '_theme/ThemeProvider';
-import {gapSize, miniPlayerHeight} from '_utilities/Dimentions';
 
 import BounceText from '_atoms/BounceText';
 
@@ -22,6 +21,7 @@ const MiniPlayer = ({onOpenBottomSheet}) => {
           <BounceText
             text="Me Hitha Thaniyen – Athma Liyanage ft. Thilina Ruhunage"
             style={styles.title}
+            shouldAnimateTreshold={1}
           />
           <BounceText text="Athma Liyanage" style={styles.meta} />
         </Pressable>
@@ -33,14 +33,14 @@ const MiniPlayer = ({onOpenBottomSheet}) => {
   );
 };
 
-const getStyles = ({colors}) => {
+const getStyles = ({colors, typography, spacing}) => {
   return StyleSheet.create({
     container: {
-      height: miniPlayerHeight,
+      height: spacing.SCALE_18 * 3,
       flexDirection: 'row',
       alignContent: 'center',
       justifyContent: 'space-between',
-      backgroundColor: colors.primary,
+      backgroundColor: colors.SECONDARY,
     },
     titleView: {
       justifyContent: 'flex-start',
@@ -51,27 +51,28 @@ const getStyles = ({colors}) => {
     },
     textContent: {
       flex: 1,
-      padding: gapSize / 3,
+      padding: spacing.SCALE_8,
     },
     title: {
-      fontSize: 13,
-      fontWeight: '500',
-      color: colors.text,
+      ...typography.FONT_MEDIUM,
+      fontSize: typography.FONT_SIZE_14,
+      color: colors.PRIMARY,
     },
     meta: {
-      fontSize: 11,
-      color: colors.text,
+      ...typography.FONT_REGULAR,
+      fontSize: typography.FONT_SIZE_12,
+      color: colors.PRIMARY,
     },
     image: {
-      width: miniPlayerHeight,
-      height: miniPlayerHeight,
+      width: spacing.SCALE_18 * 3,
+      height: spacing.SCALE_18 * 3,
     },
     iconView: {
       justifyContent: 'center',
-      marginRight: gapSize,
+      padding: spacing.SCALE_12,
     },
     icon: {
-      color: colors.text,
+      color: colors.PRIMARY,
     },
   });
 };

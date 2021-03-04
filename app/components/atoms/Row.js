@@ -3,16 +3,15 @@ import PropTypes from 'prop-types';
 import {StyleSheet, View, FlatList} from 'react-native';
 
 import {useTheme} from '_theme/ThemeProvider';
-import {gapSize} from '_utilities/Dimentions';
 
-import RoundCard from './RoundCard';
+import Card from './Card';
 import RowTitle from '_atoms/RowTitle';
 
 const Row = ({data}) => {
   const theme = useTheme();
   const styles = getStyles(theme);
 
-  const renderItem = ({item}) => <RoundCard item={item} />;
+  const renderItem = ({item}) => <Card item={item} isRound={true} />;
   return (
     <View style={styles.container}>
       <RowTitle />
@@ -27,10 +26,10 @@ const Row = ({data}) => {
   );
 };
 
-const getStyles = () => {
+const getStyles = ({spacing}) => {
   return StyleSheet.create({
     container: {
-      marginBottom: gapSize * 2,
+      marginBottom: spacing.SCALE_16 * 2,
     },
   });
 };

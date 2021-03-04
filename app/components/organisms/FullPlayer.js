@@ -4,7 +4,7 @@ import {StyleSheet, Text, Image, View} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 import {useTheme} from '_theme/ThemeProvider';
-import {gapSize, windowWidth} from '_utilities/Dimentions';
+import {windowWidth} from '_utilities/Dimentions';
 
 import BounceText from '_atoms/BounceText';
 
@@ -12,7 +12,6 @@ const artist = require('_assets/images/artist.jpg');
 
 const FullPlayer = ({onCloseBottomSheet}) => {
   const theme = useTheme();
-
   const styles = getStyles(theme);
 
   return (
@@ -21,18 +20,20 @@ const FullPlayer = ({onCloseBottomSheet}) => {
         <View style={styles.headerControl}>
           <Icon
             name="chevron-down-outline"
-            color={theme.colors.text}
+            color={theme.colors.PRIMARY}
             size={28}
             onPress={onCloseBottomSheet}
           />
           <Text style={styles.headerTitle}>Athma Liyanage</Text>
-          <Icon name="add-circle-outline" color={theme.colors.text} size={28} />
+          <Icon
+            name="add-circle-outline"
+            color={theme.colors.PRIMARY}
+            size={28}
+          />
         </View>
       </View>
       <View style={styles.body}>
-        <View style={styles.imageContent}>
-          <Image source={artist} style={styles.image} />
-        </View>
+        <Image source={artist} resizeMode="cover" style={styles.image} />
         <View style={styles.textContent}>
           <BounceText
             text="Me Hitha Thaniyen – Athma Liyanage ft. Thilina Ruhunage"
@@ -47,86 +48,84 @@ const FullPlayer = ({onCloseBottomSheet}) => {
             <Text style={styles.progressTimeText}>0.00</Text>
             <Text style={styles.progressTimeText}>3.45</Text>
           </View>
-
           <View style={styles.progressBar}></View>
         </View>
 
         <View style={styles.controls}>
           <Icon
             name="play-skip-back-sharp"
-            color={theme.colors.text}
+            color={theme.colors.PRIMARY}
             size={28}
           />
           <Icon
             name="play-circle-sharp"
-            color={theme.colors.text}
+            color={theme.colors.PRIMARY}
             size={windowWidth / 6}
           />
           <Icon
             name="play-skip-forward-sharp"
-            color={theme.colors.text}
+            color={theme.colors.PRIMARY}
             size={28}
           />
         </View>
         <View style={styles.settings}>
           <Icon
             name="chevron-down-outline"
-            color={theme.colors.text}
+            color={theme.colors.PRIMARY}
             size={28}
           />
-          <Icon name="add-circle-outline" color={theme.colors.text} size={28} />
+          <Icon
+            name="add-circle-outline"
+            color={theme.colors.PRIMARY}
+            size={28}
+          />
         </View>
       </View>
     </View>
   );
 };
 
-const getStyles = ({colors}) => {
+const getStyles = ({colors, typography, spacing}) => {
   return StyleSheet.create({
     container: {
       flex: 1,
-      padding: gapSize,
-      marginBottom: gapSize * 4,
+      justifyContent: 'space-around',
+      padding: spacing.SCALE_18,
     },
     header: {
-      justifyContent: 'space-evenly',
+      height: spacing.SCALE_18 * 3,
     },
     body: {
       flex: 1,
-      justifyContent: 'space-evenly',
-    },
-    footer: {
-      justifyContent: 'space-evenly',
+      justifyContent: 'space-around',
     },
     headerControl: {
       flexDirection: 'row',
       alignItems: 'center',
       justifyContent: 'space-between',
     },
-    imageContent: {
-      backgroundColor: 'black',
-    },
     image: {
-      width: windowWidth - gapSize * 2,
-      height: windowWidth - gapSize * 2,
+      width: windowWidth - spacing.SCALE_18 * 2,
+      height: windowWidth - spacing.SCALE_18 * 2,
+    },
+    headerTitle: {
+      ...typography.FONT_BOLD,
+      fontSize: typography.FONT_SIZE_14,
+      color: colors.PRIMARY,
     },
     textContent: {
       alignItems: 'flex-start',
     },
-    headerTitle: {
-      fontSize: 13,
-      fontWeight: 'bold',
-      color: colors.text,
-    },
     title: {
-      fontSize: 18,
-      fontWeight: 'bold',
-      color: colors.text,
-      marginBottom: gapSize / 4,
+      ...typography.FONT_BOLD,
+      fontSize: typography.FONT_SIZE_18,
+      color: colors.PRIMARY,
+      marginBottom: spacing.SCALE_12,
     },
     meta: {
-      fontSize: 14,
-      color: colors.subText,
+      ...typography.FONT_REGULAR,
+      fontSize: typography.FONT_SIZE_14,
+      color: colors.GREY,
     },
     progress: {
       alignContent: 'center',
@@ -138,24 +137,25 @@ const getStyles = ({colors}) => {
       justifyContent: 'space-between',
     },
     progressTimeText: {
-      fontSize: 12,
-      color: colors.subText,
+      fontSize: typography.FONT_SIZE_12,
+      color: colors.GREY,
     },
     progressBar: {
-      height: 2,
-      backgroundColor: colors.grey,
+      height: spacing.SCALE_12 - 12,
+      backgroundColor: colors.GREY,
+      marginBottom: spacing.SCALE_16,
     },
     controls: {
       flexDirection: 'row',
       alignItems: 'center',
       justifyContent: 'space-evenly',
-      paddingTop: 15,
+      marginBottom: spacing.SCALE_16,
     },
     settings: {
       flexDirection: 'row',
       alignItems: 'center',
       justifyContent: 'space-between',
-      paddingTop: 15,
+      marginBottom: spacing.SCALE_16,
     },
   });
 };

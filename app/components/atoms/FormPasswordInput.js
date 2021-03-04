@@ -21,34 +21,35 @@ const FormPasswordInput = ({inputValue, placeholderText, ...rest}) => {
         onChangeText={(text) => onChangeEmail(text)}
         value={inputValue}
         placeholder={placeholderText}
-        placeholderTextColor={theme.colors.placeHolder}
+        placeholderTextColor={theme.colors.GREY}
         secureTextEntry={hidePassword}
         autoCapitalize="none"
         {...rest}
       />
       <TouchableOpacity onPress={onShowPassword}>
         {hidePassword ? (
-          <Icon name="eye" color={theme.colors.placeHolder} size={20} />
+          <Icon name="eye" color={theme.colors.GREY} size={20} />
         ) : (
-          <Icon name="eye-off" color={theme.colors.placeHolder} size={20} />
+          <Icon name="eye-off" color={theme.colors.GREY} size={20} />
         )}
       </TouchableOpacity>
     </View>
   );
 };
 
-const getStyles = ({colors, margin, spacing}) => {
+const getStyles = ({colors, margin, spacing, typography}) => {
   return StyleSheet.create({
     formElement: {
       flexDirection: 'row',
-      borderColor: colors.placeHolder,
+      borderColor: colors.GREY,
       borderBottomWidth: 1,
       ...margin.MARGIN_0_12,
     },
     formTextInput: {
       flex: 1,
       height: spacing.SCALE_28,
-      color: colors.text,
+      color: colors.PRIMARY,
+      ...typography.FONT_REGULAR,
     },
   });
 };

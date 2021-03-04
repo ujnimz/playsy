@@ -19,7 +19,7 @@ const getStyles = ({typography, spacing, colors}) => {
     title: {
       ...typography.FONT_BOLD,
       fontSize: typography.FONT_SIZE_16,
-      color: colors.text,
+      color: colors.PRIMARY,
       marginBottom: spacing.SCALE_16,
     },
   });
