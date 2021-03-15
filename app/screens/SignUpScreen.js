@@ -20,7 +20,6 @@ import FormTextInput from '_atoms/FormTextInput';
 import FormPasswordInput from '_atoms/FormPasswordInput';
 import FormButton from '_atoms/FormButton';
 
-import {gapSize} from '_utilities/Dimentions';
 import {useTheme} from '_theme/ThemeProvider';
 
 const SignUpScreen = ({navigation, signUp, authState}) => {

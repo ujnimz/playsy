@@ -7,3 +7,24 @@ export const SIGNOUT_FAIL = 'SIGNOUT_FAIL';
 export const AUTH_LOADING = 'AUTH_LOADING';
 export const AUTH_SUCCESS = 'AUTH_SUCCESS';
 export const AUTH_FAIL = 'AUTH_FAIL';
+
+//ARTISTS
+export const LOADING_ARTISTS = 'LOADING_ARTISTS';
+export const GET_ARTISTS = 'GET_ARTISTS';
+export const CLEAR_ARTISTS = 'CLEAR_ARTISTS';
+export const GET_ARTIST = 'GET_ARTIST';
+export const CLEAR_ARTIST = 'CLEAR_ARTIST';
+
+//ALBUMS
+export const LOADING_ALBUMS = 'LOADING_ALBUMS';
+export const GET_ALBUMS = 'GET_ALBUMS';
+export const CLEAR_ALBUMS = 'CLEAR_ALBUMS';
+export const GET_ALBUM = 'GET_ALBUM';
+export const CLEAR_ALBUM = 'CLEAR_ALBUM';
+
+//SINGLES
+export const LOADING_SINGLES = 'LOADING_SINGLES';
+export const GET_SINGLES = 'GET_SINGLES';
+export const CLEAR_SINGLES = 'CLEAR_SINGLES';
+export const GET_SINGLE = 'GET_SINGLE';
+export const CLEAR_SINGLE = 'CLEAR_SINGLE';

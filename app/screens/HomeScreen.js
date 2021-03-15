@@ -1,52 +1,44 @@
-import React from 'react';
-//import PropTypes from 'prop-types';
+import React, {useEffect} from 'react';
+import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
+import {getArtists, clearArtists} from '_redux/actions/artists';
+import {getAlbums, clearAlbums} from '_redux/actions/albums';
 
 import {StyleSheet, ScrollView} from 'react-native';
 
 import {useTheme} from '_theme/ThemeProvider';
-import {gapSize} from '_utilities/Dimentions';
 
+import AppLoading from '_atoms/AppLoading';
 import ToolBar from '_molecules/ToolBar';
 import Row from '_atoms/Row';
 
-const DATA = [
-  {
-    id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
-    title: 'Me Hitha Thaniyen – Athma Liyanage ft. Thilina Ruhunage',
-    meta: 'Athma Liyanage',
-  },
-  {
-    id: '3ac68afc-c605-48d3-a4f8-fbd91aa97f63',
-    title: 'Me Hitha Thaniyen – Athma Liyanage ft. Thilina Ruhunage',
-    meta: 'Athma Liyanage',
-  },
-  {
-    id: '58694a0f-3da1-471f-bd96-145571e29d72',
-    title: 'Me Hitha Thaniyen – Athma Liyanage ft. Thilina Ruhunage',
-    meta: 'Athma Liyanage',
-  },
-  {
-    id: '58694a0f-3da1-471f-bdds-145571e29d72',
-    title: 'Me Hitha Thaniyen – Athma Liyanage ft. Thilina Ruhunage',
-    meta: 'Athma Liyanage',
-  },
-  {
-    id: '58694a0f-3da1-471f-bdsf6-145571e29d72',
-    title: 'Me Hitha Thaniyen – Athma Liyanage ft. Thilina Ruhunage',
-    meta: 'Athma Liyanage',
-  },
-];
-
-const HomeScreen = () => {
+const HomeScreen = ({
+  getArtists,
+  clearArtists,
+  artistsState,
+  getAlbums,
+  clearAlbums,
+  albumsState,
+}) => {
   const theme = useTheme();
   const styles = getStyles(theme);
+
+  useEffect(() => {
+    getArtists();
+    getAlbums();
+    return () => {
+      clearArtists();
+      clearAlbums();
+    };
+  }, []);
+
+  if (artistsState.loading || albumsState.loading) return <AppLoading />;
 
   return (
     <ScrollView style={styles.container}>
       <ToolBar />
-      <Row data={DATA} />
-      <Row data={DATA} />
+      <Row data={artistsState.artistsArray} type="artists" />
+      <Row data={albumsState.albumsArray} type="albums" />
     </ScrollView>
   );
 };
@@ -56,18 +48,27 @@ const getStyles = ({colors, spacing}) => {
     container: {
       flex: 1,
       backgroundColor: colors.BACKGROUND,
-      padding: spacing.SCALE_18,
-      overflow: 'visible',
+      paddingTop: spacing.SAFE_TOP,
+      paddingLeft: spacing.SCALE_18,
     },
   });
 };
 
 HomeScreen.propTypes = {
-  //signOut: PropTypes.func.isRequired,
+  getArtists: PropTypes.func.isRequired,
+  clearArtists: PropTypes.func.isRequired,
+  getAlbums: PropTypes.func.isRequired,
+  clearAlbums: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = () => ({
-  //authState: state.authState,
+const mapStateToProps = (state) => ({
+  artistsState: state.artistsState,
+  albumsState: state.albumsState,
 });
 
-export default connect(mapStateToProps, {})(HomeScreen);
+export default connect(mapStateToProps, {
+  getArtists,
+  clearArtists,
+  getAlbums,
+  clearAlbums,
+})(HomeScreen);

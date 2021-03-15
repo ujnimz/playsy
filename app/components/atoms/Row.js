@@ -7,14 +7,16 @@ import {useTheme} from '_theme/ThemeProvider';
 import Card from './Card';
 import RowTitle from '_atoms/RowTitle';
 
-const Row = ({data}) => {
+const Row = ({data, type}) => {
   const theme = useTheme();
   const styles = getStyles(theme);
 
-  const renderItem = ({item}) => <Card item={item} isRound={true} />;
+  const renderItem = ({item}) => (
+    <Card key={item.id} item={item} isRound={type === 'artists'} />
+  );
   return (
     <View style={styles.container}>
-      <RowTitle />
+      <RowTitle title={type} />
       <FlatList
         horizontal={true}
         data={data}
@@ -35,8 +37,8 @@ const getStyles = ({spacing}) => {
 };
 
 Row.propTypes = {
-  data: PropTypes.array,
-  item: PropTypes.object,
+  data: PropTypes.array.isRequired,
+  //item: PropTypes.object.isRequired,
 };
 
 export default Row;

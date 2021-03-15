@@ -9,7 +9,6 @@ const ThemeScreen = ({children}) => {
 
   const containerStyle = {
     flex: 1,
-    paddingTop: 44,
     paddingBottom: 30,
     backgroundColor: colors.BACKGROUND,
   };

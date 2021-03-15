@@ -22,12 +22,13 @@ const ToolBar = () => {
   );
 };
 
-const getStyles = ({colors}) => {
+const getStyles = ({colors, spacing}) => {
   return StyleSheet.create({
     container: {
       flexDirection: 'row',
       alignItems: 'center',
       justifyContent: 'flex-end',
+      paddingRight: spacing.SCALE_12,
     },
     icon: {
       color: colors.PRIMARY,

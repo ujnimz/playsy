@@ -2,6 +2,7 @@ import React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 
 import HomeScreen from '_screens/HomeScreen';
+import HomeStackScreen from '_navigations/HomeStackScreen';
 import SearchScreen from '_screens/SearchScreen';
 import ForYou from '_screens/ForYou';
 import LibraryScreen from '_screens/LibraryScreen';
@@ -18,7 +19,7 @@ function BottomTabsScreen() {
       <Tab.Screen
         name="Home"
         tabBarAccessibilityLabel="Home"
-        component={HomeScreen}
+        component={HomeStackScreen}
         options={{
           tabBarLabel: 'Home',
           tabBarIcon: (color, active) => (

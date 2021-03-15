@@ -1,34 +1,60 @@
-import React from 'react';
+import React, {useState} from 'react';
 //import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 
-import {StyleSheet, Text, Image, View, TouchableOpacity} from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  Image,
+  View,
+  TouchableOpacity,
+  ActivityIndicator,
+} from 'react-native';
+import {useNavigation} from '@react-navigation/native';
 
 import {useTheme} from '_theme/ThemeProvider';
 
-const artist = require('_assets/images/artist.jpg');
-
-const Card = ({isRound}) => {
+const Card = ({item, isRound}) => {
   const theme = useTheme();
   const styles = getStyles(theme);
+  const navigation = useNavigation();
+
+  const [loading, setLoading] = useState(true);
+
+  const onLoadEnd = () => {
+    setLoading(false);
+  };
 
   return (
     <>
-      <TouchableOpacity style={styles.container}>
-        <View>
+      <TouchableOpacity
+        style={styles.container}
+        onPress={() =>
+          navigation.navigate('ArtistScreen', {
+            item: item,
+          })
+        }>
+        <View style={styles.imageHolder}>
           <Image
-            source={artist}
+            onLoadEnd={onLoadEnd}
+            source={{
+              uri: item.image,
+            }}
             style={[
               styles.image,
               {borderRadius: isRound ? (theme.spacing.SCALE_12 * 10) / 2 : 3},
             ]}
             resizeMode="cover"
           />
+          <ActivityIndicator
+            style={styles.activityIndicator}
+            animating={loading}
+          />
         </View>
         <View>
           <Text
             style={[styles.title, {textAlign: isRound ? 'center' : 'left'}]}>
-            Athma Liyanage
+            {item.title}
           </Text>
         </View>
       </TouchableOpacity>
@@ -40,6 +66,9 @@ const getStyles = ({colors, spacing, typography}) => {
   return StyleSheet.create({
     container: {
       marginRight: spacing.SCALE_12,
+    },
+    imageHolder: {
+      flex: 1,
     },
     image: {
       width: spacing.SCALE_12 * 10,
@@ -57,6 +86,13 @@ const getStyles = ({colors, spacing, typography}) => {
       fontSize: spacing.SCALE_12,
       color: colors.PRIMARY,
       textAlign: 'center',
+    },
+    activityIndicator: {
+      position: 'absolute',
+      left: 0,
+      right: 0,
+      top: 0,
+      bottom: 0,
     },
   });
 };

@@ -3,13 +3,13 @@ import {StyleSheet, Text, View} from 'react-native';
 
 import {useTheme} from '_theme/ThemeProvider';
 
-const RowTitle = () => {
+const RowTitle = ({title}) => {
   const theme = useTheme();
   const styles = getStyles(theme);
 
   return (
     <View>
-      <Text style={styles.title}>Recently Played</Text>
+      <Text style={styles.title}>{title}</Text>
     </View>
   );
 };
@@ -21,6 +21,7 @@ const getStyles = ({typography, spacing, colors}) => {
       fontSize: typography.FONT_SIZE_16,
       color: colors.PRIMARY,
       marginBottom: spacing.SCALE_16,
+      textTransform: 'capitalize',
     },
   });
 };
