@@ -3,8 +3,14 @@ import {FlatList} from 'react-native';
 
 import TrackRow from '_atoms/TrackRow';
 
-const TrackList = ({data}) => {
-  const renderItem = ({item}) => <TrackRow key={item.id} item={item} />;
+const TrackList = ({data, openBottomSheet}) => {
+  const renderItem = ({item}) => (
+    <TrackRow
+      key={item.id}
+      item={item}
+      openBottomSheet={() => openBottomSheet(item)}
+    />
+  );
 
   return (
     <>

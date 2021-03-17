@@ -8,7 +8,7 @@ import {
   SIGNOUT_SUCCESS,
   SIGNOUT_FAIL,
   AUTH_LOADING,
-} from '../actions/types';
+} from '_redux/actions/types';
 
 const initialState = {
   isLoading: false,

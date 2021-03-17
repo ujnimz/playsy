@@ -7,7 +7,6 @@ import HomeScreen from '_screens/HomeScreen';
 import ArtistScreen from '_screens/ArtistScreen';
 
 import {useTheme} from '_theme/ThemeProvider';
-import {iconSize} from '_utilities/Dimentions';
 
 const HomeStack = createStackNavigator();
 

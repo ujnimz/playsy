@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {
@@ -7,8 +7,11 @@ import {
   View,
   ScrollView,
   ImageBackground,
-  FlatList,
+  Button,
 } from 'react-native';
+import Animated from 'react-native-reanimated';
+import BottomSheet from 'reanimated-bottom-sheet';
+
 import Icon from 'react-native-vector-icons/Ionicons';
 import LinearGradient from 'react-native-linear-gradient';
 
@@ -19,6 +22,9 @@ import {useTheme} from '_theme/ThemeProvider';
 import AppLoading from '_atoms/AppLoading';
 import IconButton from '_atoms/IconButton';
 import TrackList from '_molecules/TrackList';
+import TrackSettings from '_organisms/TrackSettings';
+
+const AnimatedView = Animated.View;
 
 const ArtistScreen = ({
   route,
@@ -31,6 +37,9 @@ const ArtistScreen = ({
   const styles = getStyles(theme);
 
   const {item} = route.params;
+  let fall = new Animated.Value(1);
+
+  const [currentItem, setCurrentItem] = useState(null);
 
   useEffect(() => {
     getSingles();
@@ -39,53 +48,92 @@ const ArtistScreen = ({
     };
   }, []);
 
+  const sheetRef = React.useRef(null);
+
+  const onOpenBottomSheet = (item) => {
+    setCurrentItem(item);
+    sheetRef.current.snapTo(0);
+  };
+
+  const renderContent = () => <TrackSettings currentItem={currentItem} />;
+
+  const renderShadow = () => {
+    const animatedShadowOpacity = Animated.interpolate(fall, {
+      inputRange: [0, 1],
+      outputRange: [0.5, 0],
+    });
+
+    return (
+      <AnimatedView
+        pointerEvents="none"
+        style={[
+          styles.shadowContainer,
+          {
+            opacity: animatedShadowOpacity,
+          },
+        ]}
+      />
+    );
+  };
+
   const DATA = singlesState.singlesArray;
 
   if (singlesState.loading) return <AppLoading />;
 
   return (
-    <ScrollView style={styles.container}>
-      <View style={styles.header}>
-        <ImageBackground source={{uri: item.image}} style={styles.image}>
-          <LinearGradient
-            style={styles.textHolder}
-            colors={['rgba(0, 0, 0, 0)', 'rgba(0, 0, 0, 0.6)']}>
-            <Text style={styles.text}>{item.title}</Text>
-            <View style={{flexDirection: 'row', alignItems: 'center'}}>
-              <Icon
-                style={styles.metaIcon}
-                name="heart-outline"
-                onPress={() => navigation.goBack()}
-              />
-              <Text style={styles.meta}>10K</Text>
-            </View>
-          </LinearGradient>
-        </ImageBackground>
-      </View>
-
-      <View style={styles.body}>
-        <View style={styles.controlPanel}>
-          <IconButton
-            icon="share-social"
-            bgColor={theme.colors.SECONDARY}
-            iconColor={theme.colors.PRIMARY}
-          />
-          <IconButton
-            icon="play"
-            bgColor={theme.colors.SECONDARY}
-            iconColor={theme.colors.PRIMARY}
-            text="Play"
-          />
-          <IconButton
-            icon="heart-outline"
-            bgColor={theme.colors.SECONDARY}
-            iconColor={theme.colors.PRIMARY}
-          />
+    <>
+      <ScrollView style={styles.container}>
+        <View style={styles.header}>
+          <ImageBackground source={{uri: item.image}} style={styles.image}>
+            <LinearGradient
+              style={styles.textHolder}
+              colors={['rgba(0, 0, 0, 0)', 'rgba(0, 0, 0, 0.6)']}>
+              <Text style={styles.text}>{item.title}</Text>
+              <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                <Icon
+                  style={styles.metaIcon}
+                  name="heart-outline"
+                  onPress={() => navigation.goBack()}
+                />
+                <Text style={styles.meta}>10K</Text>
+              </View>
+            </LinearGradient>
+          </ImageBackground>
         </View>
 
-        <TrackList data={DATA} />
-      </View>
-    </ScrollView>
+        <View style={styles.body}>
+          <View style={styles.controlPanel}>
+            <IconButton
+              icon="share-social"
+              bgColor={theme.colors.SECONDARY}
+              iconColor={theme.colors.PRIMARY}
+            />
+            <IconButton
+              icon="play"
+              bgColor={theme.colors.SECONDARY}
+              iconColor={theme.colors.WHITE}
+              text="Play"
+            />
+            <IconButton
+              icon="heart-outline"
+              bgColor={theme.colors.SECONDARY}
+              iconColor={theme.colors.PRIMARY}
+            />
+          </View>
+
+          <TrackList data={DATA} openBottomSheet={onOpenBottomSheet} />
+        </View>
+      </ScrollView>
+      <BottomSheet
+        ref={sheetRef}
+        snapPoints={[380, 0, 0]}
+        initialSnap={1}
+        borderRadius={20}
+        callbackNode={fall}
+        renderContent={renderContent}
+      />
+      {renderShadow()}
+    </>
   );
 };
 
@@ -108,18 +156,18 @@ const getStyles = ({colors, typography, spacing}) => {
       padding: spacing.SCALE_12,
     },
     text: {
-      color: colors.PRIMARY,
+      color: colors.WHITE,
       fontSize: typography.FONT_SIZE_16 * 2,
       ...typography.FONT_BOLD,
     },
     meta: {
-      color: colors.PRIMARY,
+      color: colors.WHITE,
       fontSize: typography.FONT_SIZE_12,
       ...typography.FONT_REGULAR,
     },
     metaIcon: {
       textAlign: 'center',
-      color: colors.PRIMARY,
+      color: colors.WHITE,
       fontSize: typography.FONT_SIZE_14,
       marginRight: spacing.SCALE_8 / 2,
     },
@@ -167,6 +215,10 @@ const getStyles = ({colors, typography, spacing}) => {
       color: colors.PRIMARY,
       fontSize: typography.FONT_SIZE_14,
       ...typography.FONT_BOLD,
+    },
+    shadowContainer: {
+      ...StyleSheet.absoluteFillObject,
+      backgroundColor: 'black',
     },
   });
 };

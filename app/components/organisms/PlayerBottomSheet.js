@@ -8,9 +8,9 @@ import MiniPlayer from '_organisms/MiniPlayer';
 import FullPlayer from '_organisms/FullPlayer';
 
 import {useTheme} from '_theme/ThemeProvider';
-import {windowHeight, gapSize, miniPlayerHeight} from '_utilities/Dimentions';
+import {windowHeight} from '_utilities/Dimentions';
 
-const BottomTabs = ({state, descriptors, navigation}) => {
+const PlayerBottomSheet = ({state, descriptors, navigation}) => {
   const focusedOptions = descriptors[state.routes[state.index].key].options;
 
   if (focusedOptions.tabBarVisible === false) {
@@ -173,10 +173,10 @@ const getStyles = ({colors, spacing}) => {
   });
 };
 
-BottomTabs.propTypes = {
+PlayerBottomSheet.propTypes = {
   state: PropTypes.object.isRequired,
   descriptors: PropTypes.object.isRequired,
   navigation: PropTypes.object.isRequired,
 };
 
-export default BottomTabs;
+export default PlayerBottomSheet;
