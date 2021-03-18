@@ -21,16 +21,16 @@ const FormPasswordInput = ({inputValue, placeholderText, ...rest}) => {
         onChangeText={(text) => onChangeEmail(text)}
         value={inputValue}
         placeholder={placeholderText}
-        placeholderTextColor={theme.colors.GREY}
+        placeholderTextColor={theme.colors.PLACEHOLDER}
         secureTextEntry={hidePassword}
         autoCapitalize="none"
         {...rest}
       />
       <TouchableOpacity onPress={onShowPassword}>
         {hidePassword ? (
-          <Icon name="eye" color={theme.colors.GREY} size={20} />
+          <Icon name="eye" color={theme.colors.PLACEHOLDER} size={20} />
         ) : (
-          <Icon name="eye-off" color={theme.colors.GREY} size={20} />
+          <Icon name="eye-off" color={theme.colors.PLACEHOLDER} size={20} />
         )}
       </TouchableOpacity>
     </View>

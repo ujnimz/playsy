@@ -37,7 +37,7 @@ const HomeStackScreen = ({navigation}) => {
           headerLeft: () => (
             <Icon
               name="chevron-back-outline"
-              onPress={() => navigation.goBack(null)}
+              onPress={() => navigation.navigate('HomeScreen')}
               size={35}
               color="white"
             />

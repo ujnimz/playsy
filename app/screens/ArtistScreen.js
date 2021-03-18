@@ -1,38 +1,22 @@
 import React, {useEffect, useState} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {
-  StyleSheet,
-  Text,
-  View,
-  ScrollView,
-  ImageBackground,
-  Button,
-} from 'react-native';
+import {StyleSheet, VirtualizedList, View} from 'react-native';
 import Animated from 'react-native-reanimated';
 import BottomSheet from 'reanimated-bottom-sheet';
-
-import Icon from 'react-native-vector-icons/Ionicons';
-import LinearGradient from 'react-native-linear-gradient';
 
 import {getSingles, clearSingles} from '_redux/actions/singles';
 
 import {useTheme} from '_theme/ThemeProvider';
 
 import AppLoading from '_atoms/AppLoading';
-import IconButton from '_atoms/IconButton';
-import TrackList from '_molecules/TrackList';
+import TrackRow from '_atoms/TrackRow';
 import TrackSettings from '_organisms/TrackSettings';
+import AlbumHeader from '_components/organisms/AlbumHeader';
 
 const AnimatedView = Animated.View;
 
-const ArtistScreen = ({
-  route,
-  navigation,
-  getSingles,
-  clearSingles,
-  singlesState,
-}) => {
+const ArtistScreen = ({route, getSingles, clearSingles, singlesState}) => {
   const theme = useTheme();
   const styles = getStyles(theme);
 
@@ -50,7 +34,7 @@ const ArtistScreen = ({
 
   const sheetRef = React.useRef(null);
 
-  const onOpenBottomSheet = (item) => {
+  const openBottomSheet = (item) => {
     setCurrentItem(item);
     sheetRef.current.snapTo(0);
   };
@@ -78,52 +62,37 @@ const ArtistScreen = ({
 
   const DATA = singlesState.singlesArray;
 
+  const renderItem = ({item}) => (
+    <TrackRow
+      key={item.id}
+      item={item}
+      openBottomSheet={() => openBottomSheet(item)}
+    />
+  );
+
+  const getItem = (data, index) => ({
+    id: data[index].id,
+    title: data[index].title,
+    image: data[index].image,
+    artists: data[index].artists,
+    genres: data[index].genres,
+  });
+
+  const getItemCount = (DATA) => DATA.length;
+
   if (singlesState.loading) return <AppLoading />;
 
   return (
-    <>
-      <ScrollView style={styles.container}>
-        <View style={styles.header}>
-          <ImageBackground source={{uri: item.image}} style={styles.image}>
-            <LinearGradient
-              style={styles.textHolder}
-              colors={['rgba(0, 0, 0, 0)', 'rgba(0, 0, 0, 0.6)']}>
-              <Text style={styles.text}>{item.title}</Text>
-              <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                <Icon
-                  style={styles.metaIcon}
-                  name="heart-outline"
-                  onPress={() => navigation.goBack()}
-                />
-                <Text style={styles.meta}>10K</Text>
-              </View>
-            </LinearGradient>
-          </ImageBackground>
-        </View>
-
-        <View style={styles.body}>
-          <View style={styles.controlPanel}>
-            <IconButton
-              icon="share-social"
-              bgColor={theme.colors.SECONDARY}
-              iconColor={theme.colors.PRIMARY}
-            />
-            <IconButton
-              icon="play"
-              bgColor={theme.colors.SECONDARY}
-              iconColor={theme.colors.WHITE}
-              text="Play"
-            />
-            <IconButton
-              icon="heart-outline"
-              bgColor={theme.colors.SECONDARY}
-              iconColor={theme.colors.PRIMARY}
-            />
-          </View>
-
-          <TrackList data={DATA} openBottomSheet={onOpenBottomSheet} />
-        </View>
-      </ScrollView>
+    <View style={styles.container}>
+      <VirtualizedList
+        data={DATA}
+        keyExtractor={(item) => item.id}
+        renderItem={renderItem}
+        getItemCount={getItemCount}
+        getItem={getItem}
+        ListHeaderComponent={() => <AlbumHeader item={item} />}
+        showsHorizontalScrollIndicator={false}
+      />
       <BottomSheet
         ref={sheetRef}
         snapPoints={[380, 0, 0]}
@@ -133,7 +102,7 @@ const ArtistScreen = ({
         renderContent={renderContent}
       />
       {renderShadow()}
-    </>
+    </View>
   );
 };
 
@@ -142,83 +111,6 @@ const getStyles = ({colors, typography, spacing}) => {
     container: {
       flex: 1,
       backgroundColor: colors.BACKGROUND,
-    },
-    header: {
-      height: 400,
-    },
-    image: {
-      flex: 1,
-      resizeMode: 'cover',
-      alignContent: 'space-between',
-      justifyContent: 'flex-end',
-    },
-    textHolder: {
-      padding: spacing.SCALE_12,
-    },
-    text: {
-      color: colors.WHITE,
-      fontSize: typography.FONT_SIZE_16 * 2,
-      ...typography.FONT_BOLD,
-    },
-    meta: {
-      color: colors.WHITE,
-      fontSize: typography.FONT_SIZE_12,
-      ...typography.FONT_REGULAR,
-    },
-    metaIcon: {
-      textAlign: 'center',
-      color: colors.WHITE,
-      fontSize: typography.FONT_SIZE_14,
-      marginRight: spacing.SCALE_8 / 2,
-    },
-    iconHolder: {
-      paddingTop: spacing.SAFE_TOP,
-      paddingLeft: spacing.SCALE_12,
-    },
-    iconButton: {
-      backgroundColor: colors.BACKGROUND,
-      padding: spacing.SCALE_12 / 4,
-      width: 34,
-      borderRadius: (34 * 10) / 2,
-      opacity: 0.7,
-    },
-    backIcon: {
-      textAlign: 'center',
-      color: colors.PRIMARY,
-      fontSize: typography.FONT_SIZE_12 * 2,
-    },
-    body: {
-      padding: spacing.SCALE_12,
-    },
-    controlPanel: {
-      flexDirection: 'row',
-      justifyContent: 'space-around',
-      paddingTop: spacing.SCALE_18,
-      paddingBottom: spacing.SCALE_18,
-    },
-    shareIcon: {
-      color: colors.PRIMARY,
-      padding: spacing.SCALE_12,
-      backgroundColor: colors.SECONDARY,
-      borderRadius: 20,
-      overflow: 'hidden',
-    },
-    playIcon: {
-      color: colors.PRIMARY,
-      padding: spacing.SCALE_12,
-      backgroundColor: colors.SECONDARY,
-      borderRadius: 20,
-      overflow: 'hidden',
-    },
-    playText: {
-      paddingLeft: 25,
-      color: colors.PRIMARY,
-      fontSize: typography.FONT_SIZE_14,
-      ...typography.FONT_BOLD,
-    },
-    shadowContainer: {
-      ...StyleSheet.absoluteFillObject,
-      backgroundColor: 'black',
     },
   });
 };

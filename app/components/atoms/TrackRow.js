@@ -23,6 +23,7 @@ const TrackRow = ({item, openBottomSheet}) => {
           source={{
             uri: item.image,
           }}
+          resizeMode="cover"
           style={styles.image}
         />
         <ActivityIndicator
@@ -33,7 +34,9 @@ const TrackRow = ({item, openBottomSheet}) => {
 
       <View style={styles.textHolder}>
         <Text style={styles.title}>{item.title}</Text>
-        <Text style={styles.meta}>{item.title}</Text>
+        <Text style={styles.meta}>
+          {item.artists.map((artist) => artist.label).join(', ')}
+        </Text>
       </View>
       <View style={styles.iconHolder}>
         <Icon
@@ -63,6 +66,8 @@ const getStyles = ({colors, typography, spacing}) => {
       borderBottomColor: colors.GREY,
       paddingTop: spacing.SCALE_8 / 2,
       paddingBottom: spacing.SCALE_8 / 2,
+      paddingLeft: spacing.SCALE_12,
+      paddingRight: spacing.SCALE_12,
     },
     imageHolder: {},
     image: {

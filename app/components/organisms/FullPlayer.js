@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {StyleSheet, Text, Image, View} from 'react-native';
+import {Platform, StyleSheet, Text, Image, View} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 import {useTheme} from '_theme/ThemeProvider';
@@ -90,10 +90,13 @@ const getStyles = ({colors, typography, spacing}) => {
     container: {
       flex: 1,
       justifyContent: 'space-around',
-      padding: spacing.SCALE_18,
+      paddingLeft: spacing.SCALE_18,
+      paddingRight: spacing.SCALE_18,
+      paddingTop: Platform.OS === 'ios' ? spacing.SCALE_12 * 2 : 0,
+      paddingBottom: Platform.OS === 'ios' ? spacing.SCALE_18 * 3 : 0,
     },
     header: {
-      height: spacing.SCALE_18 * 3,
+      height: spacing.SCALE_18 * 2,
     },
     body: {
       flex: 1,

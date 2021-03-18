@@ -29,11 +29,12 @@ const getStyles = ({colors, typography, spacing}) => {
     container: {
       flexDirection: 'row',
       alignItems: 'center',
-      justifyContent: 'center',
+      justifyContent: 'space-around',
       borderRadius: 100,
       overflow: 'hidden',
       paddingLeft: spacing.SCALE_18,
       paddingRight: spacing.SCALE_18,
+      width: spacing.SCALE_12 * 10,
     },
     iconContainer: {
       flexDirection: 'row',

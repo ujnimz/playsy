@@ -63,24 +63,21 @@ const PlayerBottomSheet = ({state, descriptors, navigation}) => {
 
   return (
     <>
-      <View>
-        <Button title="Open Bottom Sheet" onPress={onOpenBottomSheet} />
-        <BottomSheet
-          ref={sheetRef}
-          snapPoints={[
-            windowHeight - theme.spacing.SCALE_18 * 3,
-            theme.spacing.SCALE_18 * 3,
-            theme.spacing.SCALE_18 * 3,
-          ]}
-          initialSnap={1}
-          renderContent={renderContent}
-          callbackNode={fall}
-          enabledGestureInteraction={true}
-          enabledBottomInitialAnimation={true}
-          onOpenStart={miniPlayerFadeOut}
-          onCloseEnd={miniPlayerFadeIn}
-        />
-      </View>
+      <BottomSheet
+        ref={sheetRef}
+        snapPoints={[
+          windowHeight,
+          theme.spacing.SCALE_18 * 6,
+          theme.spacing.SCALE_18 * 6,
+        ]}
+        initialSnap={1}
+        renderContent={renderContent}
+        callbackNode={fall}
+        enabledGestureInteraction={true}
+        enabledBottomInitialAnimation={true}
+        onOpenStart={miniPlayerFadeOut}
+        onCloseEnd={miniPlayerFadeIn}
+      />
       <View style={styles.container}>
         {state.routes.map((route, index) => {
           const {options} = descriptors[route.key];
@@ -149,12 +146,13 @@ const getStyles = ({colors, spacing}) => {
       alignItems: 'stretch',
       justifyContent: 'center',
       backgroundColor: colors.BACKGROUND,
+      zIndex: 999999,
+      paddingTop: 17,
     },
     tabItem: {
       flex: 1,
       alignItems: 'center',
       justifyContent: 'space-between',
-      padding: spacing.SCALE_12 / 2,
     },
     label: {
       fontSize: 12,
@@ -167,7 +165,7 @@ const getStyles = ({colors, spacing}) => {
       color: colors.PRIMARY,
     },
     playerScreen: {
-      height: windowHeight - spacing.SCALE_18 * 3,
+      height: windowHeight,
       backgroundColor: colors.BACKGROUND,
     },
   });

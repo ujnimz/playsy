@@ -14,7 +14,7 @@ const FormTextInput = ({inputValue, placeholderText, ...rest}) => {
         onChangeText={(text) => onChangeEmail(text)}
         value={inputValue}
         placeholder={placeholderText}
-        placeholderTextColor={theme.colors.GREY}
+        placeholderTextColor={theme.colors.PLACEHOLDER}
         {...rest}
       />
     </View>
