@@ -8,6 +8,8 @@ import {
 
 import firestore from '@react-native-firebase/firestore';
 
+import {getSingle} from '_redux/actions/singles';
+
 // GET ALL
 export const getAlbums = () => async (dispatch) => {
   dispatch(setAlbumsLoading());
@@ -35,10 +37,16 @@ export const getAlbum = (id) => async (dispatch) => {
   dispatch(setAlbumsLoading());
   try {
     const albumRef = firestore().collection('albums').doc(id);
-    const snapshot = await albumRef.get();
+    const albumData = await albumRef.get().data();
+    const albumTracks = albumData.tracks.map(
+      async (track) =>
+        await firestore().collection('singles').doc(track.value).get(),
+    );
+    console.log(albumTracks);
+    const album = {...albumData, tracks: albumTracks};
     return dispatch({
       type: GET_ALBUM,
-      payload: snapshot.data(),
+      payload: album,
     });
   } catch (err) {
     dispatch({

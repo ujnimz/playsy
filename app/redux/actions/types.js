@@ -29,6 +29,11 @@ export const CLEAR_SINGLES = 'CLEAR_SINGLES';
 export const GET_SINGLE = 'GET_SINGLE';
 export const CLEAR_SINGLE = 'CLEAR_SINGLE';
 
-// METHODS
-export const OPEN_TRACK_SETTINGS = 'OPEN_TRACK_SETTINGS';
-export const CLOSE_TRACK_SETTINGS = 'CLOSE_TRACK_SETTINGS';
+// PLAYER
+export const TRACK_PLAY = 'TRACK_PLAY';
+export const TRACK_PAUSE = 'TRACK_PAUSE';
+export const TRACK_NEXT = 'TRACK_NEXT';
+export const TRACK_PREVIOUS = 'TRACK_PREVIOUS';
+export const TRACK_ADD = 'TRACK_ADD';
+export const TRACK_SET = 'TRACK_SET';
+export const ADD_PLAYLIST = 'ADD_PLAYLIST';

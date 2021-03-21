@@ -60,7 +60,7 @@ const ArtistScreen = ({route, getSingles, clearSingles, singlesState}) => {
     );
   };
 
-  const DATA = singlesState.singlesArray;
+  const data = singlesState.singlesArray;
 
   const renderItem = ({item}) => (
     <TrackRow
@@ -76,21 +76,22 @@ const ArtistScreen = ({route, getSingles, clearSingles, singlesState}) => {
     image: data[index].image,
     artists: data[index].artists,
     genres: data[index].genres,
+    audio: data[index].uri,
   });
 
-  const getItemCount = (DATA) => DATA.length;
+  const getItemCount = (data) => data.length;
 
   if (singlesState.loading) return <AppLoading />;
 
   return (
     <View style={styles.container}>
       <VirtualizedList
-        data={DATA}
+        data={data}
         keyExtractor={(item) => item.id}
         renderItem={renderItem}
         getItemCount={getItemCount}
         getItem={getItem}
-        ListHeaderComponent={() => <AlbumHeader item={item} />}
+        ListHeaderComponent={() => <AlbumHeader item={item} data={data} />}
         showsHorizontalScrollIndicator={false}
       />
       <BottomSheet

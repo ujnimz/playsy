@@ -14,7 +14,7 @@ import {useNavigation} from '@react-navigation/native';
 
 import {useTheme} from '_theme/ThemeProvider';
 
-const Card = ({item, isRound}) => {
+const Card = ({item, isArtist}) => {
   const theme = useTheme();
   const styles = getStyles(theme);
   const navigation = useNavigation();
@@ -30,11 +30,11 @@ const Card = ({item, isRound}) => {
       <TouchableOpacity
         style={styles.container}
         onPress={() =>
-          navigation.navigate('ArtistScreen', {
+          navigation.navigate(isArtist ? 'ArtistScreen' : 'AlbumScreen', {
             item: item,
           })
         }>
-        <View style={styles.imageHolder}>
+        <View>
           <Image
             onLoadEnd={onLoadEnd}
             source={{
@@ -42,7 +42,7 @@ const Card = ({item, isRound}) => {
             }}
             style={[
               styles.image,
-              {borderRadius: isRound ? (theme.spacing.SCALE_12 * 10) / 2 : 3},
+              {borderRadius: isArtist ? (theme.spacing.SCALE_12 * 10) / 2 : 3},
             ]}
             resizeMode="cover"
           />
@@ -51,9 +51,13 @@ const Card = ({item, isRound}) => {
             animating={loading}
           />
         </View>
-        <View>
+        <View
+          style={[
+            styles.titleHolder,
+            {justifyContent: isArtist ? 'center' : 'flex-start'},
+          ]}>
           <Text
-            style={[styles.title, {textAlign: isRound ? 'center' : 'left'}]}>
+            style={[styles.title, {textAlign: isArtist ? 'center' : 'left'}]}>
             {item.title}
           </Text>
         </View>
@@ -65,10 +69,9 @@ const Card = ({item, isRound}) => {
 const getStyles = ({colors, spacing, typography}) => {
   return StyleSheet.create({
     container: {
-      marginRight: spacing.SCALE_12,
-    },
-    imageHolder: {
-      flex: 1,
+      width: spacing.SCALE_12 * 10,
+      height: 'auto',
+      margin: spacing.SCALE_8,
     },
     image: {
       width: spacing.SCALE_12 * 10,
@@ -81,11 +84,14 @@ const getStyles = ({colors, spacing, typography}) => {
     square: {
       borderRadius: 3,
     },
+    titleHolder: {
+      flexDirection: 'row',
+    },
     title: {
       ...typography.FONT_MEDIUM,
       fontSize: spacing.SCALE_12,
       color: colors.PRIMARY,
-      textAlign: 'center',
+      flexWrap: 'wrap',
     },
     activityIndicator: {
       position: 'absolute',

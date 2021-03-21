@@ -1,7 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
 import {StyleSheet, Image, View, Pressable} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
+
+import {trackPlay, trackPause} from '_redux/actions/player';
 
 import {useTheme} from '_theme/ThemeProvider';
 
@@ -9,9 +12,18 @@ import BounceText from '_atoms/BounceText';
 
 const artist = require('_assets/images/artist.jpg');
 
-const MiniPlayer = ({onOpenBottomSheet}) => {
+const MiniPlayer = ({
+  onOpenBottomSheet,
+  trackPlay,
+  trackPause,
+  playerState,
+}) => {
   const theme = useTheme();
   const styles = getStyles(theme);
+
+  const {play} = playerState;
+
+  console.log(play);
 
   return (
     <View style={styles.container}>
@@ -27,7 +39,21 @@ const MiniPlayer = ({onOpenBottomSheet}) => {
         </Pressable>
       </View>
       <View style={styles.iconView}>
-        <Icon name="play" style={styles.icon} size={34} />
+        {play ? (
+          <Icon
+            name="pause"
+            style={styles.icon}
+            size={34}
+            onPress={() => trackPause()}
+          />
+        ) : (
+          <Icon
+            name="play"
+            style={styles.icon}
+            size={34}
+            onPress={() => trackPlay()}
+          />
+        )}
       </View>
     </View>
   );
@@ -79,6 +105,13 @@ const getStyles = ({colors, typography, spacing}) => {
 
 MiniPlayer.propTypes = {
   onOpenBottomSheet: PropTypes.func.isRequired,
+  trackPlay: PropTypes.func.isRequired,
+  trackPause: PropTypes.func.isRequired,
+  playerState: PropTypes.object.isRequired,
 };
 
-export default MiniPlayer;
+const mapStateToProps = (state) => ({
+  playerState: state.playerState,
+});
+
+export default connect(mapStateToProps, {trackPlay, trackPause})(MiniPlayer);

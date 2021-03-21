@@ -1,7 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
 import {Platform, StyleSheet, Text, Image, View} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
+
+import {
+  trackPlay,
+  trackPause,
+  trackNext,
+  trackPrevious,
+} from '_redux/actions/player';
 
 import {useTheme} from '_theme/ThemeProvider';
 import {windowWidth} from '_utilities/Dimentions';
@@ -10,9 +18,18 @@ import BounceText from '_atoms/BounceText';
 
 const artist = require('_assets/images/artist.jpg');
 
-const FullPlayer = ({onCloseBottomSheet}) => {
+const FullPlayer = ({
+  onCloseBottomSheet,
+  trackPlay,
+  trackPause,
+  trackNext,
+  trackPrevious,
+  playerState,
+}) => {
   const theme = useTheme();
   const styles = getStyles(theme);
+
+  const {play} = playerState;
 
   return (
     <View style={styles.container}>
@@ -56,16 +73,28 @@ const FullPlayer = ({onCloseBottomSheet}) => {
             name="play-skip-back-sharp"
             color={theme.colors.PRIMARY}
             size={28}
+            onPress={trackPrevious}
           />
-          <Icon
-            name="play-circle-sharp"
-            color={theme.colors.PRIMARY}
-            size={windowWidth / 6}
-          />
+          {play ? (
+            <Icon
+              name="pause-circle-sharp"
+              color={theme.colors.PRIMARY}
+              size={windowWidth / 6}
+              onPress={trackPause}
+            />
+          ) : (
+            <Icon
+              name="play-circle-sharp"
+              color={theme.colors.PRIMARY}
+              size={windowWidth / 6}
+              onPress={trackPlay}
+            />
+          )}
           <Icon
             name="play-skip-forward-sharp"
             color={theme.colors.PRIMARY}
             size={28}
+            onPress={trackNext}
           />
         </View>
         <View style={styles.settings}>
@@ -165,6 +194,19 @@ const getStyles = ({colors, typography, spacing}) => {
 
 FullPlayer.propTypes = {
   onCloseBottomSheet: PropTypes.func.isRequired,
+  trackPlay: PropTypes.func.isRequired,
+  trackPause: PropTypes.func.isRequired,
+  trackNext: PropTypes.func.isRequired,
+  trackPrevious: PropTypes.func.isRequired,
 };
 
-export default FullPlayer;
+const mapStateToProps = (state) => ({
+  playerState: state.playerState,
+});
+
+export default connect(mapStateToProps, {
+  trackPlay,
+  trackPause,
+  trackNext,
+  trackPrevious,
+})(FullPlayer);

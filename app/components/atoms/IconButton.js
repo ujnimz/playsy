@@ -4,12 +4,13 @@ import Icon from 'react-native-vector-icons/Ionicons';
 
 import {useTheme} from '_theme/ThemeProvider';
 
-const IconButton = ({icon, bgColor, iconColor, text}) => {
+const IconButton = ({icon, bgColor, iconColor, text, onPress}) => {
   const theme = useTheme();
   const styles = getStyles(theme);
 
   return (
     <TouchableOpacity
+      onPress={onPress}
       style={[
         text ? styles.container : styles.iconContainer,
         text ? {backgroundColor: bgColor} : {borderColor: bgColor},

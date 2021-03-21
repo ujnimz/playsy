@@ -8,7 +8,7 @@ const RowTitle = ({title}) => {
   const styles = getStyles(theme);
 
   return (
-    <View>
+    <View style={styles.container}>
       <Text style={styles.title}>{title}</Text>
     </View>
   );
@@ -16,11 +16,13 @@ const RowTitle = ({title}) => {
 
 const getStyles = ({typography, spacing, colors}) => {
   return StyleSheet.create({
+    container: {
+      marginLeft: spacing.SCALE_8 * 2,
+    },
     title: {
       ...typography.FONT_BOLD,
       fontSize: typography.FONT_SIZE_16,
       color: colors.PRIMARY,
-      marginBottom: spacing.SCALE_16,
       textTransform: 'capitalize',
     },
   });

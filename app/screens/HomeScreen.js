@@ -49,7 +49,6 @@ const getStyles = ({colors, spacing}) => {
       flex: 1,
       backgroundColor: colors.BACKGROUND,
       paddingTop: spacing.SAFE_TOP,
-      paddingLeft: spacing.SCALE_18,
     },
   });
 };

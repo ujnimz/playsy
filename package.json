@@ -28,7 +28,9 @@
     "react-native-reanimated": "^1.13.2",
     "react-native-safe-area-context": "^3.1.9",
     "react-native-screens": "^2.17.1",
+    "react-native-swift": "^1.2.3",
     "react-native-text-ticker": "^1.11.0",
+    "react-native-track-player": "^1.2.6",
     "react-native-vector-icons": "^8.0.0",
     "react-redux": "^7.2.2",
     "reanimated-bottom-sheet": "^1.0.0-alpha.22",
@@ -51,5 +53,6 @@
   },
   "jest": {
     "preset": "react-native"
-  }
+  },
+  "isSwift": true
 }

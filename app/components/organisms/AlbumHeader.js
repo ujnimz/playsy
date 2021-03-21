@@ -3,11 +3,11 @@ import React from 'react';
 import AlbumHero from '_components/molecules/AlbumHero';
 import AlbumButtons from '_molecules/AlbumButtons';
 
-const AlbumHeader = ({item}) => {
+const AlbumHeader = ({item, data}) => {
   return (
     <>
       <AlbumHero item={item} />
-      <AlbumButtons />
+      <AlbumButtons data={data} />
     </>
   );
 };

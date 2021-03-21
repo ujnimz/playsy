@@ -1,8 +1,10 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import PropTypes from 'prop-types';
-import {View, Text, TouchableOpacity, Button, StyleSheet} from 'react-native';
+import {connect} from 'react-redux';
+import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
 import Animated, {Easing} from 'react-native-reanimated';
 import BottomSheet from 'reanimated-bottom-sheet';
+import TrackPlayer from 'react-native-track-player';
 
 import MiniPlayer from '_organisms/MiniPlayer';
 import FullPlayer from '_organisms/FullPlayer';
@@ -10,12 +12,18 @@ import FullPlayer from '_organisms/FullPlayer';
 import {useTheme} from '_theme/ThemeProvider';
 import {windowHeight} from '_utilities/Dimentions';
 
-const PlayerBottomSheet = ({state, descriptors, navigation}) => {
+const PlayerBottomSheet = ({state, descriptors, navigation, playerState}) => {
   const focusedOptions = descriptors[state.routes[state.index].key].options;
 
   if (focusedOptions.tabBarVisible === false) {
     return null;
   }
+
+  const {playlist} = playerState;
+
+  useEffect(() => {
+    //TrackPlayer.add(playlist);
+  }, [playlist]);
 
   const theme = useTheme();
   const styles = getStyles(theme);
@@ -63,21 +71,24 @@ const PlayerBottomSheet = ({state, descriptors, navigation}) => {
 
   return (
     <>
-      <BottomSheet
-        ref={sheetRef}
-        snapPoints={[
-          windowHeight,
-          theme.spacing.SCALE_18 * 6,
-          theme.spacing.SCALE_18 * 6,
-        ]}
-        initialSnap={1}
-        renderContent={renderContent}
-        callbackNode={fall}
-        enabledGestureInteraction={true}
-        enabledBottomInitialAnimation={true}
-        onOpenStart={miniPlayerFadeOut}
-        onCloseEnd={miniPlayerFadeIn}
-      />
+      {playlist.length > 0 ? (
+        <BottomSheet
+          ref={sheetRef}
+          snapPoints={[
+            windowHeight,
+            theme.spacing.SCALE_18 * 6,
+            theme.spacing.SCALE_18 * 6,
+          ]}
+          initialSnap={1}
+          renderContent={renderContent}
+          callbackNode={fall}
+          enabledGestureInteraction={true}
+          enabledBottomInitialAnimation={true}
+          onOpenStart={miniPlayerFadeOut}
+          onCloseEnd={miniPlayerFadeIn}
+        />
+      ) : null}
+
       <View style={styles.container}>
         {state.routes.map((route, index) => {
           const {options} = descriptors[route.key];
@@ -177,4 +188,8 @@ PlayerBottomSheet.propTypes = {
   navigation: PropTypes.object.isRequired,
 };
 
-export default PlayerBottomSheet;
+const mapStateToProps = (state) => ({
+  playerState: state.playerState,
+});
+
+export default connect(mapStateToProps)(PlayerBottomSheet);

@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {StyleSheet, View, FlatList} from 'react-native';
+import {StyleSheet, View, VirtualizedList} from 'react-native';
 
 import {useTheme} from '_theme/ThemeProvider';
 
@@ -11,18 +11,33 @@ const Row = ({data, type}) => {
   const theme = useTheme();
   const styles = getStyles(theme);
 
+  const itemCount = data.length;
+
   const renderItem = ({item}) => (
-    <Card key={item.id} item={item} isRound={type === 'artists'} />
+    <Card key={item.id} item={item} isArtist={type === 'artists'} />
   );
+
+  const getItem = (data, index) => ({
+    id: data[index].id,
+    title: data[index].title,
+    image: data[index].image,
+  });
+
+  const getItemCount = () => itemCount;
+
   return (
     <View style={styles.container}>
       <RowTitle title={type} />
-      <FlatList
-        horizontal={true}
+      <VirtualizedList
         data={data}
+        initialNumToRender={4}
         renderItem={renderItem}
-        showsHorizontalScrollIndicator={false}
         keyExtractor={(item) => item.id}
+        getItemCount={getItemCount}
+        getItem={getItem}
+        horizontal
+        showsHorizontalScrollIndicator={false}
+        style={styles.list}
       />
     </View>
   );
@@ -31,7 +46,11 @@ const Row = ({data, type}) => {
 const getStyles = ({spacing}) => {
   return StyleSheet.create({
     container: {
-      marginBottom: spacing.SCALE_16 * 2,
+      marginBottom: spacing.SCALE_8,
+    },
+    list: {
+      margin: spacing.SCALE_8,
+      overflow: 'visible',
     },
   });
 };
