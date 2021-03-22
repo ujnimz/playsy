@@ -2,6 +2,8 @@ import {
   LOADING_SINGLES,
   GET_SINGLES,
   CLEAR_SINGLES,
+  GET_SINGLES_BY,
+  CLEAR_SINGLES_BY,
   GET_SINGLE,
   CLEAR_SINGLE,
 } from '../actions/types';
@@ -28,6 +30,17 @@ const singlesReducer = (state = initialState, action) => {
         loading: false,
       };
     case CLEAR_SINGLES:
+      return {
+        ...state,
+        singlesArray: [],
+      };
+    case GET_SINGLES_BY:
+      return {
+        ...state,
+        singlesArray: payload,
+        loading: false,
+      };
+    case CLEAR_SINGLES_BY:
       return {
         ...state,
         singlesArray: [],

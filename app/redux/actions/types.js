@@ -26,6 +26,8 @@ export const CLEAR_ALBUM = 'CLEAR_ALBUM';
 export const LOADING_SINGLES = 'LOADING_SINGLES';
 export const GET_SINGLES = 'GET_SINGLES';
 export const CLEAR_SINGLES = 'CLEAR_SINGLES';
+export const GET_SINGLES_BY = 'GET_SINGLES_BY';
+export const CLEAR_SINGLES_BY = 'CLEAR_SINGLES_BY';
 export const GET_SINGLE = 'GET_SINGLE';
 export const CLEAR_SINGLE = 'CLEAR_SINGLE';
 

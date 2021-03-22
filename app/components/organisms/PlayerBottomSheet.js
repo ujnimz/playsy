@@ -4,7 +4,6 @@ import {connect} from 'react-redux';
 import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
 import Animated, {Easing} from 'react-native-reanimated';
 import BottomSheet from 'reanimated-bottom-sheet';
-import TrackPlayer from 'react-native-track-player';
 
 import MiniPlayer from '_organisms/MiniPlayer';
 import FullPlayer from '_organisms/FullPlayer';
@@ -21,10 +20,6 @@ const PlayerBottomSheet = ({state, descriptors, navigation, playerState}) => {
 
   const {playlist} = playerState;
 
-  useEffect(() => {
-    //TrackPlayer.add(playlist);
-  }, [playlist]);
-
   const theme = useTheme();
   const styles = getStyles(theme);
 
@@ -38,19 +33,32 @@ const PlayerBottomSheet = ({state, descriptors, navigation, playerState}) => {
     sheetRef.current.snapTo(1);
   };
 
-  const fadeAnimation = new Animated.Value(1);
+  const fadeMiniPlayer = new Animated.Value(1);
+  const fadeTabMenu = new Animated.Value(0);
 
   const miniPlayerFadeIn = () => {
-    Animated.timing(fadeAnimation, {
+    Animated.timing(fadeMiniPlayer, {
       toValue: 1,
       duration: 100,
+      easing: Easing.inOut(Easing.linear),
+    }).start();
+
+    Animated.timing(fadeTabMenu, {
+      toValue: 0,
+      duration: 200,
       easing: Easing.inOut(Easing.linear),
     }).start();
   };
 
   const miniPlayerFadeOut = () => {
-    Animated.timing(fadeAnimation, {
+    Animated.timing(fadeMiniPlayer, {
       toValue: 0,
+      duration: 200,
+      easing: Easing.inOut(Easing.linear),
+    }).start();
+
+    Animated.timing(fadeTabMenu, {
+      toValue: -theme.spacing.SCALE_18 * 6,
       duration: 200,
       easing: Easing.inOut(Easing.linear),
     }).start();
@@ -60,7 +68,7 @@ const PlayerBottomSheet = ({state, descriptors, navigation, playerState}) => {
     <View style={styles.playerScreen}>
       <Animated.View
         style={{
-          opacity: fadeAnimation,
+          opacity: fadeMiniPlayer,
         }}>
         <MiniPlayer onOpenBottomSheet={onOpenBottomSheet} />
       </Animated.View>
@@ -89,7 +97,7 @@ const PlayerBottomSheet = ({state, descriptors, navigation, playerState}) => {
         />
       ) : null}
 
-      <View style={styles.container}>
+      <Animated.View style={[{marginBottom: fadeTabMenu}, styles.container]}>
         {state.routes.map((route, index) => {
           const {options} = descriptors[route.key];
           const label =
@@ -132,20 +140,24 @@ const PlayerBottomSheet = ({state, descriptors, navigation, playerState}) => {
               onLongPress={onLongPress}
               style={styles.tabItem}>
               {tabIcon(
-                isFocused ? theme.colors.PRIMARY : theme.colors.GREY,
+                isFocused ? theme.colors.PRIMARY : theme.colors.PLACEHOLDER,
                 isFocused ? '' : '-outline',
               )}
               <Text
                 style={[
                   styles.label,
-                  {color: isFocused ? theme.colors.PRIMARY : theme.colors.GREY},
+                  {
+                    color: isFocused
+                      ? theme.colors.PRIMARY
+                      : theme.colors.PLACEHOLDER,
+                  },
                 ]}>
                 {label}
               </Text>
             </TouchableOpacity>
           );
         })}
-      </View>
+      </Animated.View>
     </>
   );
 };

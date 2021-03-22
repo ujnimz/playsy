@@ -5,7 +5,7 @@ import {StyleSheet, VirtualizedList, View} from 'react-native';
 import Animated from 'react-native-reanimated';
 import BottomSheet from 'reanimated-bottom-sheet';
 
-import {getAlbum, clearAlbum} from '_redux/actions/albums';
+import {getSinglesBy, clearSinglesBy} from '_redux/actions/singles';
 
 import {useTheme} from '_theme/ThemeProvider';
 
@@ -16,7 +16,7 @@ import AlbumHeader from '_components/organisms/AlbumHeader';
 
 const AnimatedView = Animated.View;
 
-const AlbumScreen = ({route, getAlbum, clearAlbum, albumsState}) => {
+const AlbumScreen = ({route, getSinglesBy, clearSinglesBy, singlesState}) => {
   const theme = useTheme();
   const styles = getStyles(theme);
 
@@ -26,9 +26,9 @@ const AlbumScreen = ({route, getAlbum, clearAlbum, albumsState}) => {
   const [currentItem, setCurrentItem] = useState(null);
 
   useEffect(() => {
-    getAlbum(item.id);
+    getSinglesBy(item.id);
     return () => {
-      clearAlbum();
+      clearSinglesBy();
     };
   }, []);
 
@@ -60,9 +60,7 @@ const AlbumScreen = ({route, getAlbum, clearAlbum, albumsState}) => {
     );
   };
 
-  const data = albumsState.albumsArray;
-
-  console.log(albumsState.album);
+  const albumTracks = singlesState.singlesArray;
 
   const renderItem = ({item}) => (
     <TrackRow
@@ -83,17 +81,29 @@ const AlbumScreen = ({route, getAlbum, clearAlbum, albumsState}) => {
 
   const getItemCount = (data) => data.length;
 
-  if (albumsState.loading) return <AppLoading />;
+  const makeTrackList = (tracks) =>
+    tracks.map((track) => ({
+      id: track.id,
+      url: track.uri,
+      title: track.title,
+      artist: track.artists.map((artist) => artist.label).join(', '),
+      genre: track.genres.map((genre) => genre.label).join(', '),
+      artwork: track.image,
+    }));
+
+  if (singlesState.loading) return <AppLoading />;
 
   return (
     <View style={styles.container}>
       <VirtualizedList
-        data={data}
+        data={albumTracks}
         keyExtractor={(item) => item.id}
         renderItem={renderItem}
         getItemCount={getItemCount}
         getItem={getItem}
-        ListHeaderComponent={() => <AlbumHeader item={item} data={data} />}
+        ListHeaderComponent={() => (
+          <AlbumHeader item={item} tracks={makeTrackList(albumTracks)} />
+        )}
         showsHorizontalScrollIndicator={false}
       />
       <BottomSheet
@@ -119,12 +129,14 @@ const getStyles = ({colors, typography, spacing}) => {
 };
 
 AlbumScreen.propTypes = {
-  getAlbum: PropTypes.func.isRequired,
-  clearAlbum: PropTypes.func.isRequired,
+  getSinglesBy: PropTypes.func.isRequired,
+  clearSinglesBy: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
-  albumsState: state.albumsState,
+  singlesState: state.singlesState,
 });
 
-export default connect(mapStateToProps, {getAlbum, clearAlbum})(AlbumScreen);
+export default connect(mapStateToProps, {getSinglesBy, clearSinglesBy})(
+  AlbumScreen,
+);

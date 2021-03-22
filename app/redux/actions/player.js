@@ -51,9 +51,12 @@ export const trackAdd = (track) => async (dispatch) => {
 
 // Add Track
 export const addPlaylist = (playlist) => async (dispatch) => {
+  console.log(playlist);
   TrackPlayer.reset();
   await TrackPlayer.add(playlist);
+  TrackPlayer.play();
   return dispatch({
     type: ADD_PLAYLIST,
+    payload: playlist,
   });
 };

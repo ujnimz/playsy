@@ -2,6 +2,8 @@ import {
   LOADING_SINGLES,
   GET_SINGLES,
   CLEAR_SINGLES,
+  GET_SINGLES_BY,
+  CLEAR_SINGLES_BY,
   GET_SINGLE,
   CLEAR_SINGLE,
 } from './types';
@@ -49,6 +51,30 @@ export const getSingle = (id) => async (dispatch) => {
   }
 };
 
+// GET Singles By
+export const getSinglesBy = (id) => async (dispatch) => {
+  dispatch(setSinglesLoading());
+  try {
+    const singleRef = firestore().collection('singles');
+    const snapshot = await singleRef
+      .where('albumIds', 'array-contains', id)
+      .get();
+    const data = snapshot.docs.map((doc) => {
+      return {id: doc.id, ...doc.data()};
+    });
+    return dispatch({
+      type: GET_SINGLES_BY,
+      payload: data,
+    });
+  } catch (err) {
+    dispatch({
+      type: GET_SINGLES_BY,
+      payload: {},
+    });
+    return console.log(err);
+  }
+};
+
 export const setSinglesLoading = () => {
   return {
     type: LOADING_SINGLES,
@@ -58,6 +84,12 @@ export const setSinglesLoading = () => {
 export const clearSingles = () => {
   return {
     type: CLEAR_SINGLES,
+  };
+};
+
+export const clearSinglesBy = () => {
+  return {
+    type: CLEAR_SINGLES_BY,
   };
 };
 

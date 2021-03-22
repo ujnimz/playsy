@@ -6,28 +6,20 @@ import {useTheme} from '_theme/ThemeProvider';
 
 import IconButton from '_atoms/IconButton';
 
-import {addPlaylist} from '_redux/actions/player';
+import {addPlaylist, trackPause} from '_redux/actions/player';
 
-const AlbumButtons = ({data, addPlaylist, playerState}) => {
+const AlbumButtons = ({tracks, addPlaylist, trackPause, playerState}) => {
   const theme = useTheme();
   const styles = getStyles(theme);
 
   const {play} = playerState;
 
-  const usePlaylist = (newPlaylist) =>
-    newPlaylist.map((item) => ({
-      id: item.id,
-      url: item.uri,
-      title: item.title,
-      artist: item.artists.map((artist) => artist.label).join(', '),
-      genre: item.genres.map((genre) => genre.label).join(', '),
-      artwork: item.image,
-    }));
-
-  //console.log(usePlaylist(data));
-
   const onPlay = () => {
-    addPlaylist(usePlaylist(data));
+    addPlaylist(tracks);
+  };
+
+  const onPause = () => {
+    trackPause();
   };
 
   return (
@@ -39,11 +31,11 @@ const AlbumButtons = ({data, addPlaylist, playerState}) => {
           iconColor={theme.colors.PRIMARY}
         />
         <IconButton
-          icon={play ? 'play' : 'pause'}
+          icon={play ? 'pause' : 'play'}
           bgColor={theme.colors.SECONDARY}
           iconColor={theme.colors.WHITE}
-          text={play ? 'Play' : 'Pause'}
-          onPress={onPlay}
+          text={play ? 'Pause' : 'Play'}
+          onPress={play ? onPause : onPlay}
         />
         <IconButton
           icon="heart-outline"
@@ -95,6 +87,7 @@ const getStyles = ({colors, typography, spacing}) => {
 
 AlbumButtons.propTypes = {
   addPlaylist: PropTypes.func.isRequired,
+  trackPause: PropTypes.func.isRequired,
   playerState: PropTypes.object.isRequired,
 };
 
@@ -102,4 +95,6 @@ const mapStateToProps = (state) => ({
   playerState: state.playerState,
 });
 
-export default connect(mapStateToProps, {addPlaylist})(AlbumButtons);
+export default connect(mapStateToProps, {addPlaylist, trackPause})(
+  AlbumButtons,
+);

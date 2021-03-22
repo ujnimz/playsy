@@ -1,8 +1,9 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {Platform, StyleSheet, Text, Image, View} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
+import TrackPlayer from 'react-native-track-player';
 
 import {
   trackPlay,
@@ -31,6 +32,46 @@ const FullPlayer = ({
 
   const {play} = playerState;
 
+  const [curTrack, setCurTrack] = useState({title: '', artist: '', image: ''});
+
+  useEffect(() => {
+    let mounted = true;
+    //let listener = null;
+    (async () => {
+      // Set the initial track title:
+      const trackId = await TrackPlayer.getCurrentTrack();
+      if (!mounted || !trackId) return;
+      const track = await TrackPlayer.getTrack(trackId);
+      if (!mounted) return;
+      setCurTrack({
+        ...curTrack,
+        title: track.title,
+        artist: track.artist,
+        image: track.artwork,
+      });
+    })();
+
+    // Set the track title whenever the track changes:
+    const listener = TrackPlayer.addEventListener(
+      'playback-track-changed',
+      async (data) => {
+        const track = await TrackPlayer.getTrack(data.nextTrack);
+        //console.log(track);
+        if (!mounted) return;
+        setCurTrack({
+          ...curTrack,
+          title: track.title,
+          artist: track.artist,
+          image: track.artwork,
+        });
+      },
+    );
+    return () => {
+      mounted = false;
+      listener.remove();
+    };
+  }, []);
+
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -41,7 +82,7 @@ const FullPlayer = ({
             size={28}
             onPress={onCloseBottomSheet}
           />
-          <Text style={styles.headerTitle}>Athma Liyanage</Text>
+          <Text style={styles.headerTitle}>{curTrack.artist}</Text>
           <Icon
             name="add-circle-outline"
             color={theme.colors.PRIMARY}
@@ -50,13 +91,14 @@ const FullPlayer = ({
         </View>
       </View>
       <View style={styles.body}>
-        <Image source={artist} resizeMode="cover" style={styles.image} />
+        <Image
+          source={{uri: curTrack.image}}
+          resizeMode="cover"
+          style={styles.image}
+        />
         <View style={styles.textContent}>
-          <BounceText
-            text="Me Hitha Thaniyen – Athma Liyanage ft. Thilina Ruhunage"
-            style={styles.title}
-          />
-          <BounceText text="Athma Liyanage" style={styles.meta} />
+          <BounceText text={curTrack.title} style={styles.title} />
+          <BounceText text={curTrack.artist} style={styles.meta} />
         </View>
       </View>
       <View style={styles.footer}>
@@ -122,7 +164,7 @@ const getStyles = ({colors, typography, spacing}) => {
       paddingLeft: spacing.SCALE_18,
       paddingRight: spacing.SCALE_18,
       paddingTop: Platform.OS === 'ios' ? spacing.SCALE_12 * 2 : 0,
-      paddingBottom: Platform.OS === 'ios' ? spacing.SCALE_18 * 3 : 0,
+      //paddingBottom: Platform.OS === 'ios' ? spacing.SCALE_18 * 3 : 0,
     },
     header: {
       height: spacing.SCALE_18 * 2,
@@ -157,7 +199,7 @@ const getStyles = ({colors, typography, spacing}) => {
     meta: {
       ...typography.FONT_REGULAR,
       fontSize: typography.FONT_SIZE_14,
-      color: colors.GREY,
+      color: colors.PLACEHOLDER,
     },
     progress: {
       alignContent: 'center',
@@ -170,11 +212,11 @@ const getStyles = ({colors, typography, spacing}) => {
     },
     progressTimeText: {
       fontSize: typography.FONT_SIZE_12,
-      color: colors.GREY,
+      color: colors.PLACEHOLDER,
     },
     progressBar: {
       height: spacing.SCALE_12 - 12,
-      backgroundColor: colors.GREY,
+      backgroundColor: colors.PLACEHOLDER,
       marginBottom: spacing.SCALE_16,
     },
     controls: {

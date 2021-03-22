@@ -38,6 +38,7 @@ const playerReducer = (state = initialState, action) => {
       return {
         ...state,
         play: true,
+        playlist: payload,
       };
     default:
       return state;
