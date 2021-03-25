@@ -4,6 +4,8 @@ import {
   CLEAR_ARTISTS,
   GET_ARTIST,
   CLEAR_ARTIST,
+  GET_ARTISTS_BY,
+  CLEAR_ARTISTS_BY,
 } from '../actions/types';
 
 const initialState = {
@@ -28,6 +30,17 @@ const artistsReducer = (state = initialState, action) => {
         loading: false,
       };
     case CLEAR_ARTISTS:
+      return {
+        ...state,
+        artistsArray: [],
+      };
+    case GET_ARTISTS_BY:
+      return {
+        ...state,
+        artistsArray: payload,
+        loading: false,
+      };
+    case CLEAR_ARTISTS_BY:
       return {
         ...state,
         artistsArray: [],

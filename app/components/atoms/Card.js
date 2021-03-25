@@ -18,7 +18,7 @@ const Card = ({item, isArtist}) => {
   const theme = useTheme();
   const styles = getStyles(theme);
   const navigation = useNavigation();
-
+  //console.log(item);
   const [loading, setLoading] = useState(true);
 
   const onLoadEnd = () => {
@@ -60,6 +60,7 @@ const Card = ({item, isArtist}) => {
             style={[styles.title, {textAlign: isArtist ? 'center' : 'left'}]}>
             {item.title}
           </Text>
+          <Text style={styles.meta}>{isArtist ? null : item.year}</Text>
         </View>
       </TouchableOpacity>
     </>
@@ -85,12 +86,18 @@ const getStyles = ({colors, spacing, typography}) => {
       borderRadius: 3,
     },
     titleHolder: {
-      flexDirection: 'row',
+      alignItems: 'flex-start',
     },
     title: {
       ...typography.FONT_MEDIUM,
       fontSize: spacing.SCALE_12,
       color: colors.PRIMARY,
+      flexWrap: 'wrap',
+    },
+    meta: {
+      ...typography.FONT_REGULAR,
+      fontSize: spacing.SCALE_18 / 2,
+      color: colors.PLACEHOLDER,
       flexWrap: 'wrap',
     },
     activityIndicator: {

@@ -4,11 +4,13 @@ import {
   CLEAR_ARTISTS,
   GET_ARTIST,
   CLEAR_ARTIST,
+  GET_ARTISTS_BY,
+  CLEAR_ARTISTS_BY,
 } from './types';
 
 import firestore from '@react-native-firebase/firestore';
 
-// GET ALL
+// GET All
 export const getArtists = () => async (dispatch) => {
   dispatch(setArtistsLoading());
   try {
@@ -30,7 +32,7 @@ export const getArtists = () => async (dispatch) => {
   }
 };
 
-// GET ALL
+// GET One
 export const getArtist = (id) => async (dispatch) => {
   dispatch(setArtistsLoading());
   try {
@@ -43,6 +45,30 @@ export const getArtist = (id) => async (dispatch) => {
   } catch (err) {
     dispatch({
       type: GET_ARTIST,
+      payload: {},
+    });
+    return console.log(err);
+  }
+};
+
+// GET Artists By Ids
+export const getArtistsBy = (id) => async (dispatch) => {
+  dispatch(setArtistsLoading());
+  try {
+    const singleRef = firestore().collection('artists');
+    const snapshot = await singleRef
+      .where(firestore.FieldPath.documentId(), 'in', id)
+      .get();
+    const data = snapshot.docs.map((doc) => {
+      return {id: doc.id, ...doc.data()};
+    });
+    return dispatch({
+      type: GET_ARTISTS_BY,
+      payload: data,
+    });
+  } catch (err) {
+    dispatch({
+      type: GET_ARTISTS_BY,
       payload: {},
     });
     return console.log(err);
@@ -64,6 +90,12 @@ export const setArtistsSaving = () => {
 export const clearArtists = () => {
   return {
     type: CLEAR_ARTISTS,
+  };
+};
+
+export const clearArtistsBy = () => {
+  return {
+    type: CLEAR_ARTISTS_BY,
   };
 };
 

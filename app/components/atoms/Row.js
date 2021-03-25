@@ -21,6 +21,10 @@ const Row = ({data, type}) => {
     id: data[index].id,
     title: data[index].title,
     image: data[index].image,
+    artistIds: data[index].artistIds,
+    trackIds: data[index].trackIds,
+    genreIds: data[index].genreIds,
+    year: data[index].year,
   });
 
   const getItemCount = () => itemCount;

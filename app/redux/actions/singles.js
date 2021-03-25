@@ -32,7 +32,7 @@ export const getSingles = () => async (dispatch) => {
   }
 };
 
-// GET ALL
+// GET One
 export const getSingle = (id) => async (dispatch) => {
   dispatch(setSinglesLoading());
   try {
@@ -53,15 +53,17 @@ export const getSingle = (id) => async (dispatch) => {
 
 // GET Singles By
 export const getSinglesBy = (id) => async (dispatch) => {
+  //console.log(id);
   dispatch(setSinglesLoading());
   try {
     const singleRef = firestore().collection('singles');
     const snapshot = await singleRef
-      .where('albumIds', 'array-contains', id)
+      .where(firestore.FieldPath.documentId(), 'in', id)
       .get();
     const data = snapshot.docs.map((doc) => {
       return {id: doc.id, ...doc.data()};
     });
+    console.log(data);
     return dispatch({
       type: GET_SINGLES_BY,
       payload: data,

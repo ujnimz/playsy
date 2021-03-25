@@ -12,6 +12,8 @@ export const AUTH_FAIL = 'AUTH_FAIL';
 export const LOADING_ARTISTS = 'LOADING_ARTISTS';
 export const GET_ARTISTS = 'GET_ARTISTS';
 export const CLEAR_ARTISTS = 'CLEAR_ARTISTS';
+export const GET_ARTISTS_BY = 'GET_ARTISTS_BY';
+export const CLEAR_ARTISTS_BY = 'CLEAR_ARTISTS_BY';
 export const GET_ARTIST = 'GET_ARTIST';
 export const CLEAR_ARTIST = 'CLEAR_ARTIST';
 

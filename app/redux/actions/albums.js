@@ -8,8 +8,6 @@ import {
 
 import firestore from '@react-native-firebase/firestore';
 
-import {getSingle} from '_redux/actions/singles';
-
 // GET ALL
 export const getAlbums = () => async (dispatch) => {
   dispatch(setAlbumsLoading());

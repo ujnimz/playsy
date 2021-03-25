@@ -1,11 +1,12 @@
 import React, {useEffect, useState} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {StyleSheet, VirtualizedList, View} from 'react-native';
+import {StyleSheet, VirtualizedList, View, Text} from 'react-native';
 import Animated from 'react-native-reanimated';
 import BottomSheet from 'reanimated-bottom-sheet';
 
 import {getSinglesBy, clearSinglesBy} from '_redux/actions/singles';
+import {getArtistsBy, clearArtistsBy} from '_redux/actions/artists';
 
 import {useTheme} from '_theme/ThemeProvider';
 
@@ -16,7 +17,15 @@ import AlbumHeader from '_components/organisms/AlbumHeader';
 
 const AnimatedView = Animated.View;
 
-const AlbumScreen = ({route, getSinglesBy, clearSinglesBy, singlesState}) => {
+const AlbumScreen = ({
+  route,
+  getSinglesBy,
+  clearSinglesBy,
+  getArtistsBy,
+  clearArtistsBy,
+  singlesState,
+  artistsState,
+}) => {
   const theme = useTheme();
   const styles = getStyles(theme);
 
@@ -24,13 +33,14 @@ const AlbumScreen = ({route, getSinglesBy, clearSinglesBy, singlesState}) => {
   let fall = new Animated.Value(1);
 
   const [currentItem, setCurrentItem] = useState(null);
-
   useEffect(() => {
-    getSinglesBy(item.id);
+    getSinglesBy(item.trackIds);
+    getArtistsBy(item.artistIds);
     return () => {
       clearSinglesBy();
+      clearArtistsBy();
     };
-  }, []);
+  }, [item]);
 
   const sheetRef = React.useRef(null);
 
@@ -60,7 +70,13 @@ const AlbumScreen = ({route, getSinglesBy, clearSinglesBy, singlesState}) => {
     );
   };
 
+  const albumArtists = artistsState.artistsArray;
   const albumTracks = singlesState.singlesArray;
+
+  const getTrackArtists = (id) => {
+    const arr = albumArtists.filter((artist) => artist.id === id);
+    return arr[0];
+  };
 
   const renderItem = ({item}) => (
     <TrackRow
@@ -70,13 +86,19 @@ const AlbumScreen = ({route, getSinglesBy, clearSinglesBy, singlesState}) => {
     />
   );
 
+  const renderNoTracksMessage = () => (
+    <View>
+      <Text>You have no music tracks in your album.</Text>
+    </View>
+  );
+
   const getItem = (data, index) => ({
     id: data[index].id,
     title: data[index].title,
     image: data[index].image,
-    artists: data[index].artists,
-    genres: data[index].genres,
+    artists: data[index].artistIds.map((id) => getTrackArtists(id)),
     audio: data[index].uri,
+    year: data[index].year,
   });
 
   const getItemCount = (data) => data.length;
@@ -86,12 +108,11 @@ const AlbumScreen = ({route, getSinglesBy, clearSinglesBy, singlesState}) => {
       id: track.id,
       url: track.uri,
       title: track.title,
-      artist: track.artists.map((artist) => artist.label).join(', '),
-      genre: track.genres.map((genre) => genre.label).join(', '),
+      artist: track.artistIds.map((id) => getTrackArtists(id)).join(', '),
       artwork: track.image,
     }));
 
-  if (singlesState.loading) return <AppLoading />;
+  if (singlesState.loading || artistsState.loading) return <AppLoading />;
 
   return (
     <View style={styles.container}>
@@ -104,6 +125,7 @@ const AlbumScreen = ({route, getSinglesBy, clearSinglesBy, singlesState}) => {
         ListHeaderComponent={() => (
           <AlbumHeader item={item} tracks={makeTrackList(albumTracks)} />
         )}
+        ListEmptyComponent={renderNoTracksMessage()}
         showsHorizontalScrollIndicator={false}
       />
       <BottomSheet
@@ -119,7 +141,7 @@ const AlbumScreen = ({route, getSinglesBy, clearSinglesBy, singlesState}) => {
   );
 };
 
-const getStyles = ({colors, typography, spacing}) => {
+const getStyles = ({colors}) => {
   return StyleSheet.create({
     container: {
       flex: 1,
@@ -131,12 +153,18 @@ const getStyles = ({colors, typography, spacing}) => {
 AlbumScreen.propTypes = {
   getSinglesBy: PropTypes.func.isRequired,
   clearSinglesBy: PropTypes.func.isRequired,
+  getArtistsBy: PropTypes.func.isRequired,
+  clearArtistsBy: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   singlesState: state.singlesState,
+  artistsState: state.artistsState,
 });
 
-export default connect(mapStateToProps, {getSinglesBy, clearSinglesBy})(
-  AlbumScreen,
-);
+export default connect(mapStateToProps, {
+  getSinglesBy,
+  clearSinglesBy,
+  getArtistsBy,
+  clearArtistsBy,
+})(AlbumScreen);
