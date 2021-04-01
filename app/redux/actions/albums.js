@@ -40,7 +40,6 @@ export const getAlbum = (id) => async (dispatch) => {
       async (track) =>
         await firestore().collection('singles').doc(track.value).get(),
     );
-    console.log(albumTracks);
     const album = {...albumData, tracks: albumTracks};
     return dispatch({
       type: GET_ALBUM,

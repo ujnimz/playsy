@@ -1,42 +1,24 @@
 import React, {useEffect, useState} from 'react';
 import PropTypes from 'prop-types';
-import {connect} from 'react-redux';
 import {Platform, StyleSheet, Text, Image, View} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import TrackPlayer from 'react-native-track-player';
-
-import {
-  trackPlay,
-  trackPause,
-  trackNext,
-  trackPrevious,
-} from '_redux/actions/player';
+import PlayerProgressBar from '_atoms/PlayerProgressBar';
+import PlayerControls from '_atoms/PlayerControls';
 
 import {useTheme} from '_theme/ThemeProvider';
-import {windowWidth} from '_utilities/Dimentions';
+import {windowWidth} from '_utilities/dimentions';
 
 import BounceText from '_atoms/BounceText';
 
-const artist = require('_assets/images/artist.jpg');
-
-const FullPlayer = ({
-  onCloseBottomSheet,
-  trackPlay,
-  trackPause,
-  trackNext,
-  trackPrevious,
-  playerState,
-}) => {
+const FullPlayer = ({onCloseBottomSheet}) => {
   const theme = useTheme();
   const styles = getStyles(theme);
-
-  const {play} = playerState;
 
   const [curTrack, setCurTrack] = useState({title: '', artist: '', image: ''});
 
   useEffect(() => {
     let mounted = true;
-    //let listener = null;
     (async () => {
       // Set the initial track title:
       const trackId = await TrackPlayer.getCurrentTrack();
@@ -103,42 +85,10 @@ const FullPlayer = ({
       </View>
       <View style={styles.footer}>
         <View style={styles.progress}>
-          <View style={styles.progressTime}>
-            <Text style={styles.progressTimeText}>0.00</Text>
-            <Text style={styles.progressTimeText}>3.45</Text>
-          </View>
-          <View style={styles.progressBar}></View>
+          <PlayerProgressBar />
         </View>
 
-        <View style={styles.controls}>
-          <Icon
-            name="play-skip-back-sharp"
-            color={theme.colors.PRIMARY}
-            size={28}
-            onPress={trackPrevious}
-          />
-          {play ? (
-            <Icon
-              name="pause-circle-sharp"
-              color={theme.colors.PRIMARY}
-              size={windowWidth / 6}
-              onPress={trackPause}
-            />
-          ) : (
-            <Icon
-              name="play-circle-sharp"
-              color={theme.colors.PRIMARY}
-              size={windowWidth / 6}
-              onPress={trackPlay}
-            />
-          )}
-          <Icon
-            name="play-skip-forward-sharp"
-            color={theme.colors.PRIMARY}
-            size={28}
-            onPress={trackNext}
-          />
-        </View>
+        <PlayerControls />
         <View style={styles.settings}>
           <Icon
             name="chevron-down-outline"
@@ -204,51 +154,25 @@ const getStyles = ({colors, typography, spacing}) => {
     progress: {
       alignContent: 'center',
       justifyContent: 'space-between',
-    },
-    progressTime: {
-      flexDirection: 'row',
-      alignItems: 'center',
-      justifyContent: 'space-between',
-    },
-    progressTimeText: {
-      fontSize: typography.FONT_SIZE_12,
-      color: colors.PLACEHOLDER,
-    },
-    progressBar: {
-      height: spacing.SCALE_12 - 12,
-      backgroundColor: colors.PLACEHOLDER,
-      marginBottom: spacing.SCALE_16,
+      marginBottom: spacing.SCALE_16 * 2,
     },
     controls: {
       flexDirection: 'row',
       alignItems: 'center',
       justifyContent: 'space-evenly',
-      marginBottom: spacing.SCALE_16,
+      marginBottom: spacing.SCALE_16 * 2,
     },
     settings: {
       flexDirection: 'row',
       alignItems: 'center',
       justifyContent: 'space-between',
-      marginBottom: spacing.SCALE_16,
+      marginBottom: spacing.SCALE_16 * 2,
     },
   });
 };
 
 FullPlayer.propTypes = {
   onCloseBottomSheet: PropTypes.func.isRequired,
-  trackPlay: PropTypes.func.isRequired,
-  trackPause: PropTypes.func.isRequired,
-  trackNext: PropTypes.func.isRequired,
-  trackPrevious: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = (state) => ({
-  playerState: state.playerState,
-});
-
-export default connect(mapStateToProps, {
-  trackPlay,
-  trackPause,
-  trackNext,
-  trackPrevious,
-})(FullPlayer);
+export default FullPlayer;

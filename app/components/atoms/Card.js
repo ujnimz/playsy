@@ -13,12 +13,13 @@ import {
 import {useNavigation} from '@react-navigation/native';
 
 import {useTheme} from '_theme/ThemeProvider';
+import {toArray} from '_utilities/helpers';
 
 const Card = ({item, isArtist}) => {
   const theme = useTheme();
   const styles = getStyles(theme);
   const navigation = useNavigation();
-  //console.log(item);
+
   const [loading, setLoading] = useState(true);
 
   const onLoadEnd = () => {
@@ -60,7 +61,11 @@ const Card = ({item, isArtist}) => {
             style={[styles.title, {textAlign: isArtist ? 'center' : 'left'}]}>
             {item.title}
           </Text>
-          <Text style={styles.meta}>{isArtist ? null : item.year}</Text>
+          <Text style={styles.meta}>
+            {isArtist
+              ? null
+              : toArray(item.artists).map((artist) => artist.title)[0]}
+          </Text>
         </View>
       </TouchableOpacity>
     </>

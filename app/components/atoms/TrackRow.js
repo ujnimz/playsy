@@ -34,9 +34,7 @@ const TrackRow = ({item, openBottomSheet}) => {
 
       <View style={styles.textHolder}>
         <Text style={styles.title}>{item.title}</Text>
-        <Text style={styles.meta}>
-          {item.artists.map((artist) => artist.title).join(', ')}
-        </Text>
+        <Text style={styles.meta}>{item.artists}</Text>
       </View>
       <View style={styles.iconHolder}>
         <Icon

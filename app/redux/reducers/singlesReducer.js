@@ -10,6 +10,7 @@ import {
 
 const initialState = {
   singlesArray: [],
+  singlesArrayBy: [],
   single: {},
   loading: false,
   saving: false,
@@ -37,13 +38,13 @@ const singlesReducer = (state = initialState, action) => {
     case GET_SINGLES_BY:
       return {
         ...state,
-        singlesArray: payload,
+        singlesArrayBy: payload,
         loading: false,
       };
     case CLEAR_SINGLES_BY:
       return {
         ...state,
-        singlesArray: [],
+        singlesArrayBy: [],
       };
     case GET_SINGLE:
       return {

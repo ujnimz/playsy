@@ -52,18 +52,12 @@ export const getSingle = (id) => async (dispatch) => {
 };
 
 // GET Singles By
-export const getSinglesBy = (id) => async (dispatch) => {
-  //console.log(id);
+export const getSinglesBy = (prefix, id) => async (dispatch) => {
   dispatch(setSinglesLoading());
   try {
-    const singleRef = firestore().collection('singles');
-    const snapshot = await singleRef
-      .where(firestore.FieldPath.documentId(), 'in', id)
-      .get();
-    const data = snapshot.docs.map((doc) => {
-      return {id: doc.id, ...doc.data()};
-    });
-    console.log(data);
+    const singlesRef = firestore().collection(`${prefix}Tracks`).doc(id);
+    const doc = await singlesRef.get();
+    const data = doc.data();
     return dispatch({
       type: GET_SINGLES_BY,
       payload: data,

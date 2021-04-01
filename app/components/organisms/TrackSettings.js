@@ -14,9 +14,7 @@ const TrackSettings = ({currentItem}) => {
           {currentItem ? currentItem.title : 'No Track Selected'}
         </Text>
         <Text style={styles.subTitle}>
-          {currentItem
-            ? currentItem.artists.map((artist) => artist.label)
-            : 'No Track Selected'}
+          {currentItem ? currentItem.artists : 'No Track Selected'}
         </Text>
       </View>
 

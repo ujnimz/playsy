@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useRef} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {StyleSheet, VirtualizedList, View, Text} from 'react-native';
@@ -6,9 +6,9 @@ import Animated from 'react-native-reanimated';
 import BottomSheet from 'reanimated-bottom-sheet';
 
 import {getSinglesBy, clearSinglesBy} from '_redux/actions/singles';
-import {getArtistsBy, clearArtistsBy} from '_redux/actions/artists';
 
 import {useTheme} from '_theme/ThemeProvider';
+import {toArray} from '_utilities/helpers';
 
 import AppLoading from '_atoms/AppLoading';
 import TrackRow from '_atoms/TrackRow';
@@ -17,32 +17,26 @@ import AlbumHeader from '_components/organisms/AlbumHeader';
 
 const AnimatedView = Animated.View;
 
-const AlbumScreen = ({
-  route,
-  getSinglesBy,
-  clearSinglesBy,
-  getArtistsBy,
-  clearArtistsBy,
-  singlesState,
-  artistsState,
-}) => {
+const AlbumScreen = ({route, getSinglesBy, clearSinglesBy, singlesState}) => {
   const theme = useTheme();
   const styles = getStyles(theme);
 
   const {item} = route.params;
+
   let fall = new Animated.Value(1);
+  const sheetRef = useRef(null);
 
   const [currentItem, setCurrentItem] = useState(null);
+
   useEffect(() => {
-    getSinglesBy(item.trackIds);
-    getArtistsBy(item.artistIds);
+    getSinglesBy('album', item.id);
     return () => {
       clearSinglesBy();
-      clearArtistsBy();
     };
-  }, [item]);
+  }, []);
 
-  const sheetRef = React.useRef(null);
+  const {singlesArrayBy, loading} = singlesState;
+  const albumTracks = toArray(singlesArrayBy);
 
   const openBottomSheet = (item) => {
     setCurrentItem(item);
@@ -70,14 +64,6 @@ const AlbumScreen = ({
     );
   };
 
-  const albumArtists = artistsState.artistsArray;
-  const albumTracks = singlesState.singlesArray;
-
-  const getTrackArtists = (id) => {
-    const arr = albumArtists.filter((artist) => artist.id === id);
-    return arr[0];
-  };
-
   const renderItem = ({item}) => (
     <TrackRow
       key={item.id}
@@ -95,8 +81,10 @@ const AlbumScreen = ({
   const getItem = (data, index) => ({
     id: data[index].id,
     title: data[index].title,
-    image: data[index].image,
-    artists: data[index].artistIds.map((id) => getTrackArtists(id)),
+    image: item.image,
+    artists: toArray(data[index].artists)
+      .map((artist) => artist.title)
+      .join(', '),
     audio: data[index].uri,
     year: data[index].year,
   });
@@ -108,11 +96,13 @@ const AlbumScreen = ({
       id: track.id,
       url: track.uri,
       title: track.title,
-      artist: track.artistIds.map((id) => getTrackArtists(id)).join(', '),
-      artwork: track.image,
+      artist: toArray(track.artists)
+        .map((artist) => artist.title)
+        .join(', '),
+      artwork: item.image,
     }));
 
-  if (singlesState.loading || artistsState.loading) return <AppLoading />;
+  if (loading) return <AppLoading />;
 
   return (
     <View style={styles.container}>
@@ -153,18 +143,13 @@ const getStyles = ({colors}) => {
 AlbumScreen.propTypes = {
   getSinglesBy: PropTypes.func.isRequired,
   clearSinglesBy: PropTypes.func.isRequired,
-  getArtistsBy: PropTypes.func.isRequired,
-  clearArtistsBy: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   singlesState: state.singlesState,
-  artistsState: state.artistsState,
 });
 
 export default connect(mapStateToProps, {
   getSinglesBy,
   clearSinglesBy,
-  getArtistsBy,
-  clearArtistsBy,
 })(AlbumScreen);

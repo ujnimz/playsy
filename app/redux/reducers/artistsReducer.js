@@ -10,6 +10,7 @@ import {
 
 const initialState = {
   artistsArray: [],
+  artistsArrayBy: [],
   artist: {},
   loading: false,
   saving: false,
@@ -37,13 +38,13 @@ const artistsReducer = (state = initialState, action) => {
     case GET_ARTISTS_BY:
       return {
         ...state,
-        artistsArray: payload,
+        artistsArrayBy: payload,
         loading: false,
       };
     case CLEAR_ARTISTS_BY:
       return {
         ...state,
-        artistsArray: [],
+        artistsArrayBy: [],
       };
     case GET_ARTIST:
       return {

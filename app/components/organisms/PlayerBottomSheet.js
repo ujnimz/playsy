@@ -9,7 +9,7 @@ import MiniPlayer from '_organisms/MiniPlayer';
 import FullPlayer from '_organisms/FullPlayer';
 
 import {useTheme} from '_theme/ThemeProvider';
-import {windowHeight} from '_utilities/Dimentions';
+import {windowHeight} from '_utilities/dimentions';
 
 const PlayerBottomSheet = ({state, descriptors, navigation, playerState}) => {
   const focusedOptions = descriptors[state.routes[state.index].key].options;
@@ -34,7 +34,7 @@ const PlayerBottomSheet = ({state, descriptors, navigation, playerState}) => {
   };
 
   const fadeMiniPlayer = new Animated.Value(1);
-  const fadeTabMenu = new Animated.Value(0);
+  const slideTabMenu = new Animated.Value(0);
 
   const miniPlayerFadeIn = () => {
     Animated.timing(fadeMiniPlayer, {
@@ -43,7 +43,7 @@ const PlayerBottomSheet = ({state, descriptors, navigation, playerState}) => {
       easing: Easing.inOut(Easing.linear),
     }).start();
 
-    Animated.timing(fadeTabMenu, {
+    Animated.timing(slideTabMenu, {
       toValue: 0,
       duration: 200,
       easing: Easing.inOut(Easing.linear),
@@ -57,7 +57,7 @@ const PlayerBottomSheet = ({state, descriptors, navigation, playerState}) => {
       easing: Easing.inOut(Easing.linear),
     }).start();
 
-    Animated.timing(fadeTabMenu, {
+    Animated.timing(slideTabMenu, {
       toValue: -theme.spacing.SCALE_18 * 6,
       duration: 200,
       easing: Easing.inOut(Easing.linear),
@@ -97,7 +97,7 @@ const PlayerBottomSheet = ({state, descriptors, navigation, playerState}) => {
         />
       ) : null}
 
-      <Animated.View style={[{marginBottom: fadeTabMenu}, styles.container]}>
+      <Animated.View style={[{marginBottom: slideTabMenu}, styles.container]}>
         {state.routes.map((route, index) => {
           const {options} = descriptors[route.key];
           const label =

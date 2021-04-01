@@ -7,7 +7,7 @@ import SettingsScreen from '_screens/SettingsScreen';
 import BottomTabsScreen from './BottomTabsScreen';
 
 import {useTheme} from '_theme/ThemeProvider';
-import {iconSize} from '_utilities/Dimentions';
+import {iconSize} from '_utilities/dimentions';
 
 const AppStack = createStackNavigator();
 

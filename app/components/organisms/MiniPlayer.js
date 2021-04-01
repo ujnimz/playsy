@@ -1,28 +1,18 @@
 import React, {useEffect, useState} from 'react';
 import PropTypes from 'prop-types';
-import {connect} from 'react-redux';
 import {StyleSheet, Image, View, Pressable} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
-import TrackPlayer from 'react-native-track-player';
-
-import {trackPlay, trackPause} from '_redux/actions/player';
+import TrackPlayer, {usePlaybackState} from 'react-native-track-player';
 
 import {useTheme} from '_theme/ThemeProvider';
 
 import BounceText from '_atoms/BounceText';
 
-const artist = require('_assets/images/artist.jpg');
-
-const MiniPlayer = ({
-  onOpenBottomSheet,
-  trackPlay,
-  trackPause,
-  playerState,
-}) => {
+const MiniPlayer = ({onOpenBottomSheet}) => {
   const theme = useTheme();
   const styles = getStyles(theme);
 
-  const {play} = playerState;
+  const playbackState = usePlaybackState();
 
   const [curTrack, setCurTrack] = useState({title: '', artist: '', image: ''});
 
@@ -48,7 +38,6 @@ const MiniPlayer = ({
       'playback-track-changed',
       async (data) => {
         const track = await TrackPlayer.getTrack(data.nextTrack);
-        //console.log(track);
         if (!mounted) return;
         setCurTrack({
           ...curTrack,
@@ -64,6 +53,14 @@ const MiniPlayer = ({
     };
   }, []);
 
+  const trackPlay = () => {
+    TrackPlayer.play();
+  };
+
+  const trackPause = () => {
+    TrackPlayer.pause();
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.content}>
@@ -78,7 +75,7 @@ const MiniPlayer = ({
         </Pressable>
       </View>
       <View style={styles.iconView}>
-        {play ? (
+        {playbackState === TrackPlayer.STATE_PLAYING ? (
           <Icon
             name="pause"
             style={styles.icon}
@@ -144,13 +141,6 @@ const getStyles = ({colors, typography, spacing}) => {
 
 MiniPlayer.propTypes = {
   onOpenBottomSheet: PropTypes.func.isRequired,
-  trackPlay: PropTypes.func.isRequired,
-  trackPause: PropTypes.func.isRequired,
-  playerState: PropTypes.object.isRequired,
 };
 
-const mapStateToProps = (state) => ({
-  playerState: state.playerState,
-});
-
-export default connect(mapStateToProps, {trackPlay, trackPause})(MiniPlayer);
+export default MiniPlayer;
