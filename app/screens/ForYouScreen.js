@@ -1,26 +1,20 @@
 import React from 'react';
-import {StyleSheet, View, Text} from 'react-native';
+import {StyleSheet, Text, View} from 'react-native';
 
 import {useTheme} from '_theme/ThemeProvider';
 
-const ArtistScreen = ({route}) => {
+const ForYou = () => {
   const theme = useTheme();
   const styles = getStyles(theme);
 
-  const {item} = route.params;
-  console.log(item);
-
   return (
     <View style={styles.container}>
-      <Text>{item.title}</Text>
-      <Text>Artist Albums List</Text>
-      <Text>Artist Singles List</Text>
-      <Text>Similar Artists</Text>
+      <Text style={styles.text}>For You</Text>
     </View>
   );
 };
 
-const getStyles = ({colors}) => {
+const getStyles = ({colors, typography}) => {
   return StyleSheet.create({
     container: {
       flex: 1,
@@ -28,7 +22,12 @@ const getStyles = ({colors}) => {
       justifyContent: 'center',
       backgroundColor: colors.BACKGROUND,
     },
+    text: {
+      color: colors.PRIMARY,
+      fontSize: 18,
+      ...typography.FONT_BOLD,
+    },
   });
 };
 
-export default ArtistScreen;
+export default ForYou;

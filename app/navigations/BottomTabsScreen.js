@@ -4,7 +4,7 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 
 import HomeStackScreen from '_navigations/HomeStackScreen';
 import SearchScreen from '_screens/SearchScreen';
-import ForYou from '_screens/ForYou';
+import ForYouScreen from '_screens/ForYouScreen';
 import LibraryScreen from '_screens/LibraryScreen';
 
 import PlayerBottomSheet from '_components/organisms/PlayerBottomSheet';
@@ -41,8 +41,8 @@ const BottomTabsScreen = () => {
         />
         <Tab.Screen
           name="For You"
-          tabBarAccessibilityLabel="ForYou"
-          component={ForYou}
+          tabBarAccessibilityLabel="ForYouScreen"
+          component={ForYouScreen}
           options={{
             tabBarLabel: 'For You',
             tabBarIcon: (color, active) => (

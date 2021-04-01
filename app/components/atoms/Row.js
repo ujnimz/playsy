@@ -17,13 +17,21 @@ const Row = ({data, type}) => {
     <Card key={item.id} item={item} isArtist={type === 'artists'} />
   );
 
-  const getItem = (data, index) => ({
-    id: data[index].id,
-    title: data[index].title,
-    image: data[index].image,
-    artists: data[index].artists,
-    year: data[index].year,
-  });
+  const getItem = (data, index) =>
+    type === 'artists'
+      ? {
+          id: data[index].id,
+          title: data[index].title,
+          image: data[index].image,
+          //genres: data[index].genres,
+        }
+      : {
+          id: data[index].id,
+          title: data[index].title,
+          image: data[index].image,
+          artists: data[index].artists,
+          year: data[index].year,
+        };
 
   const getItemCount = () => itemCount;
 
