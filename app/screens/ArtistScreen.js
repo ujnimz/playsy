@@ -1,34 +1,59 @@
-import React from 'react';
-import {StyleSheet, View, Text} from 'react-native';
+import React, {useEffect, useState} from 'react';
+import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
+import {StyleSheet, ScrollView, View, Text} from 'react-native';
 
 import {useTheme} from '_theme/ThemeProvider';
 
-const ArtistScreen = ({route}) => {
+import AppLoading from '_atoms/AppLoading';
+import ArtistHero from '_molecules/ArtistHero';
+import Row from '_atoms/Row';
+
+import {getAlbumsBy, clearAlbumsBy} from '_redux/actions/albums';
+
+const ArtistScreen = ({route, getAlbumsBy, clearAlbumsBy, albumsState}) => {
   const theme = useTheme();
   const styles = getStyles(theme);
 
   const {item} = route.params;
-  console.log(item);
+  const {albumsByArray, loading} = albumsState;
+
+  useEffect(() => {
+    getAlbumsBy('artist', item.id);
+    return () => {
+      clearAlbumsBy();
+    };
+  }, []);
+
+  if (loading) return <AppLoading />;
 
   return (
-    <View style={styles.container}>
-      <Text>{item.title}</Text>
-      <Text>Artist Albums List</Text>
-      <Text>Artist Singles List</Text>
-      <Text>Similar Artists</Text>
-    </View>
+    <ScrollView style={styles.container}>
+      <ArtistHero item={item} />
+      <Row data={albumsByArray} type="albums" />
+    </ScrollView>
   );
 };
 
-const getStyles = ({colors}) => {
+const getStyles = ({colors, spacing}) => {
   return StyleSheet.create({
     container: {
       flex: 1,
-      alignItems: 'center',
-      justifyContent: 'center',
       backgroundColor: colors.BACKGROUND,
+      paddingTop: spacing.SAFE_TOP,
     },
   });
 };
 
-export default ArtistScreen;
+ArtistScreen.propTypes = {
+  getAlbumsBy: PropTypes.func.isRequired,
+  clearAlbumsBy: PropTypes.func.isRequired,
+};
+
+const mapStateToProps = (state) => ({
+  albumsState: state.albumsState,
+});
+
+export default connect(mapStateToProps, {getAlbumsBy, clearAlbumsBy})(
+  ArtistScreen,
+);

@@ -1,12 +1,12 @@
 import React, {useEffect} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {getArtists, clearArtists} from '_redux/actions/artists';
-import {getAlbums, clearAlbums} from '_redux/actions/albums';
-
 import {StyleSheet, ScrollView} from 'react-native';
 
 import {useTheme} from '_theme/ThemeProvider';
+
+import {getArtists, clearArtists} from '_redux/actions/artists';
+import {getAlbums, clearAlbums} from '_redux/actions/albums';
 
 import AppLoading from '_atoms/AppLoading';
 import ToolBar from '_molecules/ToolBar';

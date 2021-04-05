@@ -5,10 +5,10 @@ import {StyleSheet, VirtualizedList, View, Text} from 'react-native';
 import Animated from 'react-native-reanimated';
 import BottomSheet from 'reanimated-bottom-sheet';
 
-import {getSinglesBy, clearSinglesBy} from '_redux/actions/singles';
-
 import {useTheme} from '_theme/ThemeProvider';
 import {toArray} from '_utilities/helpers';
+
+import {getSinglesBy, clearSinglesBy} from '_redux/actions/singles';
 
 import AppLoading from '_atoms/AppLoading';
 import TrackRow from '_atoms/TrackRow';
@@ -36,7 +36,6 @@ const AlbumScreen = ({route, getSinglesBy, clearSinglesBy, singlesState}) => {
   }, []);
 
   const {singlesArrayBy, loading} = singlesState;
-  const albumTracks = toArray(singlesArrayBy);
 
   const openBottomSheet = (item) => {
     setCurrentItem(item);
@@ -107,13 +106,13 @@ const AlbumScreen = ({route, getSinglesBy, clearSinglesBy, singlesState}) => {
   return (
     <View style={styles.container}>
       <VirtualizedList
-        data={albumTracks}
+        data={singlesArrayBy}
         keyExtractor={(item) => item.id}
         renderItem={renderItem}
         getItemCount={getItemCount}
         getItem={getItem}
         ListHeaderComponent={() => (
-          <AlbumHeader item={item} tracks={makeTrackList(albumTracks)} />
+          <AlbumHeader item={item} tracks={makeTrackList(singlesArrayBy)} />
         )}
         ListEmptyComponent={renderNoTracksMessage()}
         showsHorizontalScrollIndicator={false}

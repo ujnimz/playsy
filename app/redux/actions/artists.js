@@ -10,7 +10,7 @@ import {
 
 import firestore from '@react-native-firebase/firestore';
 
-// GET All
+// GET ALL
 export const getArtists = () => async (dispatch) => {
   dispatch(setArtistsLoading());
   try {
@@ -32,7 +32,7 @@ export const getArtists = () => async (dispatch) => {
   }
 };
 
-// GET One
+// GET ONE
 export const getArtist = (id) => async (dispatch) => {
   dispatch(setArtistsLoading());
   try {
@@ -51,7 +51,7 @@ export const getArtist = (id) => async (dispatch) => {
   }
 };
 
-// GET Artists By Ids
+// GET BY IDS
 export const getArtistsBy = (id) => async (dispatch) => {
   dispatch(setArtistsLoading());
   try {

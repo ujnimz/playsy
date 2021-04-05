@@ -1,12 +1,15 @@
 import {
   LOADING_ALBUMS,
   GET_ALBUMS,
+  GET_ALBUMS_BY,
   CLEAR_ALBUMS,
+  CLEAR_ALBUMS_BY,
   GET_ALBUM,
   CLEAR_ALBUM,
 } from './types';
 
 import firestore from '@react-native-firebase/firestore';
+import {toArray} from '_utilities/helpers';
 
 // GET ALL
 export const getAlbums = () => async (dispatch) => {
@@ -30,7 +33,30 @@ export const getAlbums = () => async (dispatch) => {
   }
 };
 
-// GET ALL
+// GET BY
+export const getAlbumsBy = (prefix, id) => async (dispatch) => {
+  dispatch(setAlbumsLoading());
+  try {
+    const singlesRef = firestore().collection(`${prefix}Albums`).doc(id);
+    const doc = await singlesRef.get();
+    const data = doc.data();
+    const dataArray = toArray(data);
+    //console.log(dataArray);
+
+    return dispatch({
+      type: GET_ALBUMS_BY,
+      payload: dataArray,
+    });
+  } catch (err) {
+    dispatch({
+      type: GET_ALBUMS_BY,
+      payload: [],
+    });
+    return console.log(err);
+  }
+};
+
+// GET ONE
 export const getAlbum = (id) => async (dispatch) => {
   dispatch(setAlbumsLoading());
   try {
@@ -69,6 +95,12 @@ export const setAlbumsSaving = () => {
 export const clearAlbums = () => {
   return {
     type: CLEAR_ALBUMS,
+  };
+};
+
+export const clearAlbumsBy = () => {
+  return {
+    type: CLEAR_ALBUMS_BY,
   };
 };
 

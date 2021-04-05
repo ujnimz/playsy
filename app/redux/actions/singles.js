@@ -9,6 +9,7 @@ import {
 } from './types';
 
 import firestore from '@react-native-firebase/firestore';
+import {toArray} from '_utilities/helpers';
 
 // GET ALL
 export const getSingles = () => async (dispatch) => {
@@ -32,7 +33,7 @@ export const getSingles = () => async (dispatch) => {
   }
 };
 
-// GET One
+// GET ONE
 export const getSingle = (id) => async (dispatch) => {
   dispatch(setSinglesLoading());
   try {
@@ -51,21 +52,22 @@ export const getSingle = (id) => async (dispatch) => {
   }
 };
 
-// GET Singles By
+// GET BY
 export const getSinglesBy = (prefix, id) => async (dispatch) => {
   dispatch(setSinglesLoading());
   try {
     const singlesRef = firestore().collection(`${prefix}Tracks`).doc(id);
     const doc = await singlesRef.get();
     const data = doc.data();
+    const dataArray = toArray(data);
     return dispatch({
       type: GET_SINGLES_BY,
-      payload: data,
+      payload: dataArray,
     });
   } catch (err) {
     dispatch({
       type: GET_SINGLES_BY,
-      payload: {},
+      payload: [],
     });
     return console.log(err);
   }

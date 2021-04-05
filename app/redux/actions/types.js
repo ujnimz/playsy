@@ -20,7 +20,9 @@ export const CLEAR_ARTIST = 'CLEAR_ARTIST';
 //ALBUMS
 export const LOADING_ALBUMS = 'LOADING_ALBUMS';
 export const GET_ALBUMS = 'GET_ALBUMS';
+export const GET_ALBUMS_BY = 'GET_ALBUMS_BY';
 export const CLEAR_ALBUMS = 'CLEAR_ALBUMS';
+export const CLEAR_ALBUMS_BY = 'CLEAR_ALBUMS_BY';
 export const GET_ALBUM = 'GET_ALBUM';
 export const CLEAR_ALBUM = 'CLEAR_ALBUM';
 

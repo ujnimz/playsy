@@ -2,12 +2,15 @@ import {
   LOADING_ALBUMS,
   GET_ALBUMS,
   CLEAR_ALBUMS,
+  GET_ALBUMS_BY,
+  CLEAR_ALBUMS_BY,
   GET_ALBUM,
   CLEAR_ALBUM,
 } from '../actions/types';
 
 const initialState = {
   albumsArray: [],
+  albumsByArray: [],
   album: {},
   loading: false,
   saving: false,
@@ -31,6 +34,17 @@ const artistsReducer = (state = initialState, action) => {
       return {
         ...state,
         albumsArray: [],
+      };
+    case GET_ALBUMS_BY:
+      return {
+        ...state,
+        albumsByArray: payload,
+        loading: false,
+      };
+    case CLEAR_ALBUMS_BY:
+      return {
+        ...state,
+        albumsByArray: [],
       };
     case GET_ALBUM:
       return {

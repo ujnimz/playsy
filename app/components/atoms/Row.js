@@ -30,7 +30,7 @@ const Row = ({data, type}) => {
           title: data[index].title,
           image: data[index].image,
           artists: data[index].artists,
-          year: data[index].year,
+          //year: data[index].year,
         };
 
   const getItemCount = () => itemCount;

@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-//import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 
 import {
@@ -16,6 +16,7 @@ import {useTheme} from '_theme/ThemeProvider';
 import {toArray} from '_utilities/helpers';
 
 const Card = ({item, isArtist}) => {
+  console.log(item);
   const theme = useTheme();
   const styles = getStyles(theme);
   const navigation = useNavigation();
@@ -116,7 +117,7 @@ const getStyles = ({colors, spacing, typography}) => {
 };
 
 Card.propTypes = {
-  //item: PropTypes.object.isRequired,
+  item: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = () => ({
