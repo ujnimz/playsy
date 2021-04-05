@@ -7,7 +7,7 @@ import {useTheme} from '_theme/ThemeProvider';
 import Card from './Card';
 import RowTitle from '_atoms/RowTitle';
 
-const Row = ({data, type}) => {
+const Row = ({data, type, title}) => {
   const theme = useTheme();
   const styles = getStyles(theme);
 
@@ -37,7 +37,7 @@ const Row = ({data, type}) => {
 
   return (
     <View style={styles.container}>
-      <RowTitle title={type} />
+      <RowTitle title={title} />
       <VirtualizedList
         data={data}
         initialNumToRender={4}

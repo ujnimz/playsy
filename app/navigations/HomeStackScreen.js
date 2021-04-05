@@ -40,7 +40,7 @@ const HomeStackScreen = ({navigation}) => {
               name="chevron-back-outline"
               onPress={() => navigation.navigate('HomeScreen')}
               size={35}
-              color="white"
+              color={theme.colors.PRIMARY}
             />
           ),
         }}
@@ -56,7 +56,7 @@ const HomeStackScreen = ({navigation}) => {
               name="chevron-back-outline"
               onPress={() => navigation.navigate('HomeScreen')}
               size={35}
-              color="white"
+              color={theme.colors.PRIMARY}
             />
           ),
         }}

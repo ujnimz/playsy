@@ -1,5 +1,5 @@
-import React, {useEffect, useState} from 'react';
-import {StyleSheet, View} from 'react-native';
+import React from 'react';
+import {StyleSheet, ActivityIndicator, View} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {useTheme} from '_theme/ThemeProvider';
 import {windowWidth} from '_utilities/dimentions';
@@ -36,7 +36,9 @@ const PlayerControls = () => {
         size={28}
         onPress={trackPrevious}
       />
-      {playbackState === TrackPlayer.STATE_PLAYING ? (
+      {playbackState === TrackPlayer.STATE_BUFFERING ? (
+        <ActivityIndicator size="large" color={theme.colors.PRIMARY} />
+      ) : playbackState === TrackPlayer.STATE_PLAYING ? (
         <Icon
           name="pause-circle-sharp"
           color={theme.colors.PRIMARY}
@@ -51,6 +53,7 @@ const PlayerControls = () => {
           onPress={trackPlay}
         />
       )}
+
       <Icon
         name="play-skip-forward-sharp"
         color={theme.colors.PRIMARY}
@@ -67,6 +70,7 @@ const getStyles = ({spacing}) => {
       flexDirection: 'row',
       alignItems: 'center',
       justifyContent: 'space-evenly',
+      height: spacing.SCALE_18 * 5,
       marginBottom: spacing.SCALE_16 * 2,
     },
   });

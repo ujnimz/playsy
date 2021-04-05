@@ -16,7 +16,6 @@ import {useTheme} from '_theme/ThemeProvider';
 import {toArray} from '_utilities/helpers';
 
 const Card = ({item, isArtist}) => {
-  console.log(item);
   const theme = useTheme();
   const styles = getStyles(theme);
   const navigation = useNavigation();

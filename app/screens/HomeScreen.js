@@ -37,8 +37,8 @@ const HomeScreen = ({
   return (
     <ScrollView style={styles.container}>
       <ToolBar />
-      <Row data={artistsState.artistsArray} type="artists" />
-      <Row data={albumsState.albumsArray} type="albums" />
+      <Row data={artistsState.artistsArray} type="artists" title="Artists" />
+      <Row data={albumsState.albumsArray} type="albums" title="Albums" />
     </ScrollView>
   );
 };

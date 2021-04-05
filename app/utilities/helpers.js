@@ -8,12 +8,9 @@ export const toObject = (arr) => {
 };
 
 export const toArray = (obj) => {
-  //console.log(obj);
   let arr = [];
   Object.keys(obj).forEach((key) => {
-    //console.log(key);
     arr.push({id: key, ...obj[key]});
   });
-  //console.log(arr);
   return arr;
 };

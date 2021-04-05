@@ -1,6 +1,12 @@
 import React, {useEffect, useState} from 'react';
 import PropTypes from 'prop-types';
-import {StyleSheet, Image, View, Pressable} from 'react-native';
+import {
+  StyleSheet,
+  ActivityIndicator,
+  Image,
+  View,
+  Pressable,
+} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import TrackPlayer, {usePlaybackState} from 'react-native-track-player';
 
@@ -75,7 +81,9 @@ const MiniPlayer = ({onOpenBottomSheet}) => {
         </Pressable>
       </View>
       <View style={styles.iconView}>
-        {playbackState === TrackPlayer.STATE_PLAYING ? (
+        {playbackState === TrackPlayer.STATE_BUFFERING ? (
+          <ActivityIndicator size="small" color={theme.colors.PRIMARY} />
+        ) : playbackState === TrackPlayer.STATE_PLAYING ? (
           <Icon
             name="pause"
             style={styles.icon}

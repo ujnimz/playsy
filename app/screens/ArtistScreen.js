@@ -30,7 +30,7 @@ const ArtistScreen = ({route, getAlbumsBy, clearAlbumsBy, albumsState}) => {
   return (
     <ScrollView style={styles.container}>
       <ArtistHero item={item} />
-      <Row data={albumsByArray} type="albums" />
+      <Row data={albumsByArray} type="albums" title="Top Albums" />
     </ScrollView>
   );
 };
