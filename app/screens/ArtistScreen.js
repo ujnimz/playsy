@@ -7,7 +7,7 @@ import {useTheme} from '_theme/ThemeProvider';
 
 import AppLoading from '_atoms/AppLoading';
 import ArtistHero from '_molecules/ArtistHero';
-import Row from '_atoms/Row';
+import Column from '_atoms/Column';
 
 import {getAlbumsBy, clearAlbumsBy} from '_redux/actions/albums';
 
@@ -30,7 +30,7 @@ const ArtistScreen = ({route, getAlbumsBy, clearAlbumsBy, albumsState}) => {
   return (
     <ScrollView style={styles.container}>
       <ArtistHero item={item} />
-      <Row data={albumsByArray} type="albums" title="Top Albums" />
+      <Column data={albumsByArray} type="albums" title="Latest Albums" />
     </ScrollView>
   );
 };

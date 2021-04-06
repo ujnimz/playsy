@@ -4,6 +4,7 @@ import LinearGradient from 'react-native-linear-gradient';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 import {useTheme} from '_theme/ThemeProvider';
+import {toArray} from '_utilities/helpers';
 
 const AlbumHero = ({item}) => {
   const theme = useTheme();
@@ -36,6 +37,14 @@ const AlbumHero = ({item}) => {
         style={styles.textHolder}
         colors={['rgba(0, 0, 0, 0)', 'rgba(0, 0, 0, 0.6)']}>
         <Text style={styles.text}>{item.title}</Text>
+        <View style={{flexDirection: 'row', alignItems: 'center'}}>
+          <Text style={styles.meta}>
+            By{' '}
+            {toArray(item.artists)
+              .map((artist) => artist.title)
+              .join(', ')}
+          </Text>
+        </View>
         <View style={{flexDirection: 'row', alignItems: 'center'}}>
           <Icon
             style={styles.metaIcon}

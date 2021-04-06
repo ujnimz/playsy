@@ -20,13 +20,16 @@
 		5F2F9192CB95418608CA0564 /* libPods-playsy-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A7AB122E1F2FB6714C78D623 /* libPods-playsy-tvOS.a */; };
 		6FF29C7A3CA4E7CE5A6AAFF5 /* libPods-playsy.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C9B2E4EA4A55A3B5A2FA7523 /* libPods-playsy.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
+		F78EFB9A528C44C7B06EC225 /* RNPlaceholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6CECDB9D5264F99A7DA9B9E /* RNPlaceholder.swift */; };
+		FA1128F1261B479300EB4605 /* RNPlaceholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6CECDB9D5264F99A7DA9B9E /* RNPlaceholder.swift */; };
+		FA1128F2261B479300EB4605 /* RNPlaceholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6CECDB9D5264F99A7DA9B9E /* RNPlaceholder.swift */; };
+		FA1128F3261B479300EB4605 /* RNPlaceholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6CECDB9D5264F99A7DA9B9E /* RNPlaceholder.swift */; };
 		FA5551CC25E51AFC0067AF99 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FA5551CB25E51AFC0067AF99 /* GoogleService-Info.plist */; };
 		FA845EA225EFC3AA001258A5 /* Roboto-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FA845E9D25EFC3AA001258A5 /* Roboto-Bold.ttf */; };
 		FA845EA325EFC3AA001258A5 /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FA845E9E25EFC3AA001258A5 /* Roboto-Regular.ttf */; };
 		FA845EA425EFC3AA001258A5 /* Roboto-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FA845E9F25EFC3AA001258A5 /* Roboto-Thin.ttf */; };
 		FA845EA525EFC3AA001258A5 /* Roboto-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FA845EA025EFC3AA001258A5 /* Roboto-Light.ttf */; };
 		FA845EA625EFC3AA001258A5 /* Roboto-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FA845EA125EFC3AA001258A5 /* Roboto-Medium.ttf */; };
-		F78EFB9A528C44C7B06EC225 /* RNPlaceholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6CECDB9D5264F99A7DA9B9E /* RNPlaceholder.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -89,6 +92,7 @@
 		C9B2E4EA4A55A3B5A2FA7523 /* libPods-playsy.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-playsy.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DAE0BCD4B39B4876BF2E4B50 /* FontAwesome5_Brands.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Brands.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Brands.ttf"; sourceTree = "<group>"; };
 		E36E4A8C69E149F5BCCC79A6 /* Octicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Octicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Octicons.ttf"; sourceTree = "<group>"; };
+		E6CECDB9D5264F99A7DA9B9E /* RNPlaceholder.swift */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.swift; path = RNPlaceholder.swift; sourceTree = "<group>"; };
 		E762A50639DA4371911D0B41 /* Roboto-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-Bold.ttf"; path = "../app/assets/fonts/Roboto-Bold.ttf"; sourceTree = "<group>"; };
 		E955C95CA655478A9173C2EA /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = SimpleLineIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/SimpleLineIcons.ttf"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
@@ -101,7 +105,6 @@
 		FA845E9F25EFC3AA001258A5 /* Roboto-Thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Roboto-Thin.ttf"; path = "fonts/Roboto-Thin.ttf"; sourceTree = "<group>"; };
 		FA845EA025EFC3AA001258A5 /* Roboto-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Roboto-Light.ttf"; path = "fonts/Roboto-Light.ttf"; sourceTree = "<group>"; };
 		FA845EA125EFC3AA001258A5 /* Roboto-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Roboto-Medium.ttf"; path = "fonts/Roboto-Medium.ttf"; sourceTree = "<group>"; };
-		E6CECDB9D5264F99A7DA9B9E /* RNPlaceholder.swift */ = {isa = PBXFileReference; name = "RNPlaceholder.swift"; path = "RNPlaceholder.swift"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.swift; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -235,6 +238,7 @@
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				E0A5ACC06EE9C03D0BF52F08 /* Pods */,
 				3F88C86040CF43E6B71248BF /* Resources */,
+				FA1128F4261B479300EB4605 /* Recovered References */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -265,6 +269,14 @@
 				17F06A765D4042CAA7239D41 /* Pods-playsy-tvOSTests.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		FA1128F4261B479300EB4605 /* Recovered References */ = {
+			isa = PBXGroup;
+			children = (
+				E6CECDB9D5264F99A7DA9B9E /* RNPlaceholder.swift */,
+			);
+			name = "Recovered References";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -364,7 +376,6 @@
 						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
 					13B07F861A680F5B00A75B9A = {
-						DevelopmentTeam = BR22GU6936;
 						LastSwiftMigration = 1120;
 					};
 					2D02E47A1E0B4A5D006451C7 = {
@@ -646,7 +657,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				00E356F31AD99517003FC87E /* playsyTests.m in Sources */,
-				F78EFB9A528C44C7B06EC225 /* RNPlaceholder.swift in Sources */,
+				FA1128F1261B479300EB4605 /* RNPlaceholder.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -666,7 +677,7 @@
 			files = (
 				2D02E4BF1E0B4AB3006451C7 /* main.m in Sources */,
 				2D02E4BC1E0B4A80006451C7 /* AppDelegate.m in Sources */,
-				F78EFB9A528C44C7B06EC225 /* RNPlaceholder.swift in Sources */,
+				FA1128F2261B479300EB4605 /* RNPlaceholder.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -675,7 +686,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2DCD954D1E0B4F2C00145EB5 /* playsyTests.m in Sources */,
-				F78EFB9A528C44C7B06EC225 /* RNPlaceholder.swift in Sources */,
+				FA1128F3261B479300EB4605 /* RNPlaceholder.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -718,8 +729,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/playsy.app/playsy";
 				SWIFT_VERSION = 4.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/playsy.app/playsy";
 			};
 			name = Debug;
 		};
@@ -743,8 +754,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/playsy.app/playsy";
 				SWIFT_VERSION = 4.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/playsy.app/playsy";
 			};
 			name = Release;
 		};
@@ -828,9 +839,9 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.playsy-tvOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
+				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 3;
 				TVOS_DEPLOYMENT_TARGET = 10.0;
-				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
 		};
@@ -860,9 +871,9 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.playsy-tvOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
+				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 3;
 				TVOS_DEPLOYMENT_TARGET = 10.0;
-				SWIFT_VERSION = 4.0;
 			};
 			name = Release;
 		};
@@ -892,9 +903,9 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.playsy-tvOSTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
+				SWIFT_VERSION = 4.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/playsy-tvOS.app/playsy-tvOS";
 				TVOS_DEPLOYMENT_TARGET = 10.1;
-				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
 		};
@@ -924,9 +935,9 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.playsy-tvOSTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
+				SWIFT_VERSION = 4.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/playsy-tvOS.app/playsy-tvOS";
 				TVOS_DEPLOYMENT_TARGET = 10.1;
-				SWIFT_VERSION = 4.0;
 			};
 			name = Release;
 		};
@@ -1046,8 +1057,8 @@
 				);
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
-				VALIDATE_PRODUCT = YES;
 				SWIFT_VERSION = 4.0;
+				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
 		};

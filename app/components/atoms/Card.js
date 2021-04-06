@@ -91,7 +91,7 @@ const getStyles = ({colors, spacing, typography}) => {
       borderRadius: 3,
     },
     titleHolder: {
-      alignItems: 'flex-start',
+      //alignItems: 'flex-start',
     },
     title: {
       ...typography.FONT_MEDIUM,
@@ -117,10 +117,7 @@ const getStyles = ({colors, spacing, typography}) => {
 
 Card.propTypes = {
   item: PropTypes.object.isRequired,
+  isArtist: PropTypes.bool.isRequired,
 };
 
-const mapStateToProps = () => ({
-  //authState: state.authState,
-});
-
-export default connect(mapStateToProps, {})(Card);
+export default Card;

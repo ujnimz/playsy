@@ -81,7 +81,7 @@ const AlbumScreen = ({route, getSinglesBy, clearSinglesBy, singlesState}) => {
     id: data[index].id,
     title: data[index].title,
     image: item.image,
-    artists: toArray(data[index].artists)
+    artists: toArray(item.artists)
       .map((artist) => artist.title)
       .join(', '),
     audio: data[index].uri,
@@ -95,7 +95,7 @@ const AlbumScreen = ({route, getSinglesBy, clearSinglesBy, singlesState}) => {
       id: track.id,
       url: track.uri,
       title: track.title,
-      artist: toArray(track.artists)
+      artist: toArray(item.artists)
         .map((artist) => artist.title)
         .join(', '),
       artwork: item.image,

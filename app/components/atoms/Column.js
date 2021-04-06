@@ -5,9 +5,9 @@ import {StyleSheet, View, VirtualizedList} from 'react-native';
 import {useTheme} from '_theme/ThemeProvider';
 
 import Card from './Card';
-import Title from '_components/atoms/Title';
+import Title from '_atoms/Title';
 
-const Row = ({data, type, title}) => {
+const Column = ({data, type, title}) => {
   const theme = useTheme();
   const styles = getStyles(theme);
 
@@ -42,7 +42,6 @@ const Row = ({data, type, title}) => {
         keyExtractor={(item) => item.id}
         getItemCount={getItemCount}
         getItem={getItem}
-        horizontal
         showsHorizontalScrollIndicator={false}
         style={styles.list}
       />
@@ -62,10 +61,10 @@ const getStyles = ({spacing}) => {
   });
 };
 
-Row.propTypes = {
+Column.propTypes = {
   data: PropTypes.array.isRequired,
   type: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
 };
 
-export default Row;
+export default Column;
