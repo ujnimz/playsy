@@ -13,7 +13,7 @@ const AlbumButtons = ({tracks, addPlaylist, trackPause, playerState}) => {
   const styles = getStyles(theme);
 
   const {play} = playerState;
-
+  console.log(playerState);
   const onPlay = () => {
     addPlaylist(tracks);
   };

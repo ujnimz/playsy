@@ -6,6 +6,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import HomeScreen from '_screens/HomeScreen';
 import ArtistScreen from '_screens/ArtistScreen';
 import AlbumScreen from '_screens/AlbumScreen';
+import SingleScreen from '_screens/SingleScreen';
 
 import {useTheme} from '_theme/ThemeProvider';
 
@@ -55,6 +56,22 @@ const HomeStackScreen = ({navigation}) => {
             <Icon
               name="chevron-back-outline"
               onPress={() => navigation.navigate('HomeScreen')}
+              size={35}
+              color={theme.colors.PRIMARY}
+            />
+          ),
+        }}
+      />
+      <HomeStack.Screen
+        name="SingleScreen"
+        component={SingleScreen}
+        options={{
+          headerTransparent: true,
+          title: '',
+          headerLeft: () => (
+            <Icon
+              name="chevron-back-outline"
+              onPress={() => navigation.goBack()}
               size={35}
               color={theme.colors.PRIMARY}
             />

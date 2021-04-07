@@ -35,7 +35,7 @@ const AlbumScreen = ({route, getSinglesBy, clearSinglesBy, singlesState}) => {
     };
   }, []);
 
-  const {singlesArrayBy, loading} = singlesState;
+  const {singlesByArray, loading} = singlesState;
 
   const openBottomSheet = (item) => {
     setCurrentItem(item);
@@ -81,11 +81,8 @@ const AlbumScreen = ({route, getSinglesBy, clearSinglesBy, singlesState}) => {
     id: data[index].id,
     title: data[index].title,
     image: item.image,
-    artists: toArray(item.artists)
-      .map((artist) => artist.title)
-      .join(', '),
+    artists: item.meta1,
     audio: data[index].uri,
-    year: data[index].year,
   });
 
   const getItemCount = (data) => data.length;
@@ -95,9 +92,7 @@ const AlbumScreen = ({route, getSinglesBy, clearSinglesBy, singlesState}) => {
       id: track.id,
       url: track.uri,
       title: track.title,
-      artist: toArray(item.artists)
-        .map((artist) => artist.title)
-        .join(', '),
+      artist: item.meta1,
       artwork: item.image,
     }));
 
@@ -106,13 +101,13 @@ const AlbumScreen = ({route, getSinglesBy, clearSinglesBy, singlesState}) => {
   return (
     <View style={styles.container}>
       <VirtualizedList
-        data={singlesArrayBy}
+        data={singlesByArray}
         keyExtractor={(item) => item.id}
         renderItem={renderItem}
         getItemCount={getItemCount}
         getItem={getItem}
         ListHeaderComponent={() => (
-          <AlbumHeader item={item} tracks={makeTrackList(singlesArrayBy)} />
+          <AlbumHeader item={item} tracks={makeTrackList(singlesByArray)} />
         )}
         ListEmptyComponent={renderNoTracksMessage()}
         showsHorizontalScrollIndicator={false}

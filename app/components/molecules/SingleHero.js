@@ -1,11 +1,11 @@
 import React, {useState} from 'react';
 import {StyleSheet, View, Image, Text, ActivityIndicator} from 'react-native';
-import LinearGradient from 'react-native-linear-gradient';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 import {useTheme} from '_theme/ThemeProvider';
 
-const AlbumHero = ({item}) => {
+const SingleHero = ({item}) => {
+  console.log(item);
   const theme = useTheme();
   const styles = getStyles(theme);
 
@@ -17,6 +17,10 @@ const AlbumHero = ({item}) => {
 
   return (
     <View style={styles.container}>
+      <View style={styles.textHolder}>
+        <Text style={styles.text}>{item.title}</Text>
+      </View>
+
       <View style={styles.imageHolder}>
         <Image
           onLoadEnd={onLoadEnd}
@@ -32,22 +36,16 @@ const AlbumHero = ({item}) => {
         />
       </View>
 
-      <LinearGradient
-        style={styles.textHolder}
-        colors={['rgba(0, 0, 0, 0)', 'rgba(0, 0, 0, 0.6)']}>
-        <Text style={styles.text}>{item.title}</Text>
-        <View style={{flexDirection: 'row', alignItems: 'center'}}>
-          <Text style={styles.meta}>By {item.meta1}</Text>
-        </View>
+      <View style={styles.textHolder}>
         <View style={{flexDirection: 'row', alignItems: 'center'}}>
           <Icon
             style={styles.metaIcon}
             name="heart-outline"
             onPress={() => navigation.goBack()}
           />
-          <Text style={styles.meta}>10K</Text>
+          <Text style={styles.meta}>10K Followers</Text>
         </View>
-      </LinearGradient>
+      </View>
     </View>
   );
 };
@@ -55,37 +53,34 @@ const AlbumHero = ({item}) => {
 const getStyles = ({colors, typography, spacing}) => {
   return StyleSheet.create({
     container: {
-      height: 400,
       flex: 1,
-      alignContent: 'stretch',
-      justifyContent: 'flex-end',
     },
     imageHolder: {
-      position: 'absolute',
       alignSelf: 'center',
-      width: '100%',
-      height: 400,
+      width: spacing.SCALE_18 * 12,
+      height: spacing.SCALE_18 * 12,
     },
     image: {
       flex: 1,
     },
     textHolder: {
-      padding: spacing.SCALE_12,
-      position: 'relative',
+      alignItems: 'center',
+      padding: spacing.SCALE_18,
+      textAlign: 'center',
     },
     text: {
-      color: colors.WHITE,
-      fontSize: typography.FONT_SIZE_16 * 2,
+      color: colors.PRIMARY,
+      fontSize: typography.FONT_SIZE_16,
       ...typography.FONT_BOLD,
     },
     meta: {
-      color: colors.WHITE,
+      color: colors.PRIMARY,
       fontSize: typography.FONT_SIZE_12,
       ...typography.FONT_REGULAR,
     },
     metaIcon: {
       textAlign: 'center',
-      color: colors.WHITE,
+      color: colors.PRIMARY,
       fontSize: typography.FONT_SIZE_14,
       marginRight: spacing.SCALE_8 / 2,
     },
@@ -99,4 +94,4 @@ const getStyles = ({colors, typography, spacing}) => {
   });
 };
 
-export default AlbumHero;
+export default SingleHero;

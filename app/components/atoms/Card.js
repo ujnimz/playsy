@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
 import PropTypes from 'prop-types';
-import {connect} from 'react-redux';
 
 import {
   StyleSheet,
@@ -13,9 +12,8 @@ import {
 import {useNavigation} from '@react-navigation/native';
 
 import {useTheme} from '_theme/ThemeProvider';
-import {toArray} from '_utilities/helpers';
 
-const Card = ({item, isArtist}) => {
+const Card = ({item, isCenter, navigate}) => {
   const theme = useTheme();
   const styles = getStyles(theme);
   const navigation = useNavigation();
@@ -31,7 +29,7 @@ const Card = ({item, isArtist}) => {
       <TouchableOpacity
         style={styles.container}
         onPress={() =>
-          navigation.navigate(isArtist ? 'ArtistScreen' : 'AlbumScreen', {
+          navigation.navigate(navigate, {
             item: item,
           })
         }>
@@ -43,7 +41,7 @@ const Card = ({item, isArtist}) => {
             }}
             style={[
               styles.image,
-              {borderRadius: isArtist ? (theme.spacing.SCALE_12 * 10) / 2 : 3},
+              {borderRadius: isCenter ? (theme.spacing.SCALE_12 * 10) / 2 : 3},
             ]}
             resizeMode="cover"
           />
@@ -55,17 +53,18 @@ const Card = ({item, isArtist}) => {
         <View
           style={[
             styles.titleHolder,
-            {justifyContent: isArtist ? 'center' : 'flex-start'},
+            {justifyContent: isCenter ? 'center' : 'flex-start'},
           ]}>
           <Text
-            style={[styles.title, {textAlign: isArtist ? 'center' : 'left'}]}>
+            style={[styles.title, {textAlign: isCenter ? 'center' : 'left'}]}>
             {item.title}
           </Text>
-          <Text style={styles.meta}>
-            {isArtist
-              ? null
-              : toArray(item.artists).map((artist) => artist.title)[0]}
-          </Text>
+          {item.meta1 !== undefined ? (
+            <Text style={styles.meta}>{item.meta1}</Text>
+          ) : null}
+          {item.meta2 !== undefined ? (
+            <Text style={styles.meta}>{item.meta2}</Text>
+          ) : null}
         </View>
       </TouchableOpacity>
     </>
@@ -117,7 +116,7 @@ const getStyles = ({colors, spacing, typography}) => {
 
 Card.propTypes = {
   item: PropTypes.object.isRequired,
-  isArtist: PropTypes.bool.isRequired,
+  isCenter: PropTypes.bool.isRequired,
 };
 
 export default Card;

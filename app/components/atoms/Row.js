@@ -3,18 +3,24 @@ import PropTypes from 'prop-types';
 import {StyleSheet, View, VirtualizedList} from 'react-native';
 
 import {useTheme} from '_theme/ThemeProvider';
+import {toArray} from '_utilities/helpers';
 
 import Card from './Card';
 import Title from '_components/atoms/Title';
 
-const Row = ({data, type, title}) => {
+const Row = ({data, type, navigate, title}) => {
   const theme = useTheme();
   const styles = getStyles(theme);
 
   const itemCount = data.length;
 
   const renderItem = ({item}) => (
-    <Card key={item.id} item={item} isArtist={type === 'artists'} />
+    <Card
+      key={item.id}
+      item={item}
+      navigate={navigate}
+      isCenter={type === 'artists'}
+    />
   );
 
   const getItem = (data, index) =>
@@ -28,7 +34,8 @@ const Row = ({data, type, title}) => {
           id: data[index].id,
           title: data[index].title,
           image: data[index].image,
-          artists: data[index].artists,
+          meta1: toArray(data[index].artists).map((artist) => artist.title)[0],
+          meta2: data[index].year,
         };
 
   const getItemCount = () => itemCount;
