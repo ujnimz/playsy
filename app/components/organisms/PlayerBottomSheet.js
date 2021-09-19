@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
@@ -9,7 +9,7 @@ import MiniPlayer from '_organisms/MiniPlayer';
 import FullPlayer from '_organisms/FullPlayer';
 
 import {useTheme} from '_theme/ThemeProvider';
-import {windowHeight} from '_utilities/dimentions';
+import {windowHeight} from '_utilities/Dimentions';
 
 const PlayerBottomSheet = ({state, descriptors, navigation, playerState}) => {
   const focusedOptions = descriptors[state.routes[state.index].key].options;
@@ -162,7 +162,7 @@ const PlayerBottomSheet = ({state, descriptors, navigation, playerState}) => {
   );
 };
 
-const getStyles = ({colors, spacing}) => {
+const getStyles = ({colors}) => {
   return StyleSheet.create({
     container: {
       flexDirection: 'row',
@@ -198,6 +198,7 @@ PlayerBottomSheet.propTypes = {
   state: PropTypes.object.isRequired,
   descriptors: PropTypes.object.isRequired,
   navigation: PropTypes.object.isRequired,
+  playerState: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = (state) => ({

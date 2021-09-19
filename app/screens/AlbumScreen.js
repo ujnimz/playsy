@@ -6,7 +6,7 @@ import Animated from 'react-native-reanimated';
 import BottomSheet from 'reanimated-bottom-sheet';
 
 import {useTheme} from '_theme/ThemeProvider';
-import {toArray} from '_utilities/helpers';
+//import {toArray} from '_utilities/helpers';
 
 import {getSinglesBy, clearSinglesBy} from '_redux/actions/singles';
 
@@ -45,7 +45,7 @@ const AlbumScreen = ({route, getSinglesBy, clearSinglesBy, singlesState}) => {
   const renderContent = () => <TrackSettings currentItem={currentItem} />;
 
   const renderShadow = () => {
-    const animatedShadowOpacity = Animated.interpolate(fall, {
+    const animatedShadowOpacity = Animated.interpolateNode(fall, {
       inputRange: [0, 1],
       outputRange: [0.5, 0],
     });
@@ -137,6 +137,8 @@ const getStyles = ({colors}) => {
 AlbumScreen.propTypes = {
   getSinglesBy: PropTypes.func.isRequired,
   clearSinglesBy: PropTypes.func.isRequired,
+  singlesState: PropTypes.object.isRequired,
+  route: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = (state) => ({

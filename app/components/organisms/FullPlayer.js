@@ -7,7 +7,7 @@ import PlayerProgressBar from '_atoms/PlayerProgressBar';
 import PlayerControls from '_atoms/PlayerControls';
 
 import {useTheme} from '_theme/ThemeProvider';
-import {windowWidth} from '_utilities/dimentions';
+import {windowWidth} from '_utilities/Dimentions';
 
 import BounceText from '_atoms/BounceText';
 

@@ -6,7 +6,7 @@ import {StyleSheet, Text, View} from 'react-native';
 import {signOut} from '_redux/actions/auth';
 
 import {useTheme} from '_theme/ThemeProvider';
-import {windowHeight} from '_utilities/dimentions';
+// import {windowHeight} from '_utilities/dimentions';
 
 import FormButton from '_atoms/FormButton';
 import ThemeToggle from '_atoms/ThemeToggle';

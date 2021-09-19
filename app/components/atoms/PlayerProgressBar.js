@@ -1,16 +1,15 @@
 import React, {useEffect, useState} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import TrackPlayer, {
-  useTrackPlayerProgress,
+  useProgress,
   usePlaybackState,
-  useTrackPlayerEvents,
 } from 'react-native-track-player';
 
 import {useTheme} from '_theme/ThemeProvider';
 
 const PlayerProgressBar = () => {
   const [bar, setBar] = useState({duration: 0, position: 0});
-  const progress = useTrackPlayerProgress();
+  const progress = useProgress();
   const playbackState = usePlaybackState();
 
   useEffect(() => {

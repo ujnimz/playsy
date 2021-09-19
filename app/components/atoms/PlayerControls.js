@@ -2,7 +2,7 @@ import React from 'react';
 import {StyleSheet, ActivityIndicator, View} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {useTheme} from '_theme/ThemeProvider';
-import {windowWidth} from '_utilities/dimentions';
+import {windowWidth} from '_utilities/Dimentions';
 
 import TrackPlayer, {usePlaybackState} from 'react-native-track-player';
 
